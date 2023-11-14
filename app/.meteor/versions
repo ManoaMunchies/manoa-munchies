@@ -1,6 +1,6 @@
 accounts-base@2.2.8
 accounts-password@2.3.4
-alanning:roles@3.5.1
+alanning:roles@3.6.0
 aldeed:collection2@3.5.0
 aldeed:schema-index@3.0.0
 allow-deny@1.1.1
@@ -88,4 +88,4 @@ webapp@1.13.5
 webapp-hashing@1.1.1
 zodern:hide-production-sourcemaps@1.2.0
 zodern:meteor-package-versions@0.2.1
-zodern:types@1.0.9
+zodern:types@1.0.10
