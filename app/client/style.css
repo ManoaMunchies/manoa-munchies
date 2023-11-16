@@ -19,17 +19,34 @@ body {
   --bs-alert-bg: var(--matr-navbar-bg);
 }
 
-/* Define custom styles */
+ /*Define custom styles*/
 .gray-background {
   background-color: var(--matr-navbar-bg);
   color: var(--bs-dark);
   padding-top: 10px;
   padding-bottom: 20px;
 }
+#landing-page .h1-landing {
+  font-size: 50px;
+  line-height: 1.5;
+  color: #ffffff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  font-weight: bold;
+}
+#landing-page .h2-landing {
+  line-height: 1.5;
+  color: #ffffff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  font-weight: bold;
+}
 #landing-page .paragraph-landing {
   font-size: 24px;
   line-height: 1.5;
+  color: #ffffff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  font-weight: bold;
 }
+
 #landing-page .btn-primary {
   width: 150px; /* or you can set a specific width like 200px */
   max-width: 100px; /* maximum width the button can expand to */
@@ -42,4 +59,37 @@ body {
 }
 .button-column {
   text-align: center;
+}
+#landing-page .background-row {
+  margin: auto;
+  max-width: 1920px;
+  background-image: url('/images/Assorted-Plates.png'); /* Update with your image path */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 300px; /* Adjust based on your design needs */
+  border: 2px solid #494444; /* Adjust the color and width of the border as needed */
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5); /* Adjust the shadow's offset, blur, and color */
+}
+#landing-page .background-row2 {
+  margin: auto;
+  max-width: 1920px;
+  background-image: url('/images/bamboo.jpg'); /* Update with your image path */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 250px; /* Adjust based on your design needs */
+  border: 2px solid #494444; /* Adjust the color and width of the border as needed */
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5); /* Adjust the shadow's offset, blur, and color */
+}
+#landing-page .background-row3 {
+  margin:auto;
+  max-width: 1920px;
+  background-color: #414141;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 250px; /* Adjust based on your design needs */
+  border: 2px solid #494444; /* Adjust the color and width of the border as needed */
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5); /* Adjust the shadow's offset, blur, and color */
 }
