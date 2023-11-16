@@ -13,17 +13,21 @@ const NavBar = () => {
   }), []);
 
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar bg="dark" variant="dark" expand="lg">
       <Container>
         <Navbar.Brand as={NavLink} to="/">
-          <h2>meteor-application-template-react</h2>
+          <h2>Aloha Eats</h2>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto justify-content-start">
+            <Nav.Link id="available-now-nav" as={NavLink} to="/available-now" key="available-now">Foods available right now</Nav.Link>,
+            <Nav.Link id="top-picks-nav" as={NavLink} to="/top-picks" key="top-picks">Today’s top picks</Nav.Link>,
             {currentUser ? ([
               <Nav.Link id="add-stuff-nav" as={NavLink} to="/add" key="add">Add Stuff</Nav.Link>,
               <Nav.Link id="list-stuff-nav" as={NavLink} to="/list" key="list">List Stuff</Nav.Link>,
+              <Nav.Link id="available-now-nav" as={NavLink} to="/available-now" key="available-now">Foods available right now</Nav.Link>,
+              <Nav.Link id="top-picks-nav" as={NavLink} to="/top-picks" key="top-picks">Today’s top picks</Nav.Link>,
             ]) : ''}
             {Roles.userIsInRole(Meteor.userId(), 'admin') ? (
               <Nav.Link id="list-stuff-admin-nav" as={NavLink} to="/admin" key="admin">Admin</Nav.Link>

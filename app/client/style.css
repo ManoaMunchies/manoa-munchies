@@ -26,3 +26,20 @@ body {
   padding-top: 10px;
   padding-bottom: 20px;
 }
+#landing-page .paragraph-landing {
+  font-size: 24px;
+  line-height: 1.5;
+}
+#landing-page .btn-primary {
+  width: 150px; /* or you can set a specific width like 200px */
+  max-width: 100px; /* maximum width the button can expand to */
+  background-color: darkgreen;
+  border-color: white;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+#landing-page .btn-primary:hover {
+  background-color: dimgray;
+}
+.button-column {
+  text-align: center;
+}
