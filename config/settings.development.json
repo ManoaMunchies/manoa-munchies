@@ -1,6 +1,7 @@
 {
   "defaultAccounts": [
     { "email": "admin@foo.com", "password": "changeme", "role": "admin" },
+    { "email": "dunkin@foo.com", "password": "changeme", "role": "vendor" },
     { "email": "john@foo.com", "password": "changeme" }
   ],
 
@@ -9,5 +10,10 @@
     { "name": "Bicycle", "quantity": 2, "owner": "john@foo.com", "condition": "poor" },
     { "name": "Banana", "quantity": 2, "owner": "admin@foo.com", "condition": "good" },
     { "name": "Boogie Board", "quantity": 2, "owner": "admin@foo.com", "condition": "excellent" }
+  ],
+  "defaultUsers": [
+    { "firstName": "John", "lastName": "b", "title": "ICS SSA", "image": "https://static.vecteezy.com/system/resources/previews/009/292/244/original/default-avatar-icon-of-social-media-user-vector.jpg", "instagram": "johnfoo", "bio": "Write a bio", "owner": "john@foo.com"},
+    { "firstName": "Admin", "lastName": "b", "title": "a", "image": "https://static.vecteezy.com/system/resources/previews/009/292/244/original/default-avatar-icon-of-social-media-user-vector.jpg", "instagram": "b", "bio": "Write a bio", "owner": "admin@foo.com"},
+    { "firstName": "Dunkin", "lastName": "b", "title": "a", "image": "https://static.vecteezy.com/system/resources/previews/009/292/244/original/default-avatar-icon-of-social-media-user-vector.jpg", "instagram": "b", "bio": "Write a bio", "owner": "dunkin@foo.com"}
   ]
 }
