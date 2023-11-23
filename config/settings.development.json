@@ -3,11 +3,15 @@
     { "email": "admin@foo.com", "password": "changeme", "role": "admin" },
     { "email": "john@foo.com", "password": "changeme" }
   ],
-
   "defaultData": [
-    { "name": "Basket", "quantity": 3, "owner": "john@foo.com", "condition": "excellent" },
-    { "name": "Bicycle", "quantity": 2, "owner": "john@foo.com", "condition": "poor" },
-    { "name": "Banana", "quantity": 2, "owner": "admin@foo.com", "condition": "good" },
-    { "name": "Boogie Board", "quantity": 2, "owner": "admin@foo.com", "condition": "excellent" }
+    { "name": "Hot Coffee", "quantity": 3, "condition": "good", "owner": "john@foo.com" }
+  ],
+
+  "defaultDataVendors": [
+    { "name": "Dunkin Donuts", "vendorId": 1 }
+  ],
+  "defaultDataFoodItems": [
+    { "name": "Hot Coffee", "quantity": 3, "vendorId": 1, "owner": "john@foo.com", "cuisineType": "breakfast", "availability": "available" },
+    { "name": "Cold Coffee", "quantity": 3, "vendorId": 1, "owner": "john@foo.com", "cuisineType": "breakfast", "availability": "available" }
   ]
 }

@@ -17,6 +17,12 @@ import NavBar from '../components/NavBar';
 import SignIn from '../pages/SignIn';
 import NotAuthorized from '../pages/NotAuthorized';
 import LoadingSpinner from '../components/LoadingSpinner';
+import VendorHome from '../pages/VendorHome';
+import AddFoodItems from '../pages/AddFoodItems';
+import ListFoodItemsAdmin from '../pages/ListFoodItemsAdmin';
+import AddVendors from '../pages/AddVendors';
+import ListVendors from '../pages/ListVendors';
+import EditVendors from '../pages/EditVendors';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
@@ -32,14 +38,19 @@ const App = () => {
         <NavBar />
         <Routes>
           <Route exact path="/" element={<Landing />} />
+          <Route path="/add-food-items" element={<ProtectedRoute><AddFoodItems /></ProtectedRoute>} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/signout" element={<SignOut />} />
           <Route path="/home" element={<ProtectedRoute><Landing /></ProtectedRoute>} />
+          <Route path="/vendorhome" element={<ProtectedRoute><VendorHome /></ProtectedRoute>} />
           <Route path="/list" element={<ProtectedRoute><ListStuff /></ProtectedRoute>} />
           <Route path="/add" element={<ProtectedRoute><AddStuff /></ProtectedRoute>} />
           <Route path="/edit/:_id" element={<ProtectedRoute><EditStuff /></ProtectedRoute>} />
-          <Route path="/admin" element={<AdminProtectedRoute ready={ready}><ListStuffAdmin /></AdminProtectedRoute>} />
+          <Route path="/edit-vendors/:_id" element={<ProtectedRoute><EditVendors /></ProtectedRoute>} />
+          <Route path="/admin" element={<AdminProtectedRoute ready={ready}><ListFoodItemsAdmin /></AdminProtectedRoute>} />
+          <Route path="/vendors" element={<ProtectedRoute ready={ready}><ListVendors /></ProtectedRoute>} />
+          <Route path="/add-vendors" element={<ProtectedRoute ready={ready}><AddVendors /></ProtectedRoute>} />
           <Route path="/notauthorized" element={<NotAuthorized />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
