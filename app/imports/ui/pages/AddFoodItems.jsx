@@ -5,7 +5,7 @@ import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
-import { FoodItems } from '../../api/fooditems/FoodItems';
+import { Foods } from '../../api/fooditems/Foods';
 
 // Create a schema to specify the structure of the data to appear in the form.
 const formSchema = new SimpleSchema({
@@ -32,7 +32,7 @@ const AddFoodItems = () => {
   const submit = (data, formRef) => {
     const { name, quantity, vendorId, cuisineType, availability } = data;
     const owner = Meteor.user().username;
-    FoodItems.collection.insert(
+    Foods.collection.insert(
       { name, quantity, vendorId, cuisineType, availability, owner },
       (error) => {
         if (error) {

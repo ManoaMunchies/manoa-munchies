@@ -2,9 +2,9 @@ import { Mongo } from 'meteor/mongo';
 import SimpleSchema from 'simpl-schema';
 
 /**
- * The FoodItems collection. It encapsulates state and variable values for FoodItems.
+ * The Foods collection. It encapsulates state and variable values for Foods.
  */
-class FoodItemsCollection {
+class FoodsCollection {
   constructor() {
     // The name of this collection.
     this.name = 'FoodItemsCollection';
@@ -36,6 +36,6 @@ class FoodItemsCollection {
 
 /**
  * The singleton instance of the StuffsCollection.
- * @type {FoodItemsCollection}
+ * @type {FoodsCollection}
  */
-export const FoodItems = new FoodItemsCollection();
+export const Foods = new FoodsCollection();

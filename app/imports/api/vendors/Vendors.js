@@ -14,6 +14,18 @@ class VendorsCollection {
         type: Number,
         required: true,
       },
+      location: {
+        type: String,
+        required: true,
+      },
+      hours: {
+        type: String,
+        required: true,
+      },
+      owner: {
+        type: String,
+        required: true,
+      },
     });
     this.collection.attachSchema(this.schema);
     this.userPublicationName = `${this.name}.publication.user`;

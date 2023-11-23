@@ -24,13 +24,21 @@ const NavBar = () => {
             <Nav.Link id="available-now-nav" as={NavLink} to="/available-now" key="available-now">Foods available right now</Nav.Link>,
             <Nav.Link id="top-picks-nav" as={NavLink} to="/top-picks" key="top-picks">Today’s top picks</Nav.Link>,
             {currentUser ? ([
+            ]) : ''}
+            {Roles.userIsInRole(Meteor.userId(), 'user') ? ([
+              <Nav.Link id="vendor-nav" as={NavLink} to="/vendors" key="vendors">Vendors</Nav.Link>,
+              <Nav.Link id="food-items-nav" as={NavLink} to="/food-items" key="food-items">Food Items</Nav.Link>,
+            ]) : ''}
+            {Roles.userIsInRole(Meteor.userId(), 'vendor') ? ([
+              <Nav.Link id="vendor-home-nav" as={NavLink} to="/vendorhome" key="vendorhome">Vendor Home</Nav.Link>,
+              <Nav.Link id="add-food-items-nav" as={NavLink} to="/add-food-items" key="add-food-items">Add Food Items</Nav.Link>,
               <Nav.Link id="vendors-nav" as={NavLink} to="/vendors" key="vendors">Vendors</Nav.Link>,
             ]) : ''}
             {Roles.userIsInRole(Meteor.userId(), 'admin') ? ([
-              <Nav.Link id="list-stuff-admin-nav" as={NavLink} to="/admin" key="admin">Admin</Nav.Link>,
+              <Nav.Link id="list-food-items-nav" as={NavLink} to="/admin" key="admin">Admin</Nav.Link>,
               <Nav.Link id="add-food-items-nav" as={NavLink} to="/add-food-items" key="add-food-items">Add Food Items</Nav.Link>,
-              <Nav.Link id="add-food-items-nav" as={NavLink} to="/add-vendors" key="add-vendors">Add Vendors</Nav.Link>,
-
+              <Nav.Link id="add-vendors-nav" as={NavLink} to="/add-vendors" key="add-vendors">Add Vendors</Nav.Link>,
+              <Nav.Link id="list-vendors-admin-nav" as={NavLink} to="/vendors-admin" key="vendors-admin">Vendors Admin</Nav.Link>,
             ]) : ''}
           </Nav>
           <Nav className="justify-content-end">

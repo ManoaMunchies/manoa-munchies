@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
 import { Stuffs } from '../../api/stuff/Stuff';
-import { FoodItems } from '../../api/fooditems/FoodItems';
+import { Foods } from '../../api/fooditems/Foods';
 import { Vendors } from '../../api/vendors/Vendors';
 
 // User-level publication.
@@ -13,15 +13,31 @@ Meteor.publish(Stuffs.userPublicationName, function () {
   }
   return this.ready();
 });
-Meteor.publish(FoodItems.userPublicationName, function () {
+Meteor.publish(Foods.userPublicationName, function () {
   if (this.userId) {
-    const username = Meteor.users.findOne(this.userId).username;
-    return FoodItems.collection.find({ owner: username });
+    if (this.userId && Roles.userIsInRole(this.userId, 'user')) {
+      return Foods.collection.find();
+    }
   }
   return this.ready();
 });
-
+// if logged in with user role, then publish vendor information
+Meteor.publish(Vendors.userPublicationName, function () {
+  if (this.userId) {
+    if (this.userId && Roles.userIsInRole(this.userId, 'user')) {
+      return Vendors.collection.find();
+    }
+  }
+  return this.ready();
+});
 // Admin-level publication.
+// if logged in with admin role, then publsih vendor information
+Meteor.publish(Vendors.adminPublicationName, function () {
+  if (this.userId && Roles.userIsInRole(this.userId, 'admin')) {
+    return Vendors.collection.find();
+  }
+  return this.ready();
+});
 // If logged in and with admin role, then publish all documents from all users. Otherwise, publish nothing.
 Meteor.publish(Stuffs.adminPublicationName, function () {
   if (this.userId && Roles.userIsInRole(this.userId, 'admin')) {
@@ -30,9 +46,9 @@ Meteor.publish(Stuffs.adminPublicationName, function () {
   return this.ready();
 });
 
-Meteor.publish(FoodItems.adminPublicationName, function () {
+Meteor.publish(Foods.adminPublicationName, function () {
   if (this.userId && Roles.userIsInRole(this.userId, 'admin')) {
-    return FoodItems.collection.find();
+    return Foods.collection.find();
   }
   return this.ready();
 });
@@ -44,9 +60,4 @@ Meteor.publish(null, function () {
     return Meteor.roleAssignment.find({ 'user._id': this.userId });
   }
   return this.ready();
-});
-
-// display vendor information for all users
-Meteor.publish(Vendors.userPublicationName, function () {
-  return Vendors.collection.find();
 });

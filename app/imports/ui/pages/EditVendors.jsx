@@ -1,7 +1,7 @@
 import React from 'react';
 import swal from 'sweetalert';
 import { Card, Col, Container, Row } from 'react-bootstrap';
-import { AutoForm, ErrorsField, NumField, SubmitField, TextField } from 'uniforms-bootstrap5';
+import { AutoForm, ErrorsField, HiddenField, NumField, SubmitField, TextField } from 'uniforms-bootstrap5';
 import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
@@ -51,6 +51,7 @@ const EditVendors = () => {
                 <NumField name="vendorId" decimal={null} />
                 <SubmitField value="Submit" />
                 <ErrorsField />
+                <HiddenField name="owner" />
               </Card.Body>
             </Card>
           </AutoForm>

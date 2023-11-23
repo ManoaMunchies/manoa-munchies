@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { Stuffs } from '../../api/stuff/Stuff.js';
-import { FoodItems } from '../../api/fooditems/FoodItems';
+import { Foods } from '../../api/fooditems/Foods';
 import { Vendors } from '../../api/vendors/Vendors';
 
 /* eslint-disable no-console */
@@ -12,7 +12,7 @@ const addData = (data) => {
 };
 const addFoodData = (foodData) => {
   console.log(`  Adding: ${foodData.name} (${foodData.owner})`);
-  FoodItems.collection.insert(foodData);
+  Foods.collection.insert(foodData);
 };
 
 const addVendorData = (vendorData) => {
@@ -27,7 +27,7 @@ if (Stuffs.collection.find().count() === 0) {
     Meteor.settings.defaultData.forEach(data => addData(data));
   }
 }
-if (FoodItems.collection.find().count() === 0) {
+if (Foods.collection.find().count() === 0) {
   if (Meteor.settings.defaultDataFoodItems) {
     console.log('Creating default food data.');
     Meteor.settings.defaultDataFoodItems.forEach(foodData => addFoodData(foodData));

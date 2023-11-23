@@ -7,7 +7,6 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-d
 import Footer from '../components/Footer';
 import Landing from '../pages/Landing';
 import ListStuff from '../pages/ListStuff';
-import ListStuffAdmin from '../pages/ListStuffAdmin';
 import AddStuff from '../pages/AddStuff';
 import EditStuff from '../pages/EditStuff';
 import NotFound from '../pages/NotFound';
@@ -23,6 +22,8 @@ import ListFoodItemsAdmin from '../pages/ListFoodItemsAdmin';
 import AddVendors from '../pages/AddVendors';
 import ListVendors from '../pages/ListVendors';
 import EditVendors from '../pages/EditVendors';
+import ListVendorsAdmin from '../pages/ListVendorsAdmin';
+import ListFoodItems from '../pages/ListFoodItems';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
@@ -39,6 +40,7 @@ const App = () => {
         <Routes>
           <Route exact path="/" element={<Landing />} />
           <Route path="/add-food-items" element={<ProtectedRoute><AddFoodItems /></ProtectedRoute>} />
+          <Route path="/food-items" element={<ProtectedRoute><ListFoodItems /></ProtectedRoute>} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/signout" element={<SignOut />} />
@@ -50,6 +52,7 @@ const App = () => {
           <Route path="/edit-vendors/:_id" element={<ProtectedRoute><EditVendors /></ProtectedRoute>} />
           <Route path="/admin" element={<AdminProtectedRoute ready={ready}><ListFoodItemsAdmin /></AdminProtectedRoute>} />
           <Route path="/vendors" element={<ProtectedRoute ready={ready}><ListVendors /></ProtectedRoute>} />
+          <Route path="/vendors-admin" element={<AdminProtectedRoute ready={ready}><ListVendorsAdmin /></AdminProtectedRoute>} />
           <Route path="/add-vendors" element={<ProtectedRoute ready={ready}><AddVendors /></ProtectedRoute>} />
           <Route path="/notauthorized" element={<NotAuthorized />} />
           <Route path="*" element={<NotFound />} />

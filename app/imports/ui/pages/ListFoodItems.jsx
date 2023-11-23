@@ -4,14 +4,13 @@ import { useTracker } from 'meteor/react-meteor-data';
 import { Col, Container, Row, Table } from 'react-bootstrap';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { Foods } from '../../api/fooditems/Foods';
-import FoodItemsAdmin from '../components/FoodItemsAdmin';
-
+import FoodItems from '../components/FoodItems';
 /* Renders a table containing all of the Stuff documents. Use <StuffItemAdmin> to render each row. */
-const ListFoodItemsAdmin = () => {
+const ListFoodItems = () => {
   // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
   const { fooditems, ready } = useTracker(() => {
     // Get access to Stuff documents.
-    const subscription = Meteor.subscribe(Foods.adminPublicationName);
+    const subscription = Meteor.subscribe(Foods.userPublicationName);
     // Determine if the subscription is ready
     const rdy = subscription.ready();
     // Get the Stuff documents
@@ -25,7 +24,7 @@ const ListFoodItemsAdmin = () => {
     <Container className="py-3">
       <Row className="justify-content-center">
         <Col md={7}>
-          <Col className="text-center"><h2>List Food Items (Admin)</h2></Col>
+          <Col className="text-center"><h2>Food Items</h2></Col>
           <Table striped bordered hover>
             <thead>
               <tr>
@@ -34,11 +33,10 @@ const ListFoodItemsAdmin = () => {
                 <th>Vendor ID</th>
                 <th>Cuisine Type</th>
                 <th>Availability</th>
-                <th>Owner</th>
               </tr>
             </thead>
             <tbody>
-              {fooditems.map((fooditem) => <FoodItemsAdmin key={fooditem._id} fooditems={fooditem} />)}
+              {fooditems.map((fooditem) => <FoodItems key={fooditem._id} fooditems={fooditem} />)}
             </tbody>
           </Table>
         </Col>
@@ -47,4 +45,4 @@ const ListFoodItemsAdmin = () => {
   ) : <LoadingSpinner />);
 };
 
-export default ListFoodItemsAdmin;
+export default ListFoodItems;

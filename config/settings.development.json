@@ -1,14 +1,15 @@
 {
   "defaultAccounts": [
     { "email": "admin@foo.com", "password": "changeme", "role": "admin" },
-    { "email": "john@foo.com", "password": "changeme" }
+    { "email": "john@foo.com", "password": "changeme", "role": "user" },
+    { "email": "will@foo.com", "password": "changeme", "role": "vendor" }
   ],
   "defaultData": [
     { "name": "Hot Coffee", "quantity": 3, "condition": "good", "owner": "john@foo.com" }
   ],
 
   "defaultDataVendors": [
-    { "name": "Dunkin Donuts", "vendorId": 1 }
+    { "name": "Dunkin Donuts", "vendorId": 1, "location": "Paradise Palms Cafe", "hours": "Monday-Friday 7:00am-4:30pm", "owner": "will@foo.com" }
   ],
   "defaultDataFoodItems": [
     { "name": "Hot Coffee", "quantity": 3, "vendorId": 1, "owner": "john@foo.com", "cuisineType": "breakfast", "availability": "available" },
