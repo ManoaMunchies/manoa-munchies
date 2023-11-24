@@ -53,6 +53,22 @@ Meteor.publish(Foods.adminPublicationName, function () {
   return this.ready();
 });
 
+// Vendor-level publication.
+// If logged in with vendor role, publish VendorCollection documents for this owner. Otherwise publish nothing.
+Meteor.publish(Vendors.vendorPublicationName, function () {
+  if (this.userId && Roles.userIsInRole(this.userId, 'vendor')) {
+    return Vendors.collection.find();
+  }
+  return this.ready();
+});
+// If logged in with vendor role, publish FoodsCollection documents for this owner. Otherwise publish nothing.
+Meteor.publish(Foods.vendorPublicationName, function () {
+  if (this.userId && Roles.userIsInRole(this.userId, 'vendor')) {
+    return Foods.collection.find();
+  }
+  return this.ready();
+});
+
 // alanning:roles publication
 // Recommended code to publish roles for each user.
 Meteor.publish(null, function () {

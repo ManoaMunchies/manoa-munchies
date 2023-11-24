@@ -12,13 +12,16 @@ const ListVendors = () => {
     // when your component is unmounted or deps change.
     // Get access to Stuff documents.
     const subscription = Meteor.subscribe(Vendors.userPublicationName);
+    const subscription2 = Meteor.subscribe(Vendors.vendorPublicationName);
     // Determine if the subscription is ready
     const rdy = subscription.ready();
+    const rdyy = subscription2.ready();
     // Get the Stuff documents
     const vendorItems = Vendors.collection.find({}).fetch();
     return {
       vendors: vendorItems,
       ready: rdy,
+      ready2: rdyy,
     };
   }, []);
 
