@@ -53,8 +53,19 @@ body {
   background-color: darkgreen;
   border-color: white;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+
 }
+#vendor-home .vendor-btn-edit {
+  width: 150px;
+  background-color: darkgreen;
+  border-color: white;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
 #landing-page .btn-primary:hover {
+  background-color: dimgray;
+}
+#vendor-home .vendor-btn-edit:hover {
   background-color: dimgray;
 }
 .button-column {
