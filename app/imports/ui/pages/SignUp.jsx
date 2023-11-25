@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { Meteor } from 'meteor/meteor';
 import { Link, Navigate } from 'react-router-dom';
 import { Accounts } from 'meteor/accounts-base';
 import { Alert, Card, Col, Container, Row } from 'react-bootstrap';
 import SimpleSchema from 'simpl-schema';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
-import { AutoForm, ErrorsField, SubmitField, TextField } from 'uniforms-bootstrap5';
+import { AutoForm, ErrorsField, SubmitField, SelectField, TextField } from 'uniforms-bootstrap5';
 
 /**
  * SignUp component is similar to signin component, but we create a new user instead.
@@ -17,17 +18,27 @@ const SignUp = ({ location }) => {
   const schema = new SimpleSchema({
     email: String,
     password: String,
+    role: {
+      type: String,
+      allowedValues: ['vendor', 'user'],
+      defaultValue: 'user',
+    },
   });
   const bridge = new SimpleSchema2Bridge(schema);
 
   /* Handle SignUp submission. Create user account and a profile entry, then redirect to the home page. */
   const submit = (doc) => {
-    const { email, password } = doc;
+    const { email, password, role } = doc;
     Accounts.createUser({ email, username: email, password }, (err) => {
       if (err) {
         setError(err.reason);
       } else {
-        setError('');
+        Meteor.call('assignUserRole', Meteor.userId(), role, (errr) => {
+          // Handle role assignment response
+          if (errr) {
+            setError(errr.reason);
+          }
+        });
         setRedirectToRef(true);
       }
     });
@@ -51,6 +62,7 @@ const SignUp = ({ location }) => {
               <Card.Body>
                 <TextField name="email" placeholder="E-mail address" />
                 <TextField name="password" placeholder="Password" type="password" />
+                <SelectField name="role" placeholder="Select your role" />
                 <ErrorsField />
                 <SubmitField />
               </Card.Body>

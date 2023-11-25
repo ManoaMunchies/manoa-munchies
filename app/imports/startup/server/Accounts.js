@@ -1,36 +1,42 @@
 import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 import { Roles } from 'meteor/alanning:roles';
+import { check } from 'meteor/check';
 
-/* eslint-disable no-console */
-
-const createUser = (email, password, role) => {
-  console.log(`  Creating user ${email}.`);
-  const userID = Accounts.createUser({
-    username: email,
-    email: email,
-    password: password,
+Meteor.startup(() => {
+  // Create roles on startup
+  const roles = ['admin', 'user', 'vendor'];
+  roles.forEach(role => {
+    Roles.createRole(role, { unlessExists: true });
   });
-  if (role === 'admin') {
-    Roles.createRole(role, { unlessExists: true });
-    Roles.addUsersToRoles(userID, 'admin');
-  }
-  if (role === 'user') {
-    Roles.createRole(role, { unlessExists: true });
-    Roles.addUsersToRoles(userID, 'user');
-  }
-  if (role === 'vendor') {
-    Roles.createRole(role, { unlessExists: true });
-    Roles.addUsersToRoles(userID, 'vendor');
-  }
-};
 
-// When running app for first time, pass a settings file to set up a default user account.
-if (Meteor.users.find().count() === 0) {
-  if (Meteor.settings.defaultAccounts) {
+  // Create default users
+  if (Meteor.users.find().count() === 0 && Meteor.settings.defaultAccounts) {
     console.log('Creating the default user(s)');
-    Meteor.settings.defaultAccounts.forEach(({ email, password, role }) => createUser(email, password, role));
+    Meteor.settings.defaultAccounts.forEach(({ email, password, role }) => {
+      const userID = Accounts.createUser({
+        username: email,
+        email: email,
+        password: password,
+      });
+      if (roles.includes(role)) {
+        Roles.addUsersToRoles(userID, role);
+      }
+    });
   } else {
-    console.log('Cannot initialize the database!  Please invoke meteor with a settings file.');
+    console.log('Default users already exist or settings are not provided.');
   }
-}
+});
+
+Meteor.methods({
+  'assignUserRole'(userId, role) {
+    // Security check to prevent unauthorized role assignment
+    check(role, String);
+    check(userId, String);
+    if (['admin', 'user', 'vendor'].includes(role)) {
+      Roles.addUsersToRoles(userId, role);
+    } else {
+      throw new Meteor.Error('invalid-role', 'Invalid role specified');
+    }
+  },
+});
