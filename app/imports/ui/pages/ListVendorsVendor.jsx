@@ -4,14 +4,15 @@ import { useTracker } from 'meteor/react-meteor-data';
 import { Table, Container, Row, Col } from 'react-bootstrap';
 import { Vendors } from '../../api/vendors/Vendors';
 import LoadingSpinner from '../components/LoadingSpinner';
+import VendorItemVendor from '../components/VendorItemVendor';
 import VendorItem from '../components/VendorItem';
 
-const ListVendors = () => {
+const ListVendorsVendor = () => {
   const { ready, vendorData } = useTracker(() => {
     // Note that this subscription will get cleaned up
     // when your component is unmounted or deps change.
     // Get access to Stuff documents.
-    const subscription = Meteor.subscribe(Vendors.userPublicationName);
+    const subscription = Meteor.subscribe(Vendors.vendorPublicationName);
     // Determine if the subscription is ready
     const rdy = subscription.ready();
     // Get the Stuff documents
@@ -47,4 +48,4 @@ const ListVendors = () => {
   ) : <LoadingSpinner />);
 };
 
-export default ListVendors;
+export default ListVendorsVendor;

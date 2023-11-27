@@ -4,10 +4,10 @@ import { useTracker } from 'meteor/react-meteor-data';
 import { Table, Container, Row, Col } from 'react-bootstrap';
 import { Vendors } from '../../api/vendors/Vendors';
 import LoadingSpinner from '../components/LoadingSpinner';
-import VendorItemAdmin from '../components/VendorItem';
+import VendorItemAdmin from '../components/VendorItemAdmin';
 
 const ListVendorsAdmin = () => {
-  const { ready, vendors } = useTracker(() => {
+  const { ready, vendorData } = useTracker(() => {
     // Note that this subscription will get cleaned up
     // when your component is unmounted or deps change.
     // Get access to Stuff documents.
@@ -17,7 +17,7 @@ const ListVendorsAdmin = () => {
     // Get the Stuff documents
     const vendorItems = Vendors.collection.find({}).fetch();
     return {
-      vendors: vendorItems,
+      vendorData: vendorItems,
       ready: rdy,
     };
   }, []);
@@ -33,14 +33,14 @@ const ListVendorsAdmin = () => {
             <thead>
               <tr>
                 <th>Name</th>
-                <th>Vendor ID</th>
                 <th>Location</th>
                 <th>Hours</th>
                 <th>Owner</th>
+                <th>Edit</th>
               </tr>
             </thead>
             <tbody>
-              {vendors.map((vendor) => <VendorItemAdmin key={vendor._id} vendor={vendor} />)}
+              {vendorData.map((vendor) => <VendorItemAdmin key={vendor._id} vendors={vendor} />)}
             </tbody>
           </Table>
         </Col>

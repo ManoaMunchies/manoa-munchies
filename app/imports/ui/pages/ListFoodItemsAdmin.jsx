@@ -31,8 +31,8 @@ const ListFoodItemsAdmin = () => {
               <tr>
                 <th>Name</th>
                 <th>Quantity</th>
-                <th>Vendor ID</th>
                 <th>Cuisine Type</th>
+                <th>Vendor</th>
                 <th>Availability</th>
                 <th>Owner</th>
               </tr>

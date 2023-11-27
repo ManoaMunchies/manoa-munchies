@@ -6,8 +6,8 @@ const FoodItems = ({ fooditems }) => (
   <tr>
     <td>{fooditems.name}</td>
     <td>{fooditems.quantity}</td>
-    <td>{fooditems.vendorId}</td>
     <td>{fooditems.cuisineType}</td>
+    <td>{fooditems.vendor}</td>
     <td>{fooditems.availability}</td>
   </tr>
 );
@@ -17,8 +17,8 @@ FoodItems.propTypes = {
   fooditems: PropTypes.shape({
     name: PropTypes.string,
     quantity: PropTypes.number,
-    vendorId: PropTypes.string,
     cuisineType: PropTypes.string,
+    vendor: PropTypes.string,
     availability: PropTypes.string,
     _id: PropTypes.string,
   }).isRequired,

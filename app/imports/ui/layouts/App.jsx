@@ -8,7 +8,6 @@ import Footer from '../components/Footer';
 import Landing from '../pages/Landing';
 import ListStuff from '../pages/ListStuff';
 import AddStuff from '../pages/AddStuff';
-import EditStuff from '../pages/EditStuff';
 import NotFound from '../pages/NotFound';
 import SignUp from '../pages/SignUp';
 import SignOut from '../pages/SignOut';
@@ -24,6 +23,11 @@ import ListVendors from '../pages/ListVendors';
 import EditVendors from '../pages/EditVendors';
 import ListVendorsAdmin from '../pages/ListVendorsAdmin';
 import ListFoodItems from '../pages/ListFoodItems';
+import EditVendorItem from '../pages/EditVendorItem';
+import EditFoodItem from '../pages/EditFoodItem';
+import ListVendorsVendor from '../pages/ListVendorsVendor';
+import EditVendorItemAdmin from '../pages/EditVendorItemAdmin';
+import Menu from '../pages/Menu';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
@@ -41,6 +45,7 @@ const App = () => {
           <Route exact path="/" element={<Landing />} />
           <Route path="/add-food-items" element={<ProtectedRoute><AddFoodItems /></ProtectedRoute>} />
           <Route path="/food-items" element={<ProtectedRoute><ListFoodItems /></ProtectedRoute>} />
+          <Route path="/menu/" element={<ProtectedRoute><Menu /></ProtectedRoute>} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/signout" element={<SignOut />} />
@@ -48,11 +53,14 @@ const App = () => {
           <Route path="/vendorhome" element={<ProtectedRoute><VendorHome /></ProtectedRoute>} />
           <Route path="/list" element={<ProtectedRoute><ListStuff /></ProtectedRoute>} />
           <Route path="/add" element={<ProtectedRoute><AddStuff /></ProtectedRoute>} />
-          <Route path="/edit/:_id" element={<ProtectedRoute><EditStuff /></ProtectedRoute>} />
+          <Route path="/edit-food-item/:_id" element={<ProtectedRoute><EditFoodItem /></ProtectedRoute>} />
+          <Route path="/edit-vendor-item/:_id" element={<ProtectedRoute><EditVendorItem /></ProtectedRoute>} />
           <Route path="/edit-vendors/:_id" element={<ProtectedRoute><EditVendors /></ProtectedRoute>} />
           <Route path="/admin" element={<AdminProtectedRoute ready={ready}><ListFoodItemsAdmin /></AdminProtectedRoute>} />
           <Route path="/vendors" element={<ProtectedRoute ready={ready}><ListVendors /></ProtectedRoute>} />
+          <Route path="/vendors-vendor" element={<ProtectedRoute ready={ready}><ListVendorsVendor /></ProtectedRoute>} />
           <Route path="/vendors-admin" element={<AdminProtectedRoute ready={ready}><ListVendorsAdmin /></AdminProtectedRoute>} />
+          <Route path="/edit-vendor-item-admin/:_id" element={<AdminProtectedRoute ready={ready}><EditVendorItemAdmin /></AdminProtectedRoute>} />
           <Route path="/add-vendors" element={<ProtectedRoute ready={ready}><AddVendors /></ProtectedRoute>} />
           <Route path="/notauthorized" element={<NotAuthorized />} />
           <Route path="*" element={<NotFound />} />

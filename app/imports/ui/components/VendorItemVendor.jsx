@@ -1,21 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
-const VendorItemVendor = ({ vendor }) => (
+const VendorItemVendor = ({ vendors }) => (
   <tr>
-    <td>{vendor.name}</td>
-    <td>{vendor.vendorId}</td>
-    <td>{vendor.location}</td>
-    <td>{vendor.hours}</td>
-    <td>{vendor.owner}</td>
+    <td>{vendors.name}</td>
+    <td>{vendors.location}</td>
+    <td>{vendors.hours}</td>
+    <td>
+      <Link to={`/edit-vendor-item/${vendors._id}`} className="btn btn-primary">Edit</Link>
+    </td>
   </tr>
 );
 
 VendorItemVendor.propTypes = {
-  vendor: PropTypes.shape({
+  vendors: PropTypes.shape({
     _id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-    vendorId: PropTypes.number.isRequired,
     location: PropTypes.string.isRequired,
     hours: PropTypes.string.isRequired,
     owner: PropTypes.string.isRequired,

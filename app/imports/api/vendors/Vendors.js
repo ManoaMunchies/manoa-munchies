@@ -10,13 +10,10 @@ class VendorsCollection {
         type: String,
         required: true,
       },
-      vendorId: {
-        type: Number,
-        required: true,
-      },
       location: {
         type: String,
         required: true,
+        allowedValues: ['Paradise Palms Café', 'Food Truck Row', 'Shidler College', 'Campus Center', 'Hemenway', 'Gateway House', 'Athletic Complex', 'Hale Aloha', 'Hale Noelani'],
       },
       hours: {
         type: String,
@@ -33,5 +30,8 @@ class VendorsCollection {
     this.vendorPublicationName = `${this.name}.publication.vendor`;
   }
 }
-
+/**
+ * The singleton instance of the VendorsCollection.
+ * @type {VendorsCollection}
+ */
 export const Vendors = new VendorsCollection();

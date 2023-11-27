@@ -6,29 +6,21 @@ import { withTracker, useTracker } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
 import { Foods } from '../../api/fooditems/Foods';
 import { Vendors } from '../../api/vendors/Vendors';
-import VendorItem from '../components/VendorItem';
 import LoadingSpinner from '../components/LoadingSpinner';
 import FoodItemsAdmin from '../components/FoodItemsAdmin';
+import VendorItemVendor from '../components/VendorItemVendor';
 
 const VendorHome = ({ currentUser }) => {
   // Destructure the username from currentUser
   const { username } = currentUser || {};
-  const { ready, vendors, fooditems } = useTracker(() => {
-    // Note that this subscription will get cleaned up
-    // when your component is unmounted or deps change.
-    // Get access to Stuff documents.
-    const subscriptionVendors = Meteor.subscribe(Vendors.vendorPublicationName);
-    const subscriptionFoods = Meteor.subscribe(Foods.vendorPublicationName);
-    // Determine if the subscription is ready
-    const rdy = subscriptionVendors.ready();
-    const rdyy = subscriptionFoods.ready();
-    // Get the Stuff documents
-    const vendorItems = Vendors.collection.find({}).fetch();
-    const items = Foods.collection.find({}).fetch();
+  const { ready, vendorData, foodItems } = useTracker(() => {
+    const subscriptionVendors = Meteor.subscribe('myVendorData');
+    const subscriptionFoods = Meteor.subscribe('myFoodData');
+
     return {
-      vendors: vendorItems,
-      fooditems: items,
-      ready: rdy, rdyy,
+      ready: subscriptionVendors.ready() && subscriptionFoods.ready(),
+      vendorData: Vendors.collection.find({}).fetch(),
+      foodItems: Foods.collection.find({}).fetch(),
     };
   }, []);
 
@@ -49,13 +41,13 @@ const VendorHome = ({ currentUser }) => {
         <thead>
           <tr>
             <th>Name</th>
-            <th>Vendor ID</th>
             <th>Location</th>
             <th>Hours</th>
+            <th>Edit</th>
           </tr>
         </thead>
         <tbody>
-          {vendors.map((vendor) => <VendorItem key={vendor._id} vendor={vendor} />)}
+          {vendorData.map((vendor) => <VendorItemVendor key={vendor._id} vendors={vendor} />)}
         </tbody>
       </Table>
       <Col className="background-row d-flex flex-column align-items-center justify-content-center text-center">
@@ -66,22 +58,17 @@ const VendorHome = ({ currentUser }) => {
           <tr>
             <th>Name</th>
             <th>Quantity</th>
-            <th>Vendor ID</th>
             <th>Cuisine Type</th>
+            <th>Vendor</th>
             <th>Availability</th>
             <th>Owner</th>
+            <th>Edit</th>
           </tr>
         </thead>
         <tbody>
-          {fooditems.map((fooditem) => <FoodItemsAdmin key={fooditem._id} fooditems={fooditem} />)}
+          {foodItems.map((fooditem) => <FoodItemsAdmin key={fooditem._id} fooditems={fooditem} />)}
         </tbody>
       </Table>
-      {/* Button placed outside tbody but within Container */}
-      <Row className="justify-content-center mt-3">
-        <Col md="auto">
-          <Button as="a" href="/edit-vendor" className="vendor-btn-edit">Edit Information</Button>
-        </Col>
-      </Row>
     </Container>
   ) : <LoadingSpinner />);
 };

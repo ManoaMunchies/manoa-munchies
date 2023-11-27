@@ -77,3 +77,25 @@ Meteor.publish(null, function () {
   }
   return this.ready();
 });
+
+// publication for specific vendors to display their food items and their information
+Meteor.publish('myVendorData', function () {
+  if (!this.userId) {
+    return this.ready();
+  }
+  const user = Meteor.users.findOne(this.userId);
+  return Vendors.collection.find({ owner: user.username });
+});
+// publication for specific vendors to display their food items and their information
+Meteor.publish('myFoodData', function () {
+  if (!this.userId) {
+    return this.ready();
+  }
+  const user = Meteor.users.findOne(this.userId);
+  return Foods.collection.find({ owner: user.username });
+});
+
+Meteor.publish('foodItemsByVendor', function (vendorName) {
+  // Add necessary checks for vendorId validity and user permissions
+  return Foods.collection.find({ vendor: vendorName });
+});

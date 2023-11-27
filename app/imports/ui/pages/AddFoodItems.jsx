@@ -11,10 +11,13 @@ import { Foods } from '../../api/fooditems/Foods';
 const formSchema = new SimpleSchema({
   name: String,
   quantity: Number,
-  vendorId: String,
   cuisineType: {
     type: String,
-    allowedValues: ['breakfast', 'american', 'hawaiian'],
+    allowedValues: ['breakfast', 'american', 'hawaiian', 'chinese', 'japanese', 'korean', 'thai', 'indian', 'mexican'],
+  },
+  vendor: {
+    type: String,
+    required: true,
   },
   availability: {
     type: String,
@@ -30,10 +33,10 @@ const AddFoodItems = () => {
 
   // On submit, insert the data.
   const submit = (data, formRef) => {
-    const { name, quantity, vendorId, cuisineType, availability } = data;
+    const { name, quantity, cuisineType, vendor, availability } = data;
     const owner = Meteor.user().username;
     Foods.collection.insert(
-      { name, quantity, vendorId, cuisineType, availability, owner },
+      { name, quantity, cuisineType, vendor, availability, owner },
       (error) => {
         if (error) {
           swal('Error', error.message, 'error');
@@ -51,14 +54,14 @@ const AddFoodItems = () => {
     <Container className="py-3">
       <Row className="justify-content-center">
         <Col xs={5}>
-          <Col className="text-center"><h2>Add Stuff</h2></Col>
+          <Col className="text-center"><h2>Add Menu Item</h2></Col>
           <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => submit(data, fRef)}>
             <Card>
               <Card.Body>
                 <TextField name="name" />
                 <NumField name="quantity" decimal={null} />
-                <TextField name="vendorId" />
                 <SelectField name="cuisineType" />
+                <TextField name="vendor" />
                 <SelectField name="availability" />
                 <SubmitField value="Submit" />
                 <ErrorsField />
