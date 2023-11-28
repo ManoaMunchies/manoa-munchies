@@ -63,6 +63,7 @@ const VendorHome = ({ currentUser }) => {
             <th>Availability</th>
             <th>Owner</th>
             <th>Edit</th>
+            <th>Delete</th>
           </tr>
         </thead>
         <tbody>

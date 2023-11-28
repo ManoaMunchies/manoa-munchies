@@ -6,8 +6,6 @@ import { Roles } from 'meteor/alanning:roles';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Landing from '../pages/Landing';
-import ListStuff from '../pages/ListStuff';
-import AddStuff from '../pages/AddStuff';
 import NotFound from '../pages/NotFound';
 import SignUp from '../pages/SignUp';
 import SignOut from '../pages/SignOut';
@@ -20,7 +18,6 @@ import AddFoodItems from '../pages/AddFoodItems';
 import ListFoodItemsAdmin from '../pages/ListFoodItemsAdmin';
 import AddVendors from '../pages/AddVendors';
 import ListVendors from '../pages/ListVendors';
-import EditVendors from '../pages/EditVendors';
 import ListVendorsAdmin from '../pages/ListVendorsAdmin';
 import ListFoodItems from '../pages/ListFoodItems';
 import EditVendorItem from '../pages/EditVendorItem';
@@ -51,11 +48,8 @@ const App = () => {
           <Route path="/signout" element={<SignOut />} />
           <Route path="/home" element={<ProtectedRoute><Landing /></ProtectedRoute>} />
           <Route path="/vendorhome" element={<ProtectedRoute><VendorHome /></ProtectedRoute>} />
-          <Route path="/list" element={<ProtectedRoute><ListStuff /></ProtectedRoute>} />
-          <Route path="/add" element={<ProtectedRoute><AddStuff /></ProtectedRoute>} />
           <Route path="/edit-food-item/:_id" element={<ProtectedRoute><EditFoodItem /></ProtectedRoute>} />
           <Route path="/edit-vendor-item/:_id" element={<ProtectedRoute><EditVendorItem /></ProtectedRoute>} />
-          <Route path="/edit-vendors/:_id" element={<ProtectedRoute><EditVendors /></ProtectedRoute>} />
           <Route path="/admin" element={<AdminProtectedRoute ready={ready}><ListFoodItemsAdmin /></AdminProtectedRoute>} />
           <Route path="/vendors" element={<ProtectedRoute ready={ready}><ListVendors /></ProtectedRoute>} />
           <Route path="/vendors-vendor" element={<ProtectedRoute ready={ready}><ListVendorsVendor /></ProtectedRoute>} />

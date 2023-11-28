@@ -4,10 +4,6 @@
     { "email": "john@foo.com", "password": "changeme", "role": "user" },
     { "email": "will@foo.com", "password": "changeme", "role": "vendor" }
   ],
-  "defaultData": [
-    { "name": "Hot Coffee", "quantity": 3, "condition": "good", "owner": "john@foo.com" }
-  ],
-
   "defaultDataVendors": [
     { "name": "Dunkin Donuts", "location": "Paradise Palms Café", "hours": "Monday-Friday 7:00am-4:30pm", "owner": "will@foo.com" }
   ],

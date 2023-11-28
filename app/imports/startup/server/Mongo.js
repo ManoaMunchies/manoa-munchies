@@ -1,15 +1,10 @@
 import { Meteor } from 'meteor/meteor';
-import { Stuffs } from '../../api/stuff/Stuff.js';
 import { Foods } from '../../api/fooditems/Foods';
 import { Vendors } from '../../api/vendors/Vendors';
 
 /* eslint-disable no-console */
 
 // Initialize the database with a default data document.
-const addData = (data) => {
-  console.log(`  Adding: ${data.name} (${data.owner})`);
-  Stuffs.collection.insert(data);
-};
 const addFoodData = (foodData) => {
   console.log(`  Adding: ${foodData.name} (${foodData.owner})`);
   Foods.collection.insert(foodData);
@@ -20,13 +15,6 @@ const addVendorData = (vendorData) => {
   Vendors.collection.insert(vendorData);
 };
 
-// Initialize the StuffsCollection if empty.
-if (Stuffs.collection.find().count() === 0) {
-  if (Meteor.settings.defaultData) {
-    console.log('Creating default data.');
-    Meteor.settings.defaultData.forEach(data => addData(data));
-  }
-}
 if (Foods.collection.find().count() === 0) {
   if (Meteor.settings.defaultDataFoodItems) {
     console.log('Creating default food data.');
