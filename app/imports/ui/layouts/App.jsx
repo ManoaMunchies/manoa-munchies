@@ -26,6 +26,8 @@ import ListVendorsVendor from '../pages/ListVendorsVendor';
 import EditVendorItemAdmin from '../pages/EditVendorItemAdmin';
 import Menu from '../pages/Menu';
 import AdminPanel from '../pages/AdminPanel';
+import MenuAdmin from '../pages/MenuAdmin';
+import EditFoodItemAdmin from '../pages/EditFoodItemAdmin';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
@@ -50,6 +52,7 @@ const App = () => {
           <Route path="/home" element={<ProtectedRoute><Landing /></ProtectedRoute>} />
           <Route path="/vendorhome" element={<ProtectedRoute><VendorHome /></ProtectedRoute>} />
           <Route path="/edit-food-item/:_id" element={<ProtectedRoute><EditFoodItem /></ProtectedRoute>} />
+          <Route path="/edit-food-item-admin/:_id" element={<AdminProtectedRoute ready={ready}><EditFoodItemAdmin /></AdminProtectedRoute>} />
           <Route path="/edit-vendor-item/:_id" element={<ProtectedRoute><EditVendorItem /></ProtectedRoute>} />
           <Route path="/list-food-item-admin" element={<AdminProtectedRoute ready={ready}><ListFoodItemsAdmin /></AdminProtectedRoute>} />
           <Route path="/admin-panel" element={<AdminProtectedRoute ready={ready}><AdminPanel /></AdminProtectedRoute>} />
@@ -57,6 +60,7 @@ const App = () => {
           <Route path="/vendors-vendor" element={<ProtectedRoute ready={ready}><ListVendorsVendor /></ProtectedRoute>} />
           <Route path="/vendors-admin" element={<AdminProtectedRoute ready={ready}><ListVendorsAdmin /></AdminProtectedRoute>} />
           <Route path="/edit-vendor-item-admin/:_id" element={<AdminProtectedRoute ready={ready}><EditVendorItemAdmin /></AdminProtectedRoute>} />
+          <Route path="/edit-vendor-menu-admin/" element={<AdminProtectedRoute ready={ready}><MenuAdmin /></AdminProtectedRoute>} />
           <Route path="/add-vendors" element={<ProtectedRoute ready={ready}><AddVendors /></ProtectedRoute>} />
           <Route path="/notauthorized" element={<NotAuthorized />} />
           <Route path="*" element={<NotFound />} />

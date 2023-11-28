@@ -4,11 +4,14 @@ import '../../../client/style.css';
 import PropTypes from 'prop-types';
 import { withTracker, useTracker } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
+import { useNavigate } from 'react-router';
 import { Vendors } from '../../api/vendors/Vendors';
 import LoadingSpinner from '../components/LoadingSpinner';
 import VendorItemAdmin from '../components/VendorItemAdmin';
 
 const AdminPanel = ({ currentUser }) => {
+  const navigate = useNavigate();
+
   // Destructure the username from currentUser
   const { username } = currentUser || {};
   const { ready, vendorData, userData, userRoles } = useTracker(() => {
@@ -69,14 +72,19 @@ const AdminPanel = ({ currentUser }) => {
             <th>Name</th>
             <th>Location</th>
             <th>Hours</th>
-            <th>Edit</th>
+            <th>Owner</th>
+            <th>Edit Information</th>
             <th>Edit Menu</th>
+            <th>Delete</th>
           </tr>
         </thead>
         <tbody>
           {vendorData.map((vendor) => <VendorItemAdmin key={vendor._id} vendors={vendor} />)}
         </tbody>
       </Table>
+      <Col className="background-row d-flex flex-column align-items-center justify-content-center text-center">
+        <Button onClick={() => navigate('/add-vendors')}>Add New Vendor</Button>
+      </Col>
       <Col className="background-row d-flex flex-column align-items-center justify-content-center text-center">
         <h2 className="h1-landing">Active Accounts</h2>
       </Col>
@@ -110,7 +118,7 @@ const AdminPanel = ({ currentUser }) => {
                 </select>
               </td>
               <td>
-                <Button onClick={() => handleDelete(user._id)}>Delete</Button>
+                <Button variant="danger" onClick={() => handleDelete(user._id)}>Delete</Button>
               </td>
             </tr>
           ))}

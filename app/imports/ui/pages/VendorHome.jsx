@@ -1,5 +1,5 @@
 import React from 'react';
-import { Col, Container, Row, Table } from 'react-bootstrap';
+import { Button, Col, Container, Row, Table } from 'react-bootstrap';
 import '../../../client/style.css';
 import PropTypes from 'prop-types';
 import { withTracker, useTracker } from 'meteor/react-meteor-data';
@@ -70,6 +70,11 @@ const VendorHome = ({ currentUser }) => {
           {foodItems.map((fooditem) => <FoodItemsAdmin key={fooditem._id} fooditems={fooditem} />)}
         </tbody>
       </Table>
+      <Row className="justify-content-center mt-3">
+        <Col md="auto">
+          <Button as="a" href="/add-food-items" className="vendor-btn-edit">Add Menu Item</Button>
+        </Col>
+      </Row>
     </Container>
   ) : <LoadingSpinner />);
 };

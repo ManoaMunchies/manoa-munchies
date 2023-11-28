@@ -42,7 +42,7 @@ const FoodItemsAdmin = ({ fooditems }) => {
         <td>{fooditems.availability}</td>
         <td>{fooditems.owner}</td>
         <td>
-          <Link to={`/edit-food-item/${fooditems._id}`} className="btn btn-primary">Edit</Link>
+          <Link to={`/edit-food-item-admin/${fooditems._id}`} className="btn btn-primary">Edit</Link>
         </td>
         <td><Button variant="danger" onClick={() => handleDelete(fooditems._id)}>Delete</Button></td>
       </tr>

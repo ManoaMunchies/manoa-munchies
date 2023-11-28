@@ -3,7 +3,9 @@ import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 import { Roles } from 'meteor/alanning:roles';
 import { Foods } from '/imports/api/fooditems/Foods';
+import { Vendors } from '../imports/api/vendors/Vendors';
 
+// delete menu item
 Meteor.methods({
   'fooditems.remove'(foodItemId) {
     console.log('foodItem.owner:', foodItemId.owner);
@@ -22,6 +24,28 @@ Meteor.methods({
     // }
 
     Foods.collection.remove(foodItemId);
+  },
+});
+
+// delete vendor
+Meteor.methods({
+  'vendors.remove'(vendorId) {
+    console.log('vendor.owner:', vendorId.owner);
+    console.log('this.userId:', this.userId);
+
+    check(vendorId, String);
+
+    const vendor = Vendors.collection.findOne(vendorId);
+    if (!vendor) {
+      throw new Meteor.Error('Item not found');
+    }
+
+    // // Check if the current user is the owner of the item
+    // if (foodItem.owner !== this.userId.email) {
+    //   throw new Meteor.Error('Not authorized');
+    // }
+
+    Vendors.collection.remove(vendorId);
   },
 });
 
