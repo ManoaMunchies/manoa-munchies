@@ -25,6 +25,7 @@ import EditFoodItem from '../pages/EditFoodItem';
 import ListVendorsVendor from '../pages/ListVendorsVendor';
 import EditVendorItemAdmin from '../pages/EditVendorItemAdmin';
 import Menu from '../pages/Menu';
+import AdminPanel from '../pages/AdminPanel';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
@@ -50,7 +51,8 @@ const App = () => {
           <Route path="/vendorhome" element={<ProtectedRoute><VendorHome /></ProtectedRoute>} />
           <Route path="/edit-food-item/:_id" element={<ProtectedRoute><EditFoodItem /></ProtectedRoute>} />
           <Route path="/edit-vendor-item/:_id" element={<ProtectedRoute><EditVendorItem /></ProtectedRoute>} />
-          <Route path="/admin" element={<AdminProtectedRoute ready={ready}><ListFoodItemsAdmin /></AdminProtectedRoute>} />
+          <Route path="/list-food-item-admin" element={<AdminProtectedRoute ready={ready}><ListFoodItemsAdmin /></AdminProtectedRoute>} />
+          <Route path="/admin-panel" element={<AdminProtectedRoute ready={ready}><AdminPanel /></AdminProtectedRoute>} />
           <Route path="/vendors" element={<ProtectedRoute ready={ready}><ListVendors /></ProtectedRoute>} />
           <Route path="/vendors-vendor" element={<ProtectedRoute ready={ready}><ListVendorsVendor /></ProtectedRoute>} />
           <Route path="/vendors-admin" element={<AdminProtectedRoute ready={ready}><ListVendorsAdmin /></AdminProtectedRoute>} />

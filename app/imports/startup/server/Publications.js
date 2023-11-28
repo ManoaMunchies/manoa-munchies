@@ -87,3 +87,31 @@ Meteor.publish('foodItemsByVendor', function (vendorName) {
   check(vendorName, String);
   return Foods.collection.find({ vendor: vendorName });
 });
+
+// publication for admins to display all vendors and their information
+Meteor.publish('allVendorData', function () {
+  if (!this.userId) {
+    return this.ready();
+  }
+  return Vendors.collection.find();
+});
+
+// publication for admins to display all acounts and their information
+Meteor.publish('allUserData', function () {
+  if (Roles.userIsInRole(this.userId, 'admin')) {
+    return Meteor.users.find({}, { fields: { username: 1, emails: 1, roles: 1 } });
+  }
+  return this.ready();
+
+});
+
+// publication for admins to display all user roles
+Meteor.publish('allUsersRoles', function () {
+  if (Roles.userIsInRole(this.userId, 'admin')) {
+    // Publish roles of all users
+    return Meteor.roleAssignment.find({});
+  }
+  // Only publish if the user is an admin
+  return this.ready();
+
+});
