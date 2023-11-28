@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Col, Container, Row, Table } from 'react-bootstrap';
+import { Col, Container, Row, Table } from 'react-bootstrap';
 import '../../../client/style.css';
 import PropTypes from 'prop-types';
 import { withTracker, useTracker } from 'meteor/react-meteor-data';

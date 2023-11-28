@@ -1,8 +1,8 @@
 import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
+import { check } from 'meteor/check';
 import { Foods } from '../../api/fooditems/Foods';
 import { Vendors } from '../../api/vendors/Vendors';
-
 // User-level publication.
 // If logged in, then publish documents owned by this user. Otherwise, publish nothing.
 
@@ -84,5 +84,6 @@ Meteor.publish('myFoodData', function () {
 
 Meteor.publish('foodItemsByVendor', function (vendorName) {
   // Add necessary checks for vendorId validity and user permissions
+  check(vendorName, String);
   return Foods.collection.find({ vendor: vendorName });
 });

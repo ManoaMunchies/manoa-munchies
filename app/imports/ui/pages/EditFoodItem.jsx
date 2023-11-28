@@ -5,7 +5,7 @@ import { AutoForm, ErrorsField, HiddenField, NumField, SelectField, SubmitField,
 import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
-import { useParams, useNavigate } from 'react-router';
+import { useParams } from 'react-router';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { Foods } from '../../api/fooditems/Foods';
 
