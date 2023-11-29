@@ -3,6 +3,7 @@ import { Roles } from 'meteor/alanning:roles';
 import { check } from 'meteor/check';
 import { Foods } from '../../api/fooditems/Foods';
 import { Vendors } from '../../api/vendors/Vendors';
+import { UserProfiles } from '../../api/userpreferences/UserProfiles';
 // User-level publication.
 // If logged in, then publish documents owned by this user. Otherwise, publish nothing.
 
@@ -23,6 +24,7 @@ Meteor.publish(Vendors.userPublicationName, function () {
   }
   return this.ready();
 });
+
 // Admin-level publication.
 // if logged in with admin role, then publsih vendor information
 Meteor.publish(Vendors.adminPublicationName, function () {
@@ -114,4 +116,13 @@ Meteor.publish('allUsersRoles', function () {
   // Only publish if the user is an admin
   return this.ready();
 
+});
+
+// Publication for user to display user profiles
+Meteor.publish(UserProfiles.userPublicationName, function () {
+  if (this.userId) {
+    const username = Meteor.users.findOne(this.userId).username;
+    return UserProfiles.collection.find({ owner: username });
+  }
+  return this.ready();
 });
