@@ -42,6 +42,11 @@ const NavBar = () => {
             ]) : ''}
           </Nav>
           <Nav className="justify-content-end">
+            <Nav id="basic-navbar-nav">
+              {Roles.userIsInRole(Meteor.userId(), 'user') ? ([
+                <Nav.Link id="user-nav" as={NavLink} to="/profile" key="userprofile">My Profile</Nav.Link>,
+              ]) : ''}
+            </Nav>
             {currentUser === '' ? (
               <NavDropdown id="login-dropdown" title="Login">
                 <NavDropdown.Item id="login-dropdown-sign-in" as={NavLink} to="/signin">

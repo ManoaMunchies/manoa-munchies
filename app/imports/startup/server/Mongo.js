@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Foods } from '../../api/fooditems/Foods';
 import { Vendors } from '../../api/vendors/Vendors';
+import { UserProfiles } from '../../api/userpreferences/UserProfiles';
 
 /* eslint-disable no-console */
 
@@ -26,4 +27,16 @@ if (Vendors.collection.find().count() === 0) {
     console.log('Creating default vendor data.');
     Meteor.settings.defaultDataVendors.forEach(vendorData => addVendorData(vendorData));
   }
+}
+
+const addUserData = (userData) => {
+  console.log(`  Adding: ${userData.name} (${userData.owner})`);
+  UserProfiles.collection.insert(userData);
+};
+
+if (UserProfiles.collection.find().count() === 0) {
+  Meteor.publish('userData', function () {
+    console.log(Meteor.user());
+    Meteor.user().forEach(addUserData({ firstName: this.username, lastName: ' ', title: ' ', image: 'defaultImage.png', instagram: ' ', bio: ' ', owner: this.username }));
+  });
 }

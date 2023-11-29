@@ -28,6 +28,7 @@ import Menu from '../pages/Menu';
 import AdminPanel from '../pages/AdminPanel';
 import MenuAdmin from '../pages/MenuAdmin';
 import EditFoodItemAdmin from '../pages/EditFoodItemAdmin';
+import UserMyProfile from '../pages/UserMyProfile';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
@@ -51,6 +52,7 @@ const App = () => {
           <Route path="/signout" element={<SignOut />} />
           <Route path="/home" element={<ProtectedRoute><Landing /></ProtectedRoute>} />
           <Route path="/vendorhome" element={<ProtectedRoute><VendorHome /></ProtectedRoute>} />
+          <Route path="/profile" element={<ProtectedRoute><UserMyProfile /></ProtectedRoute>} />
           <Route path="/edit-food-item/:_id" element={<ProtectedRoute><EditFoodItem /></ProtectedRoute>} />
           <Route path="/edit-food-item-admin/:_id" element={<AdminProtectedRoute ready={ready}><EditFoodItemAdmin /></AdminProtectedRoute>} />
           <Route path="/edit-vendor-item/:_id" element={<ProtectedRoute><EditVendorItem /></ProtectedRoute>} />
