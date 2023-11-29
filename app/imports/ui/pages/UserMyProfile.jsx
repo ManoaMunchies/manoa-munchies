@@ -28,8 +28,8 @@ const UserMyProfile = () => {
             <h2>My Profile</h2>
           </Col>
           <Row className="justify-content-center">
-            <Col xs={3}>
-              {profiles.map((profile) => (<Image className="rounded" src={profile.image} width={200} />))}
+            <Col xs={3} className="justify-content-center">
+              {profiles.map((profile) => (<Image className="rounded-circle mb-3" src={profile.image} width={150} />))}
             </Col>
             <Col xs={7}>
               <Card>
@@ -38,9 +38,7 @@ const UserMyProfile = () => {
                     <Row className="mb-3">
                       <Col>
                         <Form.Label>First name</Form.Label>
-                        {profiles.map((profile) => (
-                          <Form.Control type="text" name="firstName" value={profile.firstName} />
-                        ))}
+                        {profiles.map((profile) => (<Form.Control type="text" name="firstName" value={profile.firstName} />))}
                       </Col>
                       <Col>
                         <Form.Label>Last name</Form.Label>
