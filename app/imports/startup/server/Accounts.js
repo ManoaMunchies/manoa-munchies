@@ -3,30 +3,28 @@ import { Accounts } from 'meteor/accounts-base';
 import { Roles } from 'meteor/alanning:roles';
 import { check } from 'meteor/check';
 
-Meteor.startup(() => {
-  // Create roles on startup
-  const roles = ['admin', 'user', 'vendor'];
-  roles.forEach(role => {
-    Roles.createRole(role, { unlessExists: true });
-  });
-
-  // Create default users
-  if (Meteor.users.find().count() === 0 && Meteor.settings.defaultAccounts) {
-    console.log('Creating the default user(s)');
-    Meteor.settings.defaultAccounts.forEach(({ email, password, role }) => {
-      const userID = Accounts.createUser({
-        username: email,
-        email: email,
-        password: password,
-      });
-      if (roles.includes(role)) {
-        Roles.addUsersToRoles(userID, role);
-      }
-    });
-  } else {
-    console.log('Default users already exist or settings are not provided.');
-  }
+// Create roles on startup
+const roles = ['admin', 'user', 'vendor'];
+roles.forEach(role => {
+  Roles.createRole(role, { unlessExists: true });
 });
+
+// Create default users
+if (Meteor.users.find().count() === 0 && Meteor.settings.defaultAccounts) {
+  console.log('Creating the default user(s)');
+  Meteor.settings.defaultAccounts.forEach(({ email, password, role }) => {
+    const userID = Accounts.createUser({
+      username: email,
+      email: email,
+      password: password,
+    });
+    if (roles.includes(role)) {
+      Roles.addUsersToRoles(userID, role);
+    }
+  });
+} else {
+  console.log('Default users already exist or settings are not provided.');
+}
 
 Meteor.methods({
   'assignUserRole'(userId, role) {
