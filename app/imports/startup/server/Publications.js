@@ -107,6 +107,10 @@ Meteor.publish('allUserData', function () {
 
 });
 
+Meteor.publish('topPicks', function () {
+  return Foods.collection.find({ isTopPick: true });
+});
+
 // publication for admins to display all user roles
 Meteor.publish('allUsersRoles', function () {
   if (Roles.userIsInRole(this.userId, 'admin')) {

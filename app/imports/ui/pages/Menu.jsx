@@ -29,7 +29,7 @@ const Menu = () => {
     <Container className="py-3">
       <Row className="justify-content-center">
         <Col md={7}>
-          <Col className="text-center"><h2>Menu</h2></Col>
+          <Col className="h1-food-card"><h2>{ vendorName } Menu</h2></Col>
           <Table striped bordered hover>
             <thead>
               <tr>

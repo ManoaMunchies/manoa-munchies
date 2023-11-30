@@ -31,6 +31,15 @@ const FoodItemsAdmin = ({ fooditems }) => {
     setItemToDelete(null);
     setShowConfirm(false);
   };
+  const handleTopPickChange = (foodItemId, isTopPick) => {
+    Meteor.call('fooditems.updateTopPick', foodItemId, isTopPick, (error) => {
+      if (error) {
+        console.error('Error updating top pick status:', error);
+      } else {
+        console.log('Top pick status updated successfully');
+      }
+    });
+  };
 
   return (
     <>
@@ -41,6 +50,13 @@ const FoodItemsAdmin = ({ fooditems }) => {
         <td>{fooditems.vendor}</td>
         <td>{fooditems.availability}</td>
         <td>{fooditems.owner}</td>
+        <td>
+          <input
+            type="checkbox"
+            checked={fooditems.isTopPick}
+            onChange={(e) => handleTopPickChange(fooditems._id, e.target.checked)}
+          />
+        </td>
         <td>
           <Link to={`/edit-food-item-admin/${fooditems._id}`} className="btn btn-primary">Edit</Link>
         </td>
@@ -67,6 +83,7 @@ FoodItemsAdmin.propTypes = {
     availability: PropTypes.string,
     _id: PropTypes.string,
     owner: PropTypes.string,
+    isTopPick: PropTypes.bool,
   }).isRequired,
 };
 

@@ -8,7 +8,8 @@
     { "name": "Dunkin Donuts", "location": "Paradise Palms Café", "hours": "Monday-Friday 7:00am-4:30pm", "owner": "will@foo.com" }
   ],
   "defaultDataFoodItems": [
-    { "name": "Hot Coffee", "quantity": 3, "owner": "john@foo.com", "cuisineType": "breakfast", "vendor": "Dunkin Donuts","availability": "available" },
-    { "name": "Cold Coffee", "quantity": 3, "owner": "john@foo.com", "cuisineType": "breakfast", "vendor": "Dunkin Donuts","availability": "available" }
+    { "name": "Hot Coffee", "quantity": 3, "owner": "john@foo.com", "cuisineType": "breakfast", "vendor": "Dunkin Donuts","availability": "available", "isTopPick": "false" },
+    { "name": "Cold Coffee", "quantity": 3, "owner": "john@foo.com", "cuisineType": "breakfast", "vendor": "Dunkin Donuts","availability": "available", "isTopPick": "false" },
+    { "name": "Donut", "quantity": 3, "owner": "john@foo.com", "cuisineType": "breakfast", "vendor": "Dunkin Donuts", "availability": "available", "isTopPick": "false" }
   ]
 }

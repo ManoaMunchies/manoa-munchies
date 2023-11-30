@@ -25,6 +25,10 @@ class FoodsCollection {
         allowedValues: ['available', 'unavailable'],
         defaultValue: 'available',
       },
+      isTopPick: {
+        type: Boolean,
+        defaultValue: false,
+      },
     });
     // Attach the schema to the collection, so all attempts to insert a document are checked against schema.
     this.collection.attachSchema(this.schema);
