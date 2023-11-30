@@ -30,6 +30,7 @@ import MenuAdmin from '../pages/MenuAdmin';
 import EditFoodItemAdmin from '../pages/EditFoodItemAdmin';
 import AvailableNow from '../pages/AvailableNow';
 import UserMyProfile from '../pages/UserMyProfile';
+import TopPicks from '../pages/TopPicks';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
@@ -67,6 +68,7 @@ const App = () => {
           <Route path="/edit-vendor-menu-admin/" element={<AdminProtectedRoute ready={ready}><MenuAdmin /></AdminProtectedRoute>} />
           <Route path="/add-vendors" element={<ProtectedRoute ready={ready}><AddVendors /></ProtectedRoute>} />
           <Route path="/notauthorized" element={<NotAuthorized />} />
+          <Route path="/top-picks" element={<ProtectedRoute ready={ready}><TopPicks /></ProtectedRoute>} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />

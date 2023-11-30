@@ -82,3 +82,15 @@ Meteor.methods({
     Meteor.users.remove(userId);
   },
 });
+Meteor.methods({
+  'fooditems.updateTopPick'(foodItemId, isTopPick) {
+    check(foodItemId, String);
+    check(isTopPick, Boolean);
+
+    // Additional security checks if necessary
+
+    Foods.collection.update(foodItemId, {
+      $set: { isTopPick },
+    });
+  },
+});

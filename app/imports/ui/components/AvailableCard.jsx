@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Card, ListGroup } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 const AvailableCard = ({ vendors, availableFood }) => (
-  <Card>
+  <Card className="food-card">
     <Card.Header>
       <Card.Title>{vendors.name}</Card.Title>
       <Card.Subtitle>{vendors.location}</Card.Subtitle>
@@ -19,6 +20,7 @@ const AvailableCard = ({ vendors, availableFood }) => (
           return <ListGroup.Item key={food._id}>{food.name}</ListGroup.Item>;
         })}
       </ListGroup>
+      <Link to={`/menu?vendor=${encodeURIComponent(vendors.name)}`}>See Full Menu</Link>
     </Card.Body>
   </Card>
 );

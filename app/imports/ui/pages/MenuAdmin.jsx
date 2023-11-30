@@ -29,7 +29,7 @@ const MenuAdmin = () => {
     <Container className="py-3">
       <Row className="justify-content-center">
         <Col md={7}>
-          <Col className="text-center"><h2>Menu (Admin)</h2></Col>
+          <Col className="text-center"><h2>{ vendorName } Menu (Admin)</h2></Col>
           <Table striped bordered hover>
             <thead>
               <tr>
@@ -38,6 +38,10 @@ const MenuAdmin = () => {
                 <th>Cuisine Type</th>
                 <th>Vendor</th>
                 <th>Availability</th>
+                <th>Owner</th>
+                <th>Top Pick</th>
+                <th>Edit</th>
+                <th>Delete</th>
               </tr>
             </thead>
             <tbody>

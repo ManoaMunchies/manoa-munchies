@@ -6,6 +6,7 @@ import { Vendors } from '../../api/vendors/Vendors';
 import { Foods } from '../../api/fooditems/Foods';
 import LoadingSpinner from '../components/LoadingSpinner';
 import AvailableCard from '../components/AvailableCard';
+import '../../../client/styles/cards.css';
 
 const AvailableNow = () => {
   const { ready, vendorData, foodData } = useTracker(() => {
@@ -33,7 +34,7 @@ const AvailableNow = () => {
       <Row className="justify-content-center">
         <Col md={7}>
           <Col className="text-center">
-            <h2>List of Vendors</h2>
+            <h1 className="h1-food-card">Food Available Now</h1>
           </Col>
           {vendorData.map((vendor) => {
             const availableFoods = foodData.filter((food) => food.vendor === vendor.name);
