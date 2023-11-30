@@ -17,8 +17,10 @@ const AvailableNow = () => {
     const adminSubscription = Meteor.subscribe(Vendors.adminPublicationName);
     const foodSubscription = Meteor.subscribe(Foods.userPublicationName);
     const adminFoodSubscription = Meteor.subscribe(Foods.adminPublicationName);
+    const vendorVendorSubscription = Meteor.subscribe(Vendors.vendorPublicationName);
+    const vendorFoodSubscription = Meteor.subscribe(Foods.vendorPublicationName);
     // Determine if the subscription is ready
-    const rdy = (subscription.ready() || adminSubscription.ready()) && (foodSubscription.ready() || adminFoodSubscription.ready());
+    const rdy = (subscription.ready() || adminSubscription.ready()) && (foodSubscription.ready() || adminFoodSubscription.ready() || vendorVendorSubscription.ready() || vendorFoodSubscription.ready());
     // Get the Stuff documents
     const vendorItems = Vendors.collection.find({}).fetch();
     const foodItems = Foods.collection.find({}).fetch();
