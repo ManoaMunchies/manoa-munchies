@@ -2,41 +2,32 @@ import { Mongo } from 'meteor/mongo';
 import SimpleSchema from 'simpl-schema';
 
 /**
- * The UserPreferencesCollection. It encapsulates state and variable values for user preferences.
+ * The ProfilesCollection. It encapsulates state and variable values for Vendor.
  */
-class UserPreferencesCollection {
+class VendorProfilesCollection {
   constructor() {
     // The name of this collection.
-    this.name = 'UserPreferencesCollection';
+    this.name = 'VendorProfilesCollection';
     // Define the Mongo collection.
     this.collection = new Mongo.Collection(this.name);
     // Define the structure of each document in the collection.
     this.schema = new SimpleSchema({
-      cuisinePreferences: {
-        type: Array,
-        defaultValue: [],
-      },
-      'cuisinePreferences.$': {
-        type: String,
-      },
-      dietRestrictions: {
-        type: Array,
-        defaultValue: [],
-      },
-      'dietRestrictions.$': {
-        type: String,
-      },
+      name: String,
+      image: String,
+      instagram: String,
+      bio: String,
       owner: String,
     });
     // Attach the schema to the collection, so all attempts to insert a document are checked against schema.
     this.collection.attachSchema(this.schema);
     // Define names for publications and subscriptions
     this.userPublicationName = `${this.name}.publication.user`;
+    this.adminPublicationName = `${this.name}.publication.admin`;
   }
 }
 
 /**
  * The singleton instance of the StuffsCollection.
- * @type {UserPreferencesCollection}
+ * @type {VendorProfilesCollection}
  */
-export const UserPreferences = new UserPreferencesCollection();
+export const VendorProfiles = new VendorProfilesCollection();
