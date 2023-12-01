@@ -23,7 +23,7 @@ const TopPicks = () => {
   }, []);
 
   return (ready ? (
-    <Container>
+    <Container className="card-pages">
       <Row>
         <Col>
           <h1 className="h1-food-card">Today&rsquo;s Top Picks</h1>

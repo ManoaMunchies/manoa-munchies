@@ -4,7 +4,7 @@ import { check } from 'meteor/check';
 import { Roles } from 'meteor/alanning:roles';
 import { Foods } from '/imports/api/fooditems/Foods';
 import { Vendors } from '../imports/api/vendors/Vendors';
-
+import { UserPreferences } from '../imports/api/userpreferences/UserPreferences';
 // delete menu item
 Meteor.methods({
   'fooditems.remove'(foodItemId) {
@@ -92,5 +92,27 @@ Meteor.methods({
     Foods.collection.update(foodItemId, {
       $set: { isTopPick },
     });
+  },
+});
+
+Meteor.methods({
+  'userPreferences.get'(userId) {
+    check(userId, String);
+    // Authorization checks here
+    return UserPreferences.collection.findOne({ owner: userId });
+  },
+
+  'userPreferences.update'(userId, preferences) {
+    check(userId, String);
+    check(preferences, { cuisinePreferences: Array, dietRestrictions: Array });
+    // Ensure preferences.cuisinePreferences is an array
+    if (!Array.isArray(preferences.cuisinePreferences)) {
+      throw new Meteor.Error('invalid-data', 'Cuisine Preferences must be an array.');
+    }
+    // Ensure preferences.dietRestrictions is an array
+    if (!Array.isArray(preferences.dietRestrictions)) {
+      throw new Meteor.Error('invalid-data', 'Diet Restrictions must be an array.');
+    }
+    UserPreferences.collection.upsert({ owner: userId }, { $set: preferences });
   },
 });
