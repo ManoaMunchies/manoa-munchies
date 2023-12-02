@@ -37,6 +37,7 @@ const Menu = () => {
                 <th>Quantity</th>
                 <th>Cuisine Type</th>
                 <th>Vendor</th>
+                <th>Diets</th>
                 <th>Availability</th>
               </tr>
             </thead>

@@ -29,6 +29,30 @@ class FoodsCollection {
         type: Boolean,
         defaultValue: false,
       },
+      dietOptions: {
+        type: Object,
+        optional: true,
+      },
+      'dietOptions.isVegan': {
+        type: Boolean,
+        defaultValue: false,
+      },
+      'dietOptions.isVegetarian': {
+        type: Boolean,
+        defaultValue: false,
+      },
+      'dietOptions.isGlutenFree': {
+        type: Boolean,
+        defaultValue: false,
+      },
+      'dietOptions.isDairyFree': {
+        type: Boolean,
+        defaultValue: false,
+      },
+      'dietOptions.isNutFree': {
+        type: Boolean,
+        defaultValue: false,
+      },
     });
     // Attach the schema to the collection, so all attempts to insert a document are checked against schema.
     this.collection.attachSchema(this.schema);

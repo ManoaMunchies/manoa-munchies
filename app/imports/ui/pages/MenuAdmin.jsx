@@ -37,6 +37,7 @@ const MenuAdmin = () => {
                 <th>Quantity</th>
                 <th>Cuisine Type</th>
                 <th>Vendor</th>
+                <th>Diets</th>
                 <th>Availability</th>
                 <th>Owner</th>
                 <th>Top Pick</th>

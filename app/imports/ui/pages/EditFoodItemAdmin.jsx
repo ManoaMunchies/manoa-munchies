@@ -1,7 +1,7 @@
 import React from 'react';
 import swal from 'sweetalert';
 import { Button, Card, Col, Container, Row } from 'react-bootstrap';
-import { AutoForm, ErrorsField, HiddenField, NumField, SelectField, SubmitField, TextField } from 'uniforms-bootstrap5';
+import { AutoForm, ErrorsField, HiddenField, NumField, SelectField, BoolField, SubmitField, TextField } from 'uniforms-bootstrap5';
 import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
@@ -32,8 +32,8 @@ const EditFoodItemAdmin = () => {
   // console.log('EditStuff', doc, ready);
   // On successful submit, insert the data.
   const submit = (data) => {
-    const { name, quantity, cuisineType, vendor, availability } = data;
-    Foods.collection.update(_id, { $set: { name, quantity, cuisineType, vendor, availability } }, (error) => (error ?
+    const { name, quantity, cuisineType, vendor, availability, topPick, dietOptions } = data;
+    Foods.collection.update(_id, { $set: { name, quantity, cuisineType, vendor, availability, topPick, dietOptions } }, (error) => (error ?
       swal('Error', error.message, 'error') :
       swal('Success', 'Item updated successfully', 'success')));
   };
@@ -51,6 +51,15 @@ const EditFoodItemAdmin = () => {
                 <SelectField name="cuisineType" />
                 <TextField name="vendor" />
                 <SelectField name="availability" />
+                <SelectField
+                  name="isTopPick"
+                  options={{ true: 'Yes', false: 'No' }}
+                />
+                <BoolField name="dietOptions.isVegan" label="Vegan" />
+                <BoolField name="dietOptions.isVegetarian" label="Vegetarian" />
+                <BoolField name="dietOptions.isGlutenFree" label="Gluten-Free" />
+                <BoolField name="dietOptions.isDairyFree" label="Dairy-Free" />
+                <BoolField name="dietOptions.isNutFree" label="Nut-Free" />
                 <SubmitField value="Submit" />
                 <ErrorsField />
                 <HiddenField name="owner" />
