@@ -13,11 +13,26 @@ class UserProfilesCollection {
     // Define the structure of each document in the collection.
     this.schema = new SimpleSchema({
       firstName: String,
-      lastName: String,
-      title: String,
-      image: String,
-      instagram: String,
-      bio: String,
+      lastName: {
+        type: String,
+        optional: true,
+      },
+      title: {
+        type: String,
+        optional: true,
+      },
+      image: {
+        type: String,
+        optional: true,
+      },
+      instagram: {
+        type: String,
+        optional: true,
+      },
+      bio: {
+        type: String,
+        optional: true,
+      },
       owner: String,
     });
     // Attach the schema to the collection, so all attempts to insert a document are checked against schema.
