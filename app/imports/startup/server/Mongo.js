@@ -42,7 +42,7 @@ if (Vendors.collection.find().count() === 0) {
 if (UserProfiles.collection.find().count() === 0 && Meteor.users.find().count() > 0) {
   if (Meteor.isServer) {
     console.log('Creating default user data.');
-    Meteor.users.find().forEach(function (user) { addUserData({ firstName: user.username, lastName: 'blank', title: 'blank', image: '/images/defaultImage.png', instagram: 'blank', bio: 'blank', owner: user.username }); });
+    Meteor.users.find().forEach(function (user) { addUserData({ firstName: user.username, image: '/images/defaultImage.png', owner: user.username }); });
   }
 
   if (Meteor.settings.defaultDataUserPreferences) {
