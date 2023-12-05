@@ -7,8 +7,8 @@ import { Meteor } from 'meteor/meteor';
 import { Foods } from '../../api/fooditems/Foods';
 import { Vendors } from '../../api/vendors/Vendors';
 import LoadingSpinner from '../components/LoadingSpinner';
-import FoodItemsAdmin from '../components/FoodItemsAdmin';
 import VendorItemVendor from '../components/VendorItemVendor';
+import FoodItemsVendor from '../components/FoodItemsVendor';
 
 const VendorHome = ({ currentUser }) => {
   // Destructure the username from currentUser
@@ -61,13 +61,14 @@ const VendorHome = ({ currentUser }) => {
             <th>Cuisine Type</th>
             <th>Vendor</th>
             <th>Availability</th>
+            <th>Diet Options</th>
             <th>Owner</th>
             <th>Edit</th>
             <th>Delete</th>
           </tr>
         </thead>
         <tbody>
-          {foodItems.map((fooditem) => <FoodItemsAdmin key={fooditem._id} fooditems={fooditem} />)}
+          {foodItems.map((fooditem) => <FoodItemsVendor key={fooditem._id} fooditems={fooditem} />)}
         </tbody>
       </Table>
       <Row className="justify-content-center mt-3">

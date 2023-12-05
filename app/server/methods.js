@@ -96,6 +96,19 @@ Meteor.methods({
 });
 
 Meteor.methods({
+  'fooditems.updateDietary'(foodItemId, dietary) {
+    check(foodItemId, String);
+    check(dietary, { dietOptions: Object });
+
+    // Additional security checks if necessary
+
+    Foods.collection.upsert(foodItemId, {
+      $set: { dietary },
+    });
+  },
+});
+
+Meteor.methods({
   'userPreferences.get'(userId) {
     check(userId, String);
     // Authorization checks here

@@ -2,11 +2,17 @@ import { Meteor } from 'meteor/meteor';
 import { Foods } from '../../api/fooditems/Foods';
 import { Vendors } from '../../api/vendors/Vendors';
 import { UserProfiles } from '../../api/userpreferences/UserProfiles';
+import { UserPreferences } from '../../api/userpreferences/UserPreferences';
 
 // Initialize the database with a default data document.
 const addFoodData = (foodData) => {
   console.log(`  Adding: ${foodData.name} (${foodData.owner})`);
   Foods.collection.insert(foodData);
+};
+const addUserPreferencesData = (userPreferencesData) => {
+  console.log(`  Adding: ${userPreferencesData.name} (${userPreferencesData.owner})`);
+  UserPreferences.collection.insert(userPreferencesData);
+
 };
 
 const addVendorData = (vendorData) => {
@@ -37,5 +43,10 @@ if (UserProfiles.collection.find().count() === 0 && Meteor.users.find().count() 
   if (Meteor.isServer) {
     console.log('Creating default user data.');
     Meteor.users.find().forEach(function (user) { addUserData({ firstName: user.username, image: '/images/defaultImage.png', owner: user.username }); });
+  }
+
+  if (Meteor.settings.defaultDataUserPreferences) {
+    console.log('Creating default user preferences data.');
+    Meteor.settings.defaultDataUserPreferences.forEach(userPreferencesData => addUserPreferencesData(userPreferencesData));
   }
 }
