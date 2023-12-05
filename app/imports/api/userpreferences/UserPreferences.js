@@ -13,18 +13,64 @@ class UserPreferencesCollection {
     // Define the structure of each document in the collection.
     this.schema = new SimpleSchema({
       cuisinePreferences: {
-        type: Array,
-        defaultValue: [],
+        type: Object,
+        optional: true,
       },
-      'cuisinePreferences.$': {
-        type: String,
+      'cuisinePreferences.isAmerican': {
+        type: Boolean,
+        defaultValue: true,
+      },
+      'cuisinePreferences.isHawaiian': {
+        type: Boolean,
+        defaultValue: true,
+      },
+      'cuisinePreferences.isChinese': {
+        type: Boolean,
+        defaultValue: true,
+      },
+      'cuisinePreferences.isJapanese': {
+        type: Boolean,
+        defaultValue: true,
+      },
+      'cuisinePreferences.isKorean': {
+        type: Boolean,
+        defaultValue: true,
+      },
+      'cuisinePreferences.isThai': {
+        type: Boolean,
+        defaultValue: true,
+      },
+      'cuisinePreferences.isIndian': {
+        type: Boolean,
+        defaultValue: true,
+      },
+      'cuisinePreferences.isMexican': {
+        type: Boolean,
+        defaultValue: true,
       },
       dietRestrictions: {
-        type: Array,
-        defaultValue: [],
+        type: Object,
+        optional: true,
       },
-      'dietRestrictions.$': {
-        type: String,
+      'dietRestrictions.isVegan': {
+        type: Boolean,
+        defaultValue: false,
+      },
+      'dietRestrictions.isVegetarian': {
+        type: Boolean,
+        defaultValue: false,
+      },
+      'dietRestrictions.isGlutenFree': {
+        type: Boolean,
+        defaultValue: false,
+      },
+      'dietRestrictions.isDairyFree': {
+        type: Boolean,
+        defaultValue: false,
+      },
+      'dietRestrictions.isNutFree': {
+        type: Boolean,
+        defaultValue: false,
       },
       owner: String,
     });

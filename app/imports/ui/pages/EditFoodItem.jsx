@@ -1,7 +1,7 @@
 import React from 'react';
 import swal from 'sweetalert';
 import { Button, Card, Col, Container, Row } from 'react-bootstrap';
-import { AutoForm, ErrorsField, HiddenField, NumField, SelectField, SubmitField, TextField } from 'uniforms-bootstrap5';
+import { AutoForm, ErrorsField, HiddenField, NumField, SelectField, BoolField, SubmitField, TextField } from 'uniforms-bootstrap5';
 import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
@@ -29,11 +29,10 @@ const EditFoodItem = () => {
       ready: rdy,
     };
   }, [_id]);
-  // console.log('EditStuff', doc, ready);
   // On successful submit, insert the data.
   const submit = (data) => {
-    const { name, quantity, cuisineType, vendor, availability } = data;
-    Foods.collection.update(_id, { $set: { name, quantity, cuisineType, vendor, availability } }, (error) => (error ?
+    const { name, quantity, cuisineType, vendor, availability, dietOptions } = data;
+    Foods.collection.update(_id, { $set: { name, quantity, cuisineType, vendor, availability, dietOptions } }, (error) => (error ?
       swal('Error', error.message, 'error') :
       swal('Success', 'Item updated successfully', 'success')));
   };
@@ -42,7 +41,7 @@ const EditFoodItem = () => {
     <Container className="py-3">
       <Row className="justify-content-center">
         <Col xs={5}>
-          <Col className="text-center"><h2>Edit Menu Item</h2></Col>
+          <Col className="text-center"><h2>Edit Menu Item (Vendor)</h2></Col>
           <AutoForm schema={bridge} onSubmit={data => submit(data)} model={doc}>
             <Card>
               <Card.Body>
@@ -51,6 +50,11 @@ const EditFoodItem = () => {
                 <SelectField name="cuisineType" />
                 <TextField name="vendor" />
                 <SelectField name="availability" />
+                <BoolField name="dietOptions.isVegan" label="Vegan" />
+                <BoolField name="dietOptions.isVegetarian" label="Vegetarian" />
+                <BoolField name="dietOptions.isGlutenFree" label="Gluten-Free" />
+                <BoolField name="dietOptions.isDairyFree" label="Dairy-Free" />
+                <BoolField name="dietOptions.isNutFree" label="Nut-Free" />
                 <SubmitField value="Submit" />
                 <ErrorsField />
                 <HiddenField name="owner" />

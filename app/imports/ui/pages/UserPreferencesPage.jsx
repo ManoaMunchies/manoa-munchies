@@ -1,130 +1,74 @@
-import React, { useState } from 'react';
+import React from 'react';
+import swal from 'sweetalert';
+import { Card, Col, Container, Row } from 'react-bootstrap';
+import { AutoForm, ErrorsField, HiddenField, BoolField, SubmitField } from 'uniforms-bootstrap5';
 import { Meteor } from 'meteor/meteor';
-import { Form, Button, Container, Row, Col } from 'react-bootstrap';
-import Alert from 'react-bootstrap/Alert';
 import { useTracker } from 'meteor/react-meteor-data';
-import Card from 'react-bootstrap/Card';
-import { UserPreferences } from '../../api/userpreferences/UserPreferences';
+import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import LoadingSpinner from '../components/LoadingSpinner';
+import { UserPreferences } from '../../api/userpreferences/UserPreferences';
 
+const bridge = new SimpleSchema2Bridge(UserPreferences.schema);
+// const navigate = useNavigate();
+/* Renders the EditStuff page for editing a single document. */
 const UserPreferencesPage = () => {
-  const { ready, userPreferences } = useTracker(() => {
-    const userPreferencesSubscription = Meteor.subscribe(UserPreferences.userPublicationName);
-    const rdy = userPreferencesSubscription.ready();
-    const preferences = UserPreferences.collection.find({}).fetch();
+  console.log(Meteor.user());
+  const { doc, ready } = useTracker(() => {
+    const subscription = Meteor.subscribe('myUserPreferences');
+    const rdy = subscription.ready();
+    const document = UserPreferences.collection.findOne({ owner: Meteor.user()?.username });
     return {
+      doc: document || { owner: Meteor.user()?.username }, // Provide a default document if not found
       ready: rdy,
-      userPreferences: preferences,
     };
   }, []);
 
-  const [selectedCuisines, setSelectedCuisines] = useState([]);
-  const [selectedDietary, setSelectedDietary] = useState([]);
-  const [showConfirmation, setShowConfirmation] = useState(false);
-
-  const cuisineOptions = ['american', 'hawaiian', 'chinese', 'japanese', 'korean', 'thai', 'indian', 'mexican'];
-  const dietaryOptions = ['vegetarian', 'vegan', 'gluten-free', 'dairy-free'];
-
-  const handleCheckboxChange = (cuisine) => {
-    if (selectedCuisines.includes(cuisine)) {
-      setSelectedCuisines(selectedCuisines.filter(item => item !== cuisine));
-    } else {
-      setSelectedCuisines([...selectedCuisines, cuisine]);
-    }
-  };
-  const handleCheckboxChangeDietary = (dietary) => {
-    if (selectedDietary.includes(dietary)) {
-      setSelectedDietary(selectedDietary.filter(item => item !== dietary));
-    } else {
-      setSelectedDietary([...selectedDietary, dietary]);
-    }
-  };
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('Submitting form with selected cuisines:', selectedCuisines);
-
-    // Assuming 'userPreferences.update' is the correct method name
-    Meteor.call('userPreferences.update', Meteor.userId(), { cuisinePreferences: selectedCuisines, dietRestrictions: selectedDietary }, (error) => {
+  const submit = (data) => {
+    // No need to set 'owner' manually as it's included in 'data' from the form
+    UserPreferences.collection.update(doc._id, { $set: data }, (error) => {
       if (error) {
-        console.error('Error updating preferences:', error);
-        setShowConfirmation(false);
+        swal('Error', error.message, 'error');
       } else {
-        console.log('Preferences updated successfully');
-        setShowConfirmation(true);
-        setTimeout(() => setShowConfirmation(false), 3000);
+        swal('Success', 'Preferences updated successfully', 'success');
       }
     });
   };
 
-  return (ready ? (
-    <Container>
-      <h2 className="h1-food-card">Your Preferences</h2>
-      <Card className="food-card">
-        <Card.Body>
-          <Card.Header>
-            <p>Preferences are used to determine which food items are displayed on your available now page.</p>
-          </Card.Header>
-          <Card.Body>Cuisine Preferences: {userPreferences[0].cuisinePreferences.join(', ')}
-            <br /> Dietary Preferences: {userPreferences[0].dietRestrictions.join(', ')}
-          </Card.Body>
-        </Card.Body>
-      </Card>
-      <h2 className="h1-food-card">Edit Your Preferences</h2>
-      <Card className="food-card">
-        <Col>
-          <Form className="card-form" onSubmit={handleSubmit}>
-            <Form.Group>
-              <Form.Label><h3>Cuisine Preferences</h3></Form.Label>
-              <Row>
-                {cuisineOptions.map(cuisine => (
-                  <Col xs={12} md={4} key={cuisine}>
-                    <Form.Check
-                      type="checkbox"
-                      id={cuisine}
-                      label={cuisine}
-                      value={cuisine}
-                      onChange={() => handleCheckboxChange(cuisine)}
-                      checked={selectedCuisines.includes(cuisine)}
-                    />
-                  </Col>
-                ))}
-              </Row>
-            </Form.Group>
-            {/* <Button className="preferences-button" type="submit">Save Preferences</Button> */}
-            {/* {showConfirmation && ( */}
-            {/*  <Alert variant="success">Your preferences have been updated successfully!</Alert> */}
-            {/* )} */}
-          </Form>
+  return ready ? (
+    <Container className="py-3">
+      <Row className="justify-content-center">
+        <Col xs={5}>
+          <Col className="text-center"><h2>Edit Your Preferences</h2></Col>
+          <AutoForm schema={bridge} onSubmit={data => submit(data)} model={doc}>
+            <Card className="food-card">
+              <Card.Body>
+                <Col><h5>Cuisine Preferences</h5>
+                  <BoolField name="cuisinePreferences.isAmerican" label="American" />
+                  <BoolField name="cuisinePreferences.isHawaiian" label="Hawaiian" />
+                  <BoolField name="cuisinePreferences.isChinese" label="Chinese" />
+                  <BoolField name="cuisinePreferences.isJapanese" label="Japanese" />
+                  <BoolField name="cuisinePreferences.isKorean" label="Korean" />
+                  <BoolField name="cuisinePreferences.isThai" label="Thai" />
+                  <BoolField name="cuisinePreferences.isIndian" label="Indian" />
+                  <BoolField name="cuisinePreferences.isMexican" label="Mexican" />
+                </Col>
+                <Col><h5>Dietary Restrictions</h5>
+                  <BoolField name="dietRestrictions.isVegan" label="Vegan" />
+                  <BoolField name="dietRestrictions.isVegetarian" label="Vegetarian" />
+                  <BoolField name="dietRestrictions.isGlutenFree" label="Gluten-Free" />
+                  <BoolField name="dietRestrictions.isDairyFree" label="Dairy-Free" />
+                  <BoolField name="dietRestrictions.isNutFree" label="Nut-Free" />
+                </Col>
+                <SubmitField value="Submit" />
+                <ErrorsField />
+                <HiddenField name="owner" />
+              </Card.Body>
+            </Card>
+          </AutoForm>
         </Col>
-        <Col>
-          <Form className="card-form" onSubmit={handleSubmit}>
-            <Form.Group>
-              <Form.Label><h3>Dietary Preferences</h3></Form.Label>
-              <Row>
-                {dietaryOptions.map(dietary => (
-                  <Col xs={12} md={4} key={dietary}>
-                    <Form.Check
-                      type="checkbox"
-                      id={dietary}
-                      label={dietary}
-                      value={dietary}
-                      onChange={() => handleCheckboxChangeDietary(dietary)}
-                      checked={selectedDietary.includes(dietary)}
-                    />
-                  </Col>
-                ))}
-              </Row>
-            </Form.Group>
-            <Button className="preferences-button" type="submit">Save Preferences</Button>
-            {showConfirmation && (
-              <Alert variant="success">Your preferences have been updated successfully!</Alert>
-            )}
-          </Form>
-        </Col>
-      </Card>
+      </Row>
     </Container>
-  ) : <LoadingSpinner />);
-
+  ) : <LoadingSpinner />;
 };
 
 export default UserPreferencesPage;
