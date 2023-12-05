@@ -3,7 +3,6 @@ import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 import { Roles } from 'meteor/alanning:roles';
 import { Foods } from '/imports/api/fooditems/Foods';
-import { array } from 'prop-types';
 import { Vendors } from '../imports/api/vendors/Vendors';
 import { UserPreferences } from '../imports/api/userpreferences/UserPreferences';
 // delete menu item

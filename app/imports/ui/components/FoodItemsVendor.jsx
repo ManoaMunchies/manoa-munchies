@@ -33,11 +33,11 @@ const FoodItemsVendor = ({ fooditems }) => {
   };
   const getDietaryOptions = () => {
     const options = [];
-    if (fooditems.dietOptions.isVegan) options.push('Vegan');
-    if (fooditems.dietOptions.isVegetarian) options.push('Vegetarian');
-    if (fooditems.dietOptions.isGlutenFree) options.push('Gluten-Free');
-    if (fooditems.dietOptions.isDairyFree) options.push('Dairy-Free');
-    if (fooditems.dietOptions.isNutFree) options.push('Nut-Free');
+    if (fooditems.dietOptions?.isVegan) options.push('Vegan');
+    if (fooditems.dietOptions?.isVegetarian) options.push('Vegetarian');
+    if (fooditems.dietOptions?.isGlutenFree) options.push('Gluten-Free');
+    if (fooditems.dietOptions?.isDairyFree) options.push('Dairy-Free');
+    if (fooditems.dietOptions?.isNutFree) options.push('Nut-Free');
     return options.join(', ');
   };
   return (

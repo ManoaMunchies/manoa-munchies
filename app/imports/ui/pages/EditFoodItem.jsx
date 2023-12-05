@@ -65,7 +65,7 @@ const EditFoodItem = () => {
       </Row>
       <Row className="justify-content-center mt-3">
         <Col md="auto">
-          <Button as="a" href="/vendor-home" className="vendor-btn-edit">Back</Button>
+          <Button as="a" href="/vendorhome" className="vendor-btn-edit">Back</Button>
         </Col>
       </Row>
     </Container>

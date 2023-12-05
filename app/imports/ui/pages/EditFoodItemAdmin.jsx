@@ -51,10 +51,6 @@ const EditFoodItemAdmin = () => {
                 <SelectField name="cuisineType" />
                 <TextField name="vendor" />
                 <SelectField name="availability" />
-                <SelectField
-                  name="isTopPick"
-                  options={{ true: 'Yes', false: 'No' }}
-                />
                 <BoolField name="dietOptions.isVegan" label="Vegan" />
                 <BoolField name="dietOptions.isVegetarian" label="Vegetarian" />
                 <BoolField name="dietOptions.isGlutenFree" label="Gluten-Free" />
