@@ -2,9 +2,12 @@
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 import { Roles } from 'meteor/alanning:roles';
-import { Foods } from '/imports/api/fooditems/Foods';
+import { Email } from 'meteor/email';
+import { Foods } from '../imports/api/fooditems/Foods';
+import { FoodSubscriptions } from '../imports/api/fooditems/FoodSubscriptions';
 import { Vendors } from '../imports/api/vendors/Vendors';
 import { UserPreferences } from '../imports/api/userpreferences/UserPreferences';
+import { UserProfiles } from '../imports/api/userpreferences/UserProfiles';
 // delete menu item
 Meteor.methods({
   'fooditems.remove'(foodItemId) {
@@ -114,5 +117,87 @@ Meteor.methods({
       throw new Meteor.Error('invalid-data', 'Diet Restrictions must be an array.');
     }
     UserPreferences.collection.upsert({ owner: userId }, { $set: preferences });
+  },
+});
+
+// Methods for update users profiles
+Meteor.methods({
+  // eslint-disable-next-line meteor/audit-argument-checks
+  'userProfiles.update'(formData) {
+    if (!this.userId) {
+      throw new Meteor.Error('not-authorized', 'You are not authorized to perform this action.');
+    }
+
+    const { _id, ...updatedData } = formData;
+    // Add the { multi: false } option to update a single document
+    const result = UserProfiles.collection.update({ _id: formData._id }, { $set: updatedData }, { multi: false });
+    if (result === 0) {
+      throw new Meteor.Error('update-failed', 'Failed to update the user profile.');
+    }
+  },
+});
+
+// Notification subscribe food for user
+Meteor.methods({
+  // eslint-disable-next-line meteor/audit-argument-checks
+  subscribeToFood(foodName) {
+    if (!this.userId) {
+      throw new Meteor.Error('not-authorized', 'User must be logged in to subscribe to food.');
+    }
+    console.log(this.userId);
+    if (typeof foodName !== 'string') {
+      throw new Meteor.Error('invalid-argument', 'Invalid food name.');
+    }
+
+    const existingSubscription = Foods.collection.findOne({ userId: this.userId, foodName });
+    if (existingSubscription) {
+      throw new Meteor.Error('already-subscribed', 'You are already subscribed to this food.');
+    }
+    FoodSubscriptions.collection.insert({
+      userId: this.userId,
+      foodName: foodName,
+      createdAt: new Date(),
+    });
+  },
+});
+
+Meteor.methods({
+  // eslint-disable-next-line meteor/audit-argument-checks
+  markFoodAsReady(foodId) {
+    if (!this.userId) {
+      throw new Meteor.Error('not-authorized', 'User must be logged in to mark food as ready.');
+    }
+
+    if (typeof foodId !== 'string') {
+      throw new Meteor.Error('invalid-argument', 'Invalid food ID.');
+    }
+
+    const food = Foods.collection.findOne(foodId);
+    if (!food) {
+      throw new Meteor.Error('food-not-found', 'Food item not found.');
+    }
+
+    Foods.collection.update(foodId, {
+      $set: {
+        availability: 'available',
+      },
+    });
+
+    const subscribedUsers = FoodSubscriptions.collection.find({ foodName: food.name }).fetch();
+    subscribedUsers.forEach((subscription) => {
+      const user = Meteor.users.findOne(subscription.userId);
+      const userEmail = user.emails[0].address;
+
+      const subject = 'Food Ready Notification';
+      const text = `Your subscribed food "${food.name}" is now ready. Enjoy your meal!`;
+      console.log(userEmail);
+      console.log(user);
+      Email.send({
+        to: userEmail,
+        from: 'Your App <noreply@example.com>',
+        subject,
+        text,
+      });
+    });
   },
 });

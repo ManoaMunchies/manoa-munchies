@@ -140,3 +140,11 @@ Meteor.publish(UserProfiles.userPublicationName, function () {
   }
   return this.ready();
 });
+
+Meteor.publish('userProfiles', function () {
+  if (!this.userId) {
+    return this.ready();
+  }
+
+  return UserProfiles.collection.find({ userId: this.userId });
+});

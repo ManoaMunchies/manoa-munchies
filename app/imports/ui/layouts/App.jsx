@@ -19,7 +19,7 @@ import ListFoodItemsAdmin from '../pages/ListFoodItemsAdmin';
 import AddVendors from '../pages/AddVendors';
 import ListVendors from '../pages/ListVendors';
 import ListVendorsAdmin from '../pages/ListVendorsAdmin';
-import ListFoodItems from '../pages/ListFoodItems';
+// import ListFoodItems from '../pages/ListFoodItems';
 import EditVendorItem from '../pages/EditVendorItem';
 import EditFoodItem from '../pages/EditFoodItem';
 import ListVendorsVendor from '../pages/ListVendorsVendor';
@@ -29,9 +29,13 @@ import AdminPanel from '../pages/AdminPanel';
 import MenuAdmin from '../pages/MenuAdmin';
 import EditFoodItemAdmin from '../pages/EditFoodItemAdmin';
 import AvailableNow from '../pages/AvailableNow';
-import UserMyProfile from '../pages/UserMyProfile';
 import TopPicks from '../pages/TopPicks';
 import UserPreferences from '../pages/UserPreferencesPage';
+import UserMyProfile from '../pages/UserProfile/UserMyProfile';
+// import UserMyProfile2 from '../pages/UserProfile/UserMyProfile2';
+import ListFoodItems2 from '../pages/FoodSubscribe/ListFoodItems2';
+import FoodList from '../pages/FoodSubscribe/FoodList';
+import SubscribeFood from '../pages/FoodSubscribe/SubscribeFood';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
@@ -48,7 +52,7 @@ const App = () => {
         <Routes>
           <Route exact path="/" element={<Landing />} />
           <Route path="/add-food-items" element={<ProtectedRoute><AddFoodItems /></ProtectedRoute>} />
-          <Route path="/food-items" element={<ProtectedRoute><ListFoodItems /></ProtectedRoute>} />
+          <Route path="/food-items" element={<ProtectedRoute><ListFoodItems2 /></ProtectedRoute>} />
           <Route path="/menu/" element={<ProtectedRoute><Menu /></ProtectedRoute>} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
@@ -57,6 +61,8 @@ const App = () => {
           <Route path="/available-now" element={<ProtectedRoute><AvailableNow /></ProtectedRoute>} />
           <Route path="/vendorhome" element={<ProtectedRoute><VendorHome /></ProtectedRoute>} />
           <Route path="/profile" element={<ProtectedRoute><UserMyProfile /></ProtectedRoute>} />
+          <Route path="/foodlist" element={<ProtectedRoute><FoodList /></ProtectedRoute>} />
+          <Route path="/subscribe" element={<ProtectedRoute><SubscribeFood /></ProtectedRoute>} />
           <Route path="/user-preferences" element={<ProtectedRoute><UserPreferences /></ProtectedRoute>} />
           <Route path="/edit-food-item/:_id" element={<ProtectedRoute><EditFoodItem /></ProtectedRoute>} />
           <Route path="/edit-food-item-admin/:_id" element={<AdminProtectedRoute ready={ready}><EditFoodItemAdmin /></AdminProtectedRoute>} />
