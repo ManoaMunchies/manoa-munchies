@@ -67,11 +67,10 @@ const UserMyProfile = () => {
           )}
           {profile ? (
             <Row className="justify-content-center">
-              {/* eslint-disable-next-line react/jsx-no-comment-textnodes */}
-              <Col xs={3} className="justify-content-center">
-                <Image className="rounded-circle mb-3" src={formData.image} width={150} />
+              <Col xs={12} md={4} lg={4} className="justify-content-center">
+                <Image className="rounded-circle mb-3" src={formData.image} width={300} />
               </Col>
-              <Col xs={7}>
+              <Col xs={12} md={8} lg={8}>
                 <Card>
                   <Card.Body>
                     <Form>
@@ -111,6 +110,21 @@ const UserMyProfile = () => {
                               type="text"
                               name="lastName"
                               value={formData.lastName || ''}
+                              disabled={!editing}
+                              onChange={handleInputChange}
+                            />
+                          </Form.Group>
+                        </Col>
+                      </Row>
+                      <Row>
+                        <Col>
+                          <Form.Group className="py-3">
+                            <Form.Label>Image</Form.Label>
+                            <Form.Control
+                              className="py-3"
+                              type="text"
+                              name="image"
+                              value={formData.image || ''}
                               disabled={!editing}
                               onChange={handleInputChange}
                             />

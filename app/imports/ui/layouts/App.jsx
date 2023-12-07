@@ -32,7 +32,6 @@ import AvailableNow from '../pages/AvailableNow';
 import TopPicks from '../pages/TopPicks';
 import UserPreferences from '../pages/UserPreferencesPage';
 import UserMyProfile from '../pages/UserProfile/UserMyProfile';
-// import UserMyProfile2 from '../pages/UserProfile/UserMyProfile2';
 import ListFoodItems2 from '../pages/FoodSubscribe/ListFoodItems2';
 import FoodList from '../pages/FoodSubscribe/FoodList';
 import SubscribeFood from '../pages/FoodSubscribe/SubscribeFood';
