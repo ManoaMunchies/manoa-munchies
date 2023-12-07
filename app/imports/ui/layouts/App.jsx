@@ -31,6 +31,7 @@ import EditFoodItemAdmin from '../pages/EditFoodItemAdmin';
 import AvailableNow from '../pages/AvailableNow';
 import UserMyProfile from '../pages/UserMyProfile';
 import TopPicks from '../pages/TopPicks';
+import MapPage from '../pages/MapPage';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
@@ -49,6 +50,7 @@ const App = () => {
           <Route path="/add-food-items" element={<ProtectedRoute><AddFoodItems /></ProtectedRoute>} />
           <Route path="/food-items" element={<ProtectedRoute><ListFoodItems /></ProtectedRoute>} />
           <Route path="/menu/" element={<ProtectedRoute><Menu /></ProtectedRoute>} />
+          <Route path="/map/:vendor" element={<ProtectedRoute><MapPage /></ProtectedRoute>} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/signout" element={<SignOut />} />

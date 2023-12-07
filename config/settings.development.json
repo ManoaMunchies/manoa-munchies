@@ -5,7 +5,14 @@
     { "email": "will@foo.com", "password": "changeme", "role": "vendor" }
   ],
   "defaultDataVendors": [
-    { "name": "Dunkin Donuts", "location": "Paradise Palms Café", "hours": "Monday-Friday 7:00am-4:30pm", "owner": "will@foo.com" }
+    { "name": "Dunkin Donuts", "location": "Paradise Palms Café", "hours": "Monday-Friday 7:00am-4:30pm",
+      "mapLocation": {
+      "lat": 21.301049681940516,
+      "lng": -157.81558059739896,
+      "address": "2600 Campus Rd, Honolulu, HI 96822, USA"
+      },
+      "owner": "will@foo.com"
+    }
   ],
   "defaultDataFoodItems": [
     { "name": "Hot Coffee", "quantity": 3, "owner": "john@foo.com", "cuisineType": "breakfast", "vendor": "Dunkin Donuts","availability": "available", "isTopPick": "false" },

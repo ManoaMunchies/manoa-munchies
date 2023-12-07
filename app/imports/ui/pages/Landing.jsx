@@ -1,10 +1,6 @@
 import React from 'react';
 import { Button, Col, Container, Row } from 'react-bootstrap';
-import Map from '../components/Map';
 import '../../../client/style.css';
-import '../../../client/styles/map.css';
-
-const location = { lat: 21.3009048, lng: -157.81815, address: '2560 McCarthy Mall, Honolulu, HI' };
 
 const Landing = () => (
   <Container id="landing-page" fluid className="py-3">
@@ -29,11 +25,6 @@ const Landing = () => (
       <Col md={6} className="d-flex flex-column align-items-center justify-content-center text-center">
         <p className="paragraph-landing">Already exploring with us?</p>
         <Button as="a" href="/signin" className="btn-primary">Sign in</Button>
-      </Col>
-    </Row>
-    <Row>
-      <Col>
-        <Map zoomLevel={17} location={location} />
       </Col>
     </Row>
   </Container>
