@@ -67,10 +67,10 @@ const UserMyProfile = () => {
           )}
           {profile ? (
             <Row className="justify-content-center">
-              <Col xs={12} md={4} lg={4} className="justify-content-center">
+              <Col xs={10} md={4} lg={4} className="justify-content-center">
                 <Image className="rounded-circle mb-3" src={formData.image} width={300} />
               </Col>
-              <Col xs={12} md={8} lg={8}>
+              <Col xs={10} md={6} lg={6}>
                 <Card>
                   <Card.Body>
                     <Form>
