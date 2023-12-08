@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { Button } from 'react-bootstrap';
+import { Button, Card, Image } from 'react-bootstrap';
 import { Meteor } from 'meteor/meteor';
 
 /** Renders a single row in the FoodItems (Admin) table. See pages/ListStuffAdmin.jsx. */
@@ -31,6 +31,28 @@ const FoodItemsVendor = ({ fooditems }) => {
     setItemToDelete(null);
     setShowConfirm(false);
   };
+
+  /* const handleMarkReadyClick = () => {
+   Meteor.call('markFoodAsReady', fooditems._id, (error) => {
+     if (error) {
+       console.log(error);
+     } else {
+       console.log('Food marked as ready!');
+       setIsReady(true);
+     }
+   });
+ };
+ const handleMarkUnReadyClick = () => {
+   Meteor.call('markFoodAsReady', fooditems._id, (error) => {
+     if (error) {
+       console.log(error);
+     } else {
+       console.log('Food marked as ready!');
+       setIsReady(false);
+     }
+   });
+ }; */
+
   const getDietaryOptions = () => {
     const options = [];
     if (fooditems.dietOptions?.isVegan) options.push('Vegan');
@@ -42,19 +64,20 @@ const FoodItemsVendor = ({ fooditems }) => {
   };
   return (
     <>
-      <tr>
-        <td>{fooditems.name}</td>
-        <td>{fooditems.quantity}</td>
-        <td>{fooditems.cuisineType}</td>
-        <td>{fooditems.vendor}</td>
-        <td>{fooditems.availability}</td>
-        <td>{getDietaryOptions()}</td>
-        <td>{fooditems.owner}</td>
-        <td>
+      <Card className="h-80">
+        <Card.Header>
+          <Image src={fooditems.image} width={250} height={200} />
+          <Card.Title>{fooditems.name}</Card.Title>
+          <Card.Subtitle>Cuisine Type: {fooditems.cuisineType}</Card.Subtitle>
+          <Card.Subtitle>Availability: {fooditems.availability}</Card.Subtitle>
+          <Card.Text>{getDietaryOptions()}</Card.Text>
+        </Card.Header>
+        <Card.Body>
+          <Card.Text>{fooditems.description}</Card.Text>
           <Link to={`/edit-food-item/${fooditems._id}`} className="btn btn-primary">Edit</Link>
-        </td>
-        <td><Button variant="danger" onClick={() => handleDelete(fooditems._id)}>Delete</Button></td>
-      </tr>
+          <Button className="mx-2" variant="danger" onClick={() => handleDelete(fooditems._id)}>Delete</Button>
+        </Card.Body>
+      </Card>
       {showConfirm && (
         <div className="confirm-dialog">
           <p>Are you sure you want to delete this item?</p>
@@ -65,12 +88,13 @@ const FoodItemsVendor = ({ fooditems }) => {
     </>
   );
 };
-
 // Require a document to be passed to this component.
 FoodItemsVendor.propTypes = {
   fooditems: PropTypes.shape({
     name: PropTypes.string,
     quantity: PropTypes.number,
+    image: PropTypes.string,
+    description: PropTypes.string,
     cuisineType: PropTypes.string,
     vendor: PropTypes.string,
     availability: PropTypes.string,

@@ -8,7 +8,7 @@ import { Foods } from '../../../../../api/fooditems/Foods';
 import { Vendors } from '../../../../../api/vendors/Vendors';
 import LoadingSpinner from '../../../../components/LoadingSpinner';
 import VendorItemVendor from '../../../../components/VendorItemVendor';
-import FoodItems from '../../../../components/Vendors/FoodItems';
+import FoodItemsVendor from '../../../../components/Vendors/FoodItemsVendor';
 // import MarkFoodReady from './MarkFoodReady';
 
 const VendorHome = ({ currentUser }) => {
@@ -54,7 +54,7 @@ const VendorHome = ({ currentUser }) => {
       <Col className="background-row d-flex flex-column align-items-center justify-content-center text-center">
         <h2 className="h1-landing">Your Menu</h2>
       </Col>
-      {foodItems.map((fooditem) => <FoodItems key={fooditem._id} fooditems={fooditem} />)}
+      {foodItems.map((fooditem) => <FoodItemsVendor key={fooditem._id} fooditems={fooditem} />)}
       <Row className="justify-content-center mt-3">
         <Col md="auto">
           <Button as="a" href="/add-food-items" className="vendor-btn-edit">Add Menu Item</Button>

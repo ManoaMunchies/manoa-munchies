@@ -6,7 +6,7 @@ import { withTracker, useTracker } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
 import { Foods } from '../../../../../api/fooditems/Foods';
 import LoadingSpinner from '../../../../components/LoadingSpinner';
-import FoodItems from '../../../../components/Vendors/FoodItems';
+import FoodItemsVendor from '../../../../components/Vendors/FoodItemsVendor';
 
 const VendorMenu = ({ currentUser }) => {
   // Destructure the username from currentUser
@@ -36,7 +36,7 @@ const VendorMenu = ({ currentUser }) => {
         </Col>
       </Row>
       <Row xs={1} md={2} lg={3} className="g-4">
-        {foodItems.map((fooditem) => <FoodItems key={fooditem._id} fooditems={fooditem} />)}
+        {foodItems.map((fooditem) => <FoodItemsVendor key={fooditem._id} fooditems={fooditem} />)}
       </Row>
     </Container>
   ) : <LoadingSpinner />);

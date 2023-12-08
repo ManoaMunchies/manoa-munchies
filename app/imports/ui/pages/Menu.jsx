@@ -1,11 +1,12 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
-import { Col, Container, Row, Table } from 'react-bootstrap';
+import { Col, Container, Row } from 'react-bootstrap';
 import { useLocation } from 'react-router';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { Foods } from '../../api/fooditems/Foods';
-import FoodItems from '../components/Vendors/FoodItems';
+import FoodItems from '../components/FoodItems';
+// import FoodItemsVendor from '../components/Vendors/FoodItemsVendor';
 
 /* Renders a table containing all of the Stuff documents. Use <StuffItemAdmin> to render each row. */
 const Menu = () => {
@@ -27,25 +28,9 @@ const Menu = () => {
   }, [vendorName]);
   return (ready ? (
     <Container className="py-3">
-      <Row className="justify-content-center">
-        <Col md={7}>
-          <Col className="h1-food-card"><h2>{ vendorName } Menu</h2></Col>
-          <Table striped bordered hover>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Quantity</th>
-                <th>Cuisine Type</th>
-                <th>Vendor</th>
-                <th>Diets</th>
-                <th>Availability</th>
-              </tr>
-            </thead>
-            <tbody>
-              {fooditems.map((fooditem) => <FoodItems key={fooditem._id} fooditems={fooditem} />)}
-            </tbody>
-          </Table>
-        </Col>
+      <Col className="h1-food-card"><h2>{ vendorName } Menu</h2></Col>
+      <Row xs={1} md={2} lg={3} className="g-4">
+        {fooditems.map((fooditem) => <FoodItems key={fooditem._id} fooditems={fooditem} />)}
       </Row>
     </Container>
   ) : <LoadingSpinner />);

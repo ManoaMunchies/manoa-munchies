@@ -31,11 +31,13 @@ import MenuAdmin from '../pages/MenuAdmin';
 import EditFoodItemAdmin from '../pages/EditFoodItemAdmin';
 import AvailableNow from '../pages/AvailableNow';
 import TopPicks from '../pages/TopPicks';
+import Reviews from '../pages/Reviews';
+import AddReview from '../pages/AddReview';
 import UserPreferences from '../pages/UserPreferencesPage';
 import UserMyProfile from '../pages/Users/UserProfile/UserMyProfile';
-import ListFoodItems2 from '../pages/FoodSubscribe/ListFoodItems2';
 import FoodList from '../pages/FoodSubscribe/FoodList';
 import SubscribeFood from '../pages/Users/UserFoodSubscribe/SubscribeFood';
+import ListFoodItems from '../pages/ListFoodItems';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
@@ -52,13 +54,15 @@ const App = () => {
         <Routes>
           <Route exact path="/" element={<Landing />} />
           <Route path="/add-food-items" element={<ProtectedRoute><AddFoodItems /></ProtectedRoute>} />
-          <Route path="/food-items" element={<ProtectedRoute><ListFoodItems2 /></ProtectedRoute>} />
+          <Route path="/food-items" element={<ProtectedRoute><ListFoodItems /></ProtectedRoute>} />
           <Route path="/menu/" element={<ProtectedRoute><Menu /></ProtectedRoute>} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/signout" element={<SignOut />} />
           <Route path="/home" element={<ProtectedRoute><Landing /></ProtectedRoute>} />
           <Route path="/available-now" element={<ProtectedRoute><AvailableNow /></ProtectedRoute>} />
+          <Route path="/add-review" element={<ProtectedRoute><AddReview /></ProtectedRoute>} />
+          <Route path="/reviews/" element={<ProtectedRoute><Reviews /></ProtectedRoute>} />
           <Route path="/vendormenu" element={<ProtectedRoute><VendorMenu /></ProtectedRoute>} />
           <Route path="/vendorhome" element={<ProtectedRoute><VendorHome /></ProtectedRoute>} />
           <Route path="/profile" element={<ProtectedRoute><UserMyProfile /></ProtectedRoute>} />

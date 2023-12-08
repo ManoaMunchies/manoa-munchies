@@ -4,7 +4,7 @@ import { useTracker } from 'meteor/react-meteor-data';
 import { Col, Container, Row, Table, Button } from 'react-bootstrap';
 import LoadingSpinner from '../../components/LoadingSpinner';
 import { Foods } from '../../../api/fooditems/Foods';
-import FoodItems from '../../components/Vendors/FoodItems';
+import FoodItems from '../../components/FoodItems';
 
 /* Renders a table containing all of the Stuff documents. Use <StuffItemAdmin> to render each row. */
 const ListFoodItems = () => {
