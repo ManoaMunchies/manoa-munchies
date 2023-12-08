@@ -11,5 +11,8 @@
     { "name": "Hot Coffee", "quantity": 3, "owner": "john@foo.com", "cuisineType": "breakfast", "vendor": "Dunkin Donuts","availability": "available", "isTopPick": "false" },
     { "name": "Cold Coffee", "quantity": 3, "owner": "john@foo.com", "cuisineType": "breakfast", "vendor": "Dunkin Donuts","availability": "available", "isTopPick": "false" },
     { "name": "Donut", "quantity": 3, "owner": "john@foo.com", "cuisineType": "breakfast", "vendor": "Dunkin Donuts", "availability": "available", "isTopPick": "false" }
+  ],
+  "defaultReviews": [
+    { "reviewerName": "John", "vendorName": "Dunkin Donuts", "review": "Great coffee!", "rating": 5, "owner": "john@foo.com" }
   ]
 }

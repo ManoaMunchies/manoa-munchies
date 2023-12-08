@@ -4,6 +4,7 @@ import { check } from 'meteor/check';
 import { Foods } from '../../api/fooditems/Foods';
 import { Vendors } from '../../api/vendors/Vendors';
 import { UserProfiles } from '../../api/userpreferences/UserProfiles';
+import { Reviews } from '../../api/reviews/Reviews';
 // User-level publication.
 // If logged in, then publish documents owned by this user. Otherwise, publish nothing.
 
@@ -90,6 +91,12 @@ Meteor.publish('foodItemsByVendor', function (vendorName) {
   return Foods.collection.find({ vendor: vendorName });
 });
 
+Meteor.publish('reviewsByVendor', function (vendorName) {
+  // Add necessary checks for vendorId validity and user permissions
+  check(vendorName, String);
+  return Reviews.collection.find({ vendorName: vendorName });
+});
+
 // publication for admins to display all vendors and their information
 Meteor.publish('allVendorData', function () {
   if (!this.userId) {
@@ -130,3 +137,17 @@ Meteor.publish(UserProfiles.userPublicationName, function () {
   }
   return this.ready();
 });
+
+Meteor.publish(Reviews.userPublicationName, function () {
+  if (this.userId) {
+    return Reviews.collection.find();
+  }
+  return this.ready();
+});
+
+// Meteor.publish(Reviews.adminPublicationName, function () {
+//   if (this.userId && Roles.userIsInRole(this.userId, 'admin')) {
+//     return Reviews.collection.find();
+//   }
+//   return this.ready();
+// });
