@@ -14,6 +14,14 @@ class FoodsCollection {
     this.schema = new SimpleSchema({
       name: String,
       quantity: Number,
+      image: {
+        type: String,
+        optional: true,
+      },
+      description: {
+        type: String,
+        optional: true,
+      },
       cuisineType: {
         type: String,
         allowedValues: ['breakfast', 'american', 'hawaiian', 'chinese', 'japanese', 'korean', 'thai', 'indian', 'mexican'],

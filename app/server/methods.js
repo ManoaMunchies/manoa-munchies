@@ -8,6 +8,8 @@ import { FoodSubscriptions } from '../imports/api/fooditems/FoodSubscriptions';
 import { Vendors } from '../imports/api/vendors/Vendors';
 import { UserPreferences } from '../imports/api/userpreferences/UserPreferences';
 import { UserProfiles } from '../imports/api/userpreferences/UserProfiles';
+
+process.env.MAIL_URL = 'smtp://manoamunchies3@gmail.com:ICS314!@@smtp.gmail.com:465';
 // delete menu item
 Meteor.methods({
   'fooditems.remove'(foodItemId) {
@@ -187,14 +189,12 @@ Meteor.methods({
     subscribedUsers.forEach((subscription) => {
       const user = Meteor.users.findOne(subscription.userId);
       const userEmail = user.emails[0].address;
-
+      console.log(userEmail);
       const subject = 'Food Ready Notification';
       const text = `Your subscribed food "${food.name}" is now ready. Enjoy your meal!`;
-      console.log(userEmail);
-      console.log(user);
       Email.send({
         to: userEmail,
-        from: 'Your App <noreply@example.com>',
+        from: 'AlohaEats <manoamunchies3@gmail.com>',
         subject,
         text,
       });

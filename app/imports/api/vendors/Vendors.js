@@ -10,6 +10,10 @@ class VendorsCollection {
         type: String,
         required: true,
       },
+      image: {
+        type: String,
+        optional: true,
+      },
       location: {
         type: String,
         required: true,

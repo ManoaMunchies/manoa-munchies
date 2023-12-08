@@ -3,7 +3,7 @@ import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
 import { Container } from 'react-bootstrap';
 import { Foods } from '../../../api/fooditems/Foods';
-import MarkFoodReady from './MarkFoodReady';
+import MarkFoodReady from '../Vendors/FoodItems/Function/MarkFoodReady';
 import LoadingSpinner from '../../components/LoadingSpinner';
 
 const FoodList = () => {

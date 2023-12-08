@@ -13,15 +13,16 @@ import NavBar from '../components/NavBar';
 import SignIn from '../pages/SignIn';
 import NotAuthorized from '../pages/NotAuthorized';
 import LoadingSpinner from '../components/LoadingSpinner';
-import VendorHome from '../pages/VendorHome';
-import AddFoodItems from '../pages/AddFoodItems';
+import VendorHome from '../pages/Vendors/FoodItems/Listing/VendorHome';
+import VendorMenu from '../pages/Vendors/FoodItems/Listing/VendorMenu';
+import AddFoodItems from '../pages/Vendors/FoodItems/Function/AddFoodItems';
 import ListFoodItemsAdmin from '../pages/ListFoodItemsAdmin';
 import AddVendors from '../pages/AddVendors';
 import ListVendors from '../pages/ListVendors';
 import ListVendorsAdmin from '../pages/ListVendorsAdmin';
 // import ListFoodItems from '../pages/ListFoodItems';
-import EditVendorItem from '../pages/EditVendorItem';
-import EditFoodItem from '../pages/EditFoodItem';
+import EditVendorItem from '../pages/Vendors/EditVendorItem';
+import EditFoodItem from '../pages/Vendors/FoodItems/Function/EditFoodItem';
 import ListVendorsVendor from '../pages/ListVendorsVendor';
 import EditVendorItemAdmin from '../pages/EditVendorItemAdmin';
 import Menu from '../pages/Menu';
@@ -31,10 +32,10 @@ import EditFoodItemAdmin from '../pages/EditFoodItemAdmin';
 import AvailableNow from '../pages/AvailableNow';
 import TopPicks from '../pages/TopPicks';
 import UserPreferences from '../pages/UserPreferencesPage';
-import UserMyProfile from '../pages/UserProfile/UserMyProfile';
+import UserMyProfile from '../pages/Users/UserProfile/UserMyProfile';
 import ListFoodItems2 from '../pages/FoodSubscribe/ListFoodItems2';
 import FoodList from '../pages/FoodSubscribe/FoodList';
-import SubscribeFood from '../pages/FoodSubscribe/SubscribeFood';
+import SubscribeFood from '../pages/Users/UserFoodSubscribe/SubscribeFood';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
@@ -58,6 +59,7 @@ const App = () => {
           <Route path="/signout" element={<SignOut />} />
           <Route path="/home" element={<ProtectedRoute><Landing /></ProtectedRoute>} />
           <Route path="/available-now" element={<ProtectedRoute><AvailableNow /></ProtectedRoute>} />
+          <Route path="/vendormenu" element={<ProtectedRoute><VendorMenu /></ProtectedRoute>} />
           <Route path="/vendorhome" element={<ProtectedRoute><VendorHome /></ProtectedRoute>} />
           <Route path="/profile" element={<ProtectedRoute><UserMyProfile /></ProtectedRoute>} />
           <Route path="/foodlist" element={<ProtectedRoute><FoodList /></ProtectedRoute>} />

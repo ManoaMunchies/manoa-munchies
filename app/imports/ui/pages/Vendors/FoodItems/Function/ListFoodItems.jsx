@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
 import { Col, Container, Row, Table } from 'react-bootstrap';
-import LoadingSpinner from '../components/LoadingSpinner';
-import { Foods } from '../../api/fooditems/Foods';
-import FoodItems from '../components/FoodItems';
+import LoadingSpinner from '../../../../components/LoadingSpinner';
+import { Foods } from '../../../../../api/fooditems/Foods';
+import FoodItems from '../../../../components/Vendors/FoodItems';
 
 /* Renders a table containing all of the Stuff documents. Use <StuffItemAdmin> to render each row. */
 const ListFoodItems = () => {
@@ -12,7 +12,7 @@ const ListFoodItems = () => {
   // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
   const { fooditems, ready } = useTracker(() => {
     // Get access to Stuff documents.
-    const subscription = Meteor.subscribe(Foods.userPublicationName);
+    const subscription = Meteor.subscribe(Foods.vendorPublicationName);
     // Determine if the subscription is ready
     const rdy = subscription.ready();
     // Get the Stuff documents

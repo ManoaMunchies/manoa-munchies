@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
 import { Button, Form, Card, Col, Container, Image, Row, Alert } from 'react-bootstrap';
-import LoadingSpinner from '../../components/LoadingSpinner';
-import { UserProfiles } from '../../../api/userpreferences/UserProfiles';
+import LoadingSpinner from '../../../components/LoadingSpinner';
+import { UserProfiles } from '../../../../api/userpreferences/UserProfiles';
 
 /* Renders a table containing all of the Stuff documents. Use <StuffItemAdmin> to render each row. */
 
