@@ -29,11 +29,6 @@ const NavBar = () => {
               <Nav.Link id="vendor-nav" as={NavLink} to="/vendors" key="vendors">Vendors</Nav.Link>,
               <Nav.Link id="food-items-nav" as={NavLink} to="/food-items" key="food-items">Food Items</Nav.Link>,
             ]) : ''}
-            {Roles.userIsInRole(Meteor.userId(), 'vendor') ? ([
-              <Nav.Link id="vendor-home-nav" as={NavLink} to="/vendorhome" key="vendorhome">Vendor Home</Nav.Link>,
-              <Nav.Link id="add-food-items-nav" as={NavLink} to="/add-food-items" key="add-food-items">Add Food Items</Nav.Link>,
-              <Nav.Link id="vendors-vendor-nav" as={NavLink} to="/vendors-vendor" key="vendors-vendor">Vendors</Nav.Link>,
-            ]) : ''}
             {Roles.userIsInRole(Meteor.userId(), 'admin') ? ([
               <Nav.Link id="admin-panel-nav" as={NavLink} to="/admin-panel" key="admin">Admin Panel</Nav.Link>,
               // <Nav.Link id="add-food-items-nav" as={NavLink} to="/add-food-items" key="add-food-items">Add Food Items</Nav.Link>,
@@ -46,6 +41,12 @@ const NavBar = () => {
               {Roles.userIsInRole(Meteor.userId(), 'user') ? ([
                 <Nav.Link id="user-preferences-nav" as={NavLink} to="/user-preferences" key="userpreferences">My Preferences</Nav.Link>,
                 <Nav.Link id="user-nav" as={NavLink} to="/profile" key="userprofile">My Profile</Nav.Link>,
+              ]) : ''}
+              {Roles.userIsInRole(Meteor.userId(), 'vendor') ? ([
+                <Nav.Link id="vendor-home-nav" as={NavLink} to="/vendorhome" key="vendorhome">Vendor Home</Nav.Link>,
+                // <Nav.Link id="add-food-items-nav" as={NavLink} to="/add-food-items" key="add-food-items">Add Food Items</Nav.Link>,
+                <Nav.Link id="vendor-menu-nav" as={NavLink} to="/vendormenu" key="vendormenu">Our Menu</Nav.Link>,
+                // <Nav.Link id="vendors-vendor-nav" as={NavLink} to="/vendors-vendor" key="vendors-vendor">Vendors</Nav.Link>,
               ]) : ''}
             </Nav>
             {currentUser === '' ? (

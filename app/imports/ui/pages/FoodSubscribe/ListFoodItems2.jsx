@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
-import { Col, Container, Row, Table } from 'react-bootstrap';
-import LoadingSpinner from '../components/LoadingSpinner';
-import { Foods } from '../../api/fooditems/Foods';
-import FoodItems from '../components/FoodItems';
+import { Col, Container, Row, Table, Button } from 'react-bootstrap';
+import LoadingSpinner from '../../components/LoadingSpinner';
+import { Foods } from '../../../api/fooditems/Foods';
+import FoodItems from '../../components/Vendors/FoodItems';
 
 /* Renders a table containing all of the Stuff documents. Use <StuffItemAdmin> to render each row. */
 const ListFoodItems = () => {
+
   const [filter, setFilter] = useState(''); // State to keep track of the selected filter
   // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
   const { fooditems, ready } = useTracker(() => {
@@ -22,6 +23,27 @@ const ListFoodItems = () => {
       ready: rdy,
     };
   }, []);
+
+  const handleFoodSubscribe = (foodName) => {
+    // Call a server-side method to subscribe the user to the food
+    Meteor.call('subscribeToFood', foodName, (error) => {
+      if (error) {
+        // Handle subscription error
+        console.log(error);
+      } else {
+        // Subscription successful
+        console.log('Subscribed successfully!');
+      }
+    });
+  };
+
+  const handleSubscribeClick = () => {
+    const _foodName = prompt('Enter the food name:');
+    if (_foodName) {
+      handleFoodSubscribe(_foodName);
+    }
+  };
+
   return (ready ? (
     <Container className="py-3">
       <Row className="justify-content-center">
@@ -42,12 +64,14 @@ const ListFoodItems = () => {
                 <th>Cuisine Type</th>
                 <th>Vendor</th>
                 <th>Availability</th>
+                <th>Subscribe</th>
               </tr>
             </thead>
             <tbody>
               {fooditems
                 .filter(fooditem => filter === '' || fooditem.cuisineType === filter)
                 .map(fooditem => <FoodItems key={fooditem._id} fooditems={fooditem} />)}
+              <td><Button onClick={handleSubscribeClick}>Subscribe</Button></td>
             </tbody>
           </Table>
         </Col>

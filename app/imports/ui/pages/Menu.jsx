@@ -5,7 +5,7 @@ import { Col, Container, Row, Table } from 'react-bootstrap';
 import { useLocation } from 'react-router';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { Foods } from '../../api/fooditems/Foods';
-import FoodItems from '../components/FoodItems';
+import FoodItems from '../components/Vendors/FoodItems';
 
 /* Renders a table containing all of the Stuff documents. Use <StuffItemAdmin> to render each row. */
 const Menu = () => {

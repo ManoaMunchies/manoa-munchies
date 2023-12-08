@@ -5,19 +5,17 @@ import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
-import { Foods } from '../../api/fooditems/Foods';
+import { Foods } from '../../../../../api/fooditems/Foods';
 
 // Create a schema to specify the structure of the data to appear in the form.
 const formSchema = new SimpleSchema({
   name: String,
   quantity: Number,
+  image: String,
+  description: String,
   cuisineType: {
     type: String,
     allowedValues: ['breakfast', 'american', 'hawaiian', 'chinese', 'japanese', 'korean', 'thai', 'indian', 'mexican'],
-  },
-  vendor: {
-    type: String,
-    required: true,
   },
   availability: {
     type: String,
@@ -33,10 +31,11 @@ const AddFoodItems = () => {
 
   // On submit, insert the data.
   const submit = (data, formRef) => {
-    const { name, quantity, cuisineType, vendor, availability } = data;
+    const { name, quantity, image, description, cuisineType, availability } = data;
     const owner = Meteor.user().username;
+    const vendor = Meteor.user().username;
     Foods.collection.insert(
-      { name, quantity, cuisineType, vendor, availability, owner },
+      { name, quantity, image, description, cuisineType, vendor, availability, owner },
       (error) => {
         if (error) {
           swal('Error', error.message, 'error');
@@ -60,8 +59,9 @@ const AddFoodItems = () => {
               <Card.Body>
                 <TextField name="name" />
                 <NumField name="quantity" decimal={null} />
+                <TextField name="image" />
                 <SelectField name="cuisineType" />
-                <TextField name="vendor" />
+                <TextField name="description" />
                 <SelectField name="availability" />
                 <SubmitField value="Submit" />
                 <ErrorsField />

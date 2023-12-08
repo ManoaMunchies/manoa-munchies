@@ -6,8 +6,8 @@ import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import { useParams } from 'react-router';
-import LoadingSpinner from '../components/LoadingSpinner';
-import { Vendors } from '../../api/vendors/Vendors';
+import LoadingSpinner from '../../components/LoadingSpinner';
+import { Vendors } from '../../../api/vendors/Vendors';
 
 const bridge = new SimpleSchema2Bridge(Vendors.schema);
 // const navigate = useNavigate();
@@ -32,8 +32,8 @@ const EditVendorItem = () => {
   // console.log('EditStuff', doc, ready);
   // On successful submit, insert the data.
   const submit = (data) => {
-    const { name, location, hours } = data;
-    Vendors.collection.update(_id, { $set: { name, location, hours } }, (error) => (error ?
+    const { name, image, location, hours } = data;
+    Vendors.collection.update(_id, { $set: { name, image, location, hours } }, (error) => (error ?
       swal('Error', error.message, 'error') :
       swal('Success', 'Item updated successfully', 'success')));
   };
@@ -48,6 +48,7 @@ const EditVendorItem = () => {
               <Card.Body>
                 <TextField name="name" />
                 <SelectField name="location" />
+                <TextField name="image" />
                 <TextField name="hours" />
                 <SubmitField value="Submit" />
                 <ErrorsField />
