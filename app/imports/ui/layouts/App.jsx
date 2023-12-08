@@ -31,6 +31,8 @@ import EditFoodItemAdmin from '../pages/EditFoodItemAdmin';
 import AvailableNow from '../pages/AvailableNow';
 import UserMyProfile from '../pages/UserMyProfile';
 import TopPicks from '../pages/TopPicks';
+import Reviews from '../pages/Reviews';
+import AddReview from '../pages/AddReview';=======
 import UserPreferencesPage from '../pages/UserPreferencesPage';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
@@ -50,6 +52,8 @@ const App = () => {
           <Route path="/add-food-items" element={<ProtectedRoute><AddFoodItems /></ProtectedRoute>} />
           <Route path="/food-items" element={<ProtectedRoute><ListFoodItems /></ProtectedRoute>} />
           <Route path="/menu/" element={<ProtectedRoute><Menu /></ProtectedRoute>} />
+          <Route path="/add-review" element={<ProtectedRoute><AddReview /></ProtectedRoute>} />
+          <Route path="/reviews/" element={<ProtectedRoute><Reviews /></ProtectedRoute>} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/signout" element={<SignOut />} />

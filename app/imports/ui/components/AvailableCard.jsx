@@ -21,6 +21,7 @@ const AvailableCard = ({ vendors, availableFood }) => (
         })}
       </ListGroup>
       <Link to={`/menu?vendor=${encodeURIComponent(vendors.name)}`}>See Full Menu</Link>
+      <Link className="ps-4" to={`/reviews?vendor=${encodeURIComponent(vendors.name)}`}>See Reviews</Link>
     </Card.Body>
   </Card>
 );
