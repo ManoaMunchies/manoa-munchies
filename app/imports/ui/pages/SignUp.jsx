@@ -7,6 +7,8 @@ import { Alert, Card, Col, Container, Row } from 'react-bootstrap';
 import SimpleSchema from 'simpl-schema';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import { AutoForm, ErrorsField, SubmitField, SelectField, TextField } from 'uniforms-bootstrap5';
+import { UserProfiles } from '../../api/userpreferences/UserProfiles';
+import { UserPreferences } from '../../api/userpreferences/UserPreferences';
 
 /**
  * SignUp component is similar to signin component, but we create a new user instead.
@@ -33,6 +35,7 @@ const SignUp = ({ location }) => {
       if (err) {
         setError(err.reason);
       } else {
+        UserProfiles.collection.insert({ firstName: Meteor.user().username, image: '/images/defaultImage.png', owner: Meteor.user().username });
         Meteor.call('assignUserRole', Meteor.userId(), role, (errr) => {
           // Handle role assignment response
           if (errr) {
@@ -41,6 +44,26 @@ const SignUp = ({ location }) => {
         });
         setRedirectToRef(true);
       }
+      UserPreferences.collection.insert({
+        owner: email,
+        cuisinePreferences: {
+          isAmerican: true,
+          isHawaiian: true,
+          isChinese: true,
+          isJapanese: true,
+          isKorean: true,
+          isThai: true,
+          isIndian: true,
+          isMexican: true,
+        },
+        dietRestrictions: {
+          isVegan: false,
+          isVegetarian: false,
+          isGlutenFree: false,
+          isDairyFree: false,
+          isNutFree: false,
+        },
+      });
     });
   };
 
