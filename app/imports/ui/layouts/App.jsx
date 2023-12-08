@@ -32,7 +32,7 @@ import AvailableNow from '../pages/AvailableNow';
 import UserMyProfile from '../pages/UserMyProfile';
 import TopPicks from '../pages/TopPicks';
 import Reviews from '../pages/Reviews';
-import AddReview from '../pages/AddReview';=======
+import AddReview from '../pages/AddReview';
 import UserPreferencesPage from '../pages/UserPreferencesPage';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
