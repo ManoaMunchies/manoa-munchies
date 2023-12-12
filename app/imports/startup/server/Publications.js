@@ -12,10 +12,22 @@ import { UserPreferences } from '../../api/userpreferences/UserPreferences';
 // if logged in with user role, then publish user preferences for that user
 Meteor.publish(UserPreferences.userPublicationName, function () {
   // publish only the user preferences for the logged in user
-  if (this.userId) {
-    return UserPreferences.collection.find({ owner: this.userId });
+  if (this.userId && Roles.userIsInRole(this.userId, 'user')) {
+    // return UserPreferences.collection.find({ owner: this.userId });
+    return UserPreferences.collection.find();
   }
   return this.ready();
+});
+
+Meteor.publish('myUserPreferences', function () {
+  if (!this.userId) {
+    return this.ready();
+  }
+  const user = Meteor.users.findOne(this.userId);
+  if (!user) {
+    return this.ready(); // Handle the case where the user is not found
+  }
+  return UserPreferences.collection.find({ owner: user.username });
 });
 
 Meteor.publish(Foods.userPublicationName, function () {
