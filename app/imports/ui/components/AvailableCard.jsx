@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Card, ListGroup } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'; // Import Link
 
 const AvailableCard = ({ vendors, availableFood }) => (
   <Card className="food-card">
@@ -9,6 +9,7 @@ const AvailableCard = ({ vendors, availableFood }) => (
       <Card.Title>{vendors.name}</Card.Title>
       <Card.Subtitle>{vendors.location}</Card.Subtitle>
       <Card.Text>{vendors.hours}</Card.Text>
+      <Link to={`/map/${encodeURIComponent(vendors.name)}`}>See Location on Map</Link> {/* Use Link */}
     </Card.Header>
     <Card.Body>
       <Card.Text className="fw-bold">Available Food</Card.Text>

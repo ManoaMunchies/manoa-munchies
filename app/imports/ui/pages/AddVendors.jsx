@@ -16,6 +16,19 @@ const formSchema = new SimpleSchema({
     defaultValue: 'Campus Center',
   },
   hours: String,
+  mapLocation: Object,
+  'mapLocation.lat': {
+    type: Number,
+    required: true,
+  },
+  'mapLocation.lng': {
+    type: Number,
+    required: true,
+  },
+  'mapLocation.address': {
+    type: String,
+    required: true,
+  },
 });
 
 const bridge = new SimpleSchema2Bridge(formSchema);
@@ -24,10 +37,10 @@ const bridge = new SimpleSchema2Bridge(formSchema);
 const AddVendors = () => {
   // On submit, insert the data.
   const submit = (data, formRef) => {
-    const { name, location, hours } = data;
+    const { name, location, hours, mapLocation } = data;
     const owner = Meteor.user().username;
     Vendors.collection.insert(
-      { name, location, hours, owner },
+      { name, location, hours, owner, mapLocation },
       (error) => {
         if (error) {
           swal('Error', error.message, 'error');
@@ -51,6 +64,9 @@ const AddVendors = () => {
                 <TextField name="name" />
                 <SelectField name="location" />
                 <TextField name="hours" />
+                <TextField name="mapLocation.lat" />
+                <TextField name="mapLocation.lng" />
+                <TextField name="mapLocation.address" />
                 <SubmitField value="Submit" />
                 <ErrorsField />
               </Card.Body>

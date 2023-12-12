@@ -23,6 +23,22 @@ class VendorsCollection {
         type: String,
         required: true,
       },
+      mapLocation: { // New mapLocation prop
+        type: Object,
+        required: true,
+      },
+      'mapLocation.lat': { // Latitude property of mapLocation
+        type: Number,
+        required: true,
+      },
+      'mapLocation.lng': { // Longitude property of mapLocation
+        type: Number,
+        required: true,
+      },
+      'mapLocation.address': { // Address property of mapLocation
+        type: String,
+        required: true,
+      },
       owner: {
         type: String,
         required: true,

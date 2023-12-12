@@ -8,9 +8,27 @@
     { "email": "llbarbecue@foo.com", "password": "changeme", "role": "vendor" }
   ],
   "defaultDataVendors": [
-    { "name": "Dunkin Donuts", "image": "https://photos.prnewswire.com/prnfull/20110224/NY53806LOGO", "location": "Paradise Palms Café", "hours": "Monday-Friday 7:00am-4:30pm", "owner": "dunkin@foo.com" },
-    { "name": "Holoholo Grill", "image": "https://holohologrill.com/wp-content/uploads/2017/03/hg_logo_01_000000_818x276_optimized.png", "location": "Paradise Palms Café", "hours": "Monday-Friday 12:00pm - 6:00pm", "owner": "holohologrill@foo.com" },
-    { "name": "L&L Hawaiian Barbecue", "image": "https://www.hawaiianbarbecue.com/static/30acfbd8ccfb6528c91b7f8e5e79a8bb/930e7/location-illustration-red.webp", "location": "Paradise Palms Café", "hours": "Monday-Friday 12:00pm - 6:00pm", "owner": "llbarbecue@foo.com" }
+    { "name": "Dunkin Donuts", "image": "https://photos.prnewswire.com/prnfull/20110224/NY53806LOGO", "location": "Paradise Palms Café", "hours": "Monday-Friday 7:00am-4:30pm",
+      "mapLocation": {
+        "lat": 21.300931969508664,
+        "lng": -157.8156786006709,
+        "address": "2600 Campus Rd, Honolulu, HI 96822" },
+      "owner": "dunkin@foo.com"
+    },
+    { "name": "Holoholo Grill", "image": "https://holohologrill.com/wp-content/uploads/2017/03/hg_logo_01_000000_818x276_optimized.png", "location": "Paradise Palms Café", "hours": "Monday-Friday 12:00pm - 6:00pm",
+      "mapLocation": {
+        "lat": 21.300931969508664,
+        "lng": -157.8156786006709,
+        "address": "2600 Campus Rd, Honolulu, HI 96822" },
+      "owner": "holohologrill@foo.com"
+    },
+    { "name": "L&L Hawaiian Barbecue", "image": "https://www.hawaiianbarbecue.com/static/30acfbd8ccfb6528c91b7f8e5e79a8bb/930e7/location-illustration-red.webp", "location": "Paradise Palms Café", "hours": "Monday-Friday 12:00pm - 6:00pm",
+      "mapLocation": {
+        "lat": 21.300931969508664,
+        "lng": -157.8156786006709,
+        "address": "2600 Campus Rd, Honolulu, HI 96822" },
+      "owner": "llbarbecue@foo.com"
+    }
   ],
   "defaultDataFoodItems": [
     { "name": "Hot Coffee", "quantity": 3, "image": "https://s.yimg.com/ny/api/res/1.2/S6WtiTTnyPGvdeEXu7TB5g--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTQ3OQ--/https://media.zenfs.com/en/the_independent_635/e06dafce015e7dccb0663e3033b9c95b", "description": "Hot coffee", "owner": "dunkin@foo.com", "cuisineType": "breakfast", "vendor": "Dunkin Donuts","availability": "available", "isTopPick": "false" },
