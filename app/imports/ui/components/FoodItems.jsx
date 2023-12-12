@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Button, Card, Image } from 'react-bootstrap';
+import { Button, Card, Image, Badge } from 'react-bootstrap';
 import { Meteor } from 'meteor/meteor';
 
 /** Renders a single row in the List Stuff (Admin) table. See pages/ListStuffAdmin.jsx. */
 const FoodItems = ({ fooditems }) => {
+  const [showDiet, setShowDiet] = useState(null);
+  const [available, setAvailable] = useState(null);
+  const [subscribe, setSubscribe] = useState(null);
 
   const getDietaryOptions = () => {
     const options = [];
@@ -15,6 +18,7 @@ const FoodItems = ({ fooditems }) => {
     if (fooditems.dietOptions?.isNutFree) options.push('Nut-Free');
     return options.join(', ');
   };
+
   const handleFoodSubscribe = (foodName) => {
     // Call a server-side method to subscribe the user to the food
     Meteor.call('subscribeToFood', foodName, (error) => {
@@ -28,19 +32,48 @@ const FoodItems = ({ fooditems }) => {
     });
   };
 
+  useEffect(() => {
+    if (fooditems.dietOptions != null) {
+      setShowDiet(true);
+    }
+
+    if (fooditems.availability === 'available') {
+      setAvailable(true);
+      setSubscribe(false);
+    } else {
+      setAvailable(false);
+      setSubscribe(true);
+    }
+  }, [fooditems]);
+
   return (
     <Card className="h-80">
       <Card.Header>
         <Image src={fooditems.image} width={250} height={200} />
+        {showDiet && (
+          <Badge pill bg="info">
+            Diets: {getDietaryOptions()}
+          </Badge>
+        )}
+        {available && (
+          <Badge pill bg="success">
+            Availability: {fooditems.availability}
+          </Badge>
+        )}
+        {!available && (
+          <Badge pill bg="danger">
+            Availability: {fooditems.availability}
+          </Badge>
+        )}
         <Card.Title><h4>{fooditems.name}</h4></Card.Title>
         <Card.Subtitle><h6>Vendor: {fooditems.vendor}</h6></Card.Subtitle>
         <Card.Subtitle><h6>Cuisine Type: {fooditems.cuisineType}</h6></Card.Subtitle>
-        <Card.Subtitle><h6>Availability: {fooditems.availability}</h6></Card.Subtitle>
-        <Card.Subtitle><h6>Diets: {getDietaryOptions()}</h6></Card.Subtitle>
       </Card.Header>
       <Card.Body>
         <Card.Text>{fooditems.description}</Card.Text>
-        <Button className="mx-2" variant="primary" onClick={() => handleFoodSubscribe(fooditems._id)}>Subscribe</Button>
+        {subscribe && (
+          <Button className="mx-2" variant="success" onClick={() => handleFoodSubscribe(fooditems._id)}>Notify me</Button>
+        )}
       </Card.Body>
     </Card>
   );
