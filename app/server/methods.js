@@ -9,7 +9,7 @@ import { Vendors } from '../imports/api/vendors/Vendors';
 import { UserPreferences } from '../imports/api/userpreferences/UserPreferences';
 import { UserProfiles } from '../imports/api/userpreferences/UserProfiles';
 
-process.env.MAIL_URL = 'smtp://manoamunchies3@gmail.com:ICS314!@@smtp.gmail.com:465';
+process.env.MAIL_URL = 'smtp://postmaster@sandboxa115aa72fdea492d9d9939ded535bf51.mailgun.org:3c4968e12b65e4c1860b7f38c150d6cf-07f37fca-389ebd8d@smtp.mailgun.org:587';
 // delete menu item
 Meteor.methods({
   'fooditems.remove'(foodItemId) {
@@ -198,19 +198,24 @@ Meteor.methods({
       },
     });
 
-    const subscribedUsers = FoodSubscriptions.collection.find({ foodName: food.name }).fetch();
+    const subscribedUsers = FoodSubscriptions.collection.find({ foodName: foodId }).fetch();
     subscribedUsers.forEach((subscription) => {
       const user = Meteor.users.findOne(subscription.userId);
       const userEmail = user.emails[0].address;
-      console.log(userEmail);
+      console.log(`Sending email to user: ${userEmail}`);
       const subject = 'Food Ready Notification';
       const text = `Your subscribed food "${food.name}" is now ready. Enjoy your meal!`;
-      Email.send({
-        to: userEmail,
-        from: 'AlohaEats <manoamunchies3@gmail.com>',
-        subject,
-        text,
-      });
+      try {
+        Email.send({
+          to: userEmail,
+          from: 'AlohaEats <manoamunchies3@gmail.com>',
+          subject,
+          text,
+        });
+        console.log('Email sent successfully!');
+      } catch (error) {
+        console.error('An error occurred while sending the email:', error);
+      }
     });
   },
 });
