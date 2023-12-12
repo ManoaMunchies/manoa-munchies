@@ -43,7 +43,7 @@ const MapPage = () => {
           <Col className="text-center">
             <h1 className="h1-map">Map</h1>
           </Col>
-          {location && <Map location={location} zoomLevel={20} />}
+          {location && <Map location={location} zoomLevel={18} />}
         </Col>
       </Row>
     </Container>

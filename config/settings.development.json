@@ -9,18 +9,18 @@
   ],
   "defaultDataVendors": [
     { "name": "Dunkin Donuts", "image": "https://photos.prnewswire.com/prnfull/20110224/NY53806LOGO", "location": "Paradise Palms Café", "hours": "Monday-Friday 7:00am-4:30pm", "mapLocation": {
-      "lat": 21.301001034228594,
-      "lng": -157.8154106672249,
+      "lat": 21.300931969508664,
+      "lng": -157.8156786006709,
       "address": "2600 Campus Rd, Honolulu, HI 96822"
     }, "owner": "dunkin@foo.com" },
     { "name": "Holoholo Grill", "image": "https://holohologrill.com/wp-content/uploads/2017/03/hg_logo_01_000000_818x276_optimized.png", "location": "Paradise Palms Café", "hours": "Monday-Friday 12:00pm - 6:00pm", "mapLocation": {
-      "lat": 21.301001034228594,
-      "lng": -157.8154106672249,
+      "lat": 21.300931969508664,
+      "lng": -157.8156786006709,
       "address": "2600 Campus Rd, Honolulu, HI 96822"
     }, "owner": "holohologrill@foo.com" },
     { "name": "L&L Hawaiian Barbecue", "image": "https://www.hawaiianbarbecue.com/static/30acfbd8ccfb6528c91b7f8e5e79a8bb/930e7/location-illustration-red.webp", "location": "Paradise Palms Café", "hours": "Monday-Friday 12:00pm - 6:00pm", "mapLocation": {
-      "lat": 21.301001034228594,
-      "lng": -157.8154106672249,
+      "lat": 21.300931969508664,
+      "lng": -157.8156786006709,
       "address": "2600 Campus Rd, Honolulu, HI 96822"
     }, "owner": "llbarbecue@foo.com" }
   ],
