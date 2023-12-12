@@ -22,8 +22,6 @@ import Reviews from '../pages/Reviews';
 import VendorMenu from '../pages/Vendors/FoodItems/Listing/VendorMenu';
 import VendorHome from '../pages/Vendors/FoodItems/Listing/VendorHome';
 import UserMyProfile from '../pages/Users/UserProfile/UserMyProfile';
-import FoodList from '../pages/FoodSubscribe/FoodList';
-import SubscribeFood from '../pages/Users/UserFoodSubscribe/SubscribeFood';
 import { UserPreferences } from '../../api/userpreferences/UserPreferences';
 import UserPreferencesPage from '../pages/UserPreferencesPage';
 import EditFoodItem from '../pages/Vendors/FoodItems/Function/EditFoodItem';
@@ -66,8 +64,6 @@ const App = () => {
           <Route path="/vendormenu" element={<ProtectedRoute><VendorMenu /></ProtectedRoute>} />
           <Route path="/vendorhome" element={<ProtectedRoute><VendorHome /></ProtectedRoute>} />
           <Route path="/profile" element={<ProtectedRoute><UserMyProfile /></ProtectedRoute>} />
-          <Route path="/foodlist" element={<ProtectedRoute><FoodList /></ProtectedRoute>} />
-          <Route path="/subscribe" element={<ProtectedRoute><SubscribeFood /></ProtectedRoute>} />
           <Route path="/user-preferences" element={<ProtectedRoute><UserPreferences /></ProtectedRoute>} />
           <Route path="/user-preferences/" element={<ProtectedRoute><UserPreferencesPage /></ProtectedRoute>} />
           <Route path="/edit-food-item/:_id" element={<ProtectedRoute><EditFoodItem /></ProtectedRoute>} />

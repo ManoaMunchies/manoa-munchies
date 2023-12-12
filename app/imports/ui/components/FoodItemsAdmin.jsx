@@ -60,6 +60,7 @@ const FoodItemsAdmin = ({ fooditems }) => {
         <td>{getDietaryOptions()}</td>
         <td>{fooditems.availability}</td>
         <td>{fooditems.owner}</td>
+        {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
         <td>
           <input
             type="checkbox"

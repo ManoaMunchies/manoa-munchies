@@ -45,18 +45,6 @@ const FoodItemsVendor = ({ fooditems }) => {
     });
   };
 
-  /*
- const handleMarkUnReadyClick = () => {
-   Meteor.call('markFoodAsReady', fooditems._id, (error) => {
-     if (error) {
-       console.log(error);
-     } else {
-       console.log('Food marked as ready!');
-       setIsReady(false);
-     }
-   });
- }; */
-
   const getDietaryOptions = () => {
     const options = [];
     if (fooditems.dietOptions?.isVegan) options.push('Vegan');
@@ -86,6 +74,7 @@ const FoodItemsVendor = ({ fooditems }) => {
       <Card className="h-80">
         <Card.Header>
           <Image src={fooditems.image} width={250} height={200} />
+          <hr />
           {showDiet && (
             <Badge pill bg="info">
               Diets: {getDietaryOptions()}

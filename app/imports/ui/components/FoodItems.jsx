@@ -8,6 +8,7 @@ const FoodItems = ({ fooditems }) => {
   const [showDiet, setShowDiet] = useState(null);
   const [available, setAvailable] = useState(null);
   const [subscribe, setSubscribe] = useState(null);
+  const [alert, setAlert] = useState(null);
 
   const getDietaryOptions = () => {
     const options = [];
@@ -25,8 +26,11 @@ const FoodItems = ({ fooditems }) => {
       if (error) {
         // Handle subscription error
         console.log(error);
+        setAlert(false);
       } else {
         // Subscription successful
+        setAlert(true);
+        setSubscribe(false);
         console.log('Subscribed successfully!');
       }
     });
@@ -50,6 +54,7 @@ const FoodItems = ({ fooditems }) => {
     <Card className="h-80">
       <Card.Header>
         <Image src={fooditems.image} width={250} height={200} />
+        <hr />
         {showDiet && (
           <Badge pill bg="info">
             Diets: {getDietaryOptions()}
@@ -73,6 +78,9 @@ const FoodItems = ({ fooditems }) => {
         <Card.Text>{fooditems.description}</Card.Text>
         {subscribe && (
           <Button className="mx-2" variant="success" onClick={() => handleFoodSubscribe(fooditems._id)}>Notify me</Button>
+        )}
+        {alert && (
+          <Button className="mx-2" variant="success">Subscribed</Button>
         )}
       </Card.Body>
     </Card>
