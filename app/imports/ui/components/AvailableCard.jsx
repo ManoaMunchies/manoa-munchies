@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Card, ListGroup } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'; // Import Link
 
 const AvailableCard = ({ vendors, availableFood }) => (
   <Card className="food-card">
@@ -20,9 +20,9 @@ const AvailableCard = ({ vendors, availableFood }) => (
           return <ListGroup.Item key={food._id}>{food.name}</ListGroup.Item>;
         })}
       </ListGroup>
-      <Link to={`/menu?vendor=${encodeURIComponent(vendors.name)}`}>See Full Menu</Link>
+      <Link to={`/menu?vendor=${encodeURIComponent(vendors.name)}`}>See Full Menu</Link> {/* Use Link */}
       <br />
-      <Link to={`/map/${encodeURIComponent(vendors)}`}>See Location on Map</Link>
+      <Link to={`/map/${encodeURIComponent(vendors.name)}`}>See Location on Map</Link> {/* Use Link */}
     </Card.Body>
   </Card>
 );

@@ -32,8 +32,8 @@ const EditVendorItemAdmin = () => {
   // console.log('EditStuff', doc, ready);
   // On successful submit, insert the data.
   const submit = (data) => {
-    const { name, location, hours, owner } = data;
-    Vendors.collection.update(_id, { $set: { name, location, hours, owner } }, (error) => (error ?
+    const { name, location, hours, owner, mapLocation } = data;
+    Vendors.collection.update(_id, { $set: { name, location, hours, owner, mapLocation } }, (error) => (error ?
       swal('Error', error.message, 'error') :
       swal('Success', 'Item updated successfully', 'success')));
   };
@@ -50,6 +50,9 @@ const EditVendorItemAdmin = () => {
                 <SelectField name="location" />
                 <TextField name="hours" />
                 <TextField name="owner" />
+                <TextField name="mapLocation.lat" />
+                <TextField name="mapLocation.lng" />
+                <TextField name="mapLocation.address" />
                 <SubmitField value="Submit" />
                 <ErrorsField />
               </Card.Body>

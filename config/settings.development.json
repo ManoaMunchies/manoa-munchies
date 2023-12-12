@@ -7,9 +7,20 @@
   "defaultDataVendors": [
     { "name": "Dunkin Donuts", "location": "Paradise Palms Café", "hours": "Monday-Friday 7:00am-4:30pm",
       "mapLocation": {
-      "lat": 21.301049681940516,
-      "lng": -157.81558059739896,
-      "address": "2600 Campus Rd, Honolulu, HI 96822, USA"
+      "lat": 21.301001034228594,
+      "lng": -157.8154106672249,
+      "address": "2600 Campus Rd, Honolulu, HI 96822"
+      },
+      "owner": "will@foo.com"
+    },
+    {
+      "name": "Starbucks",
+      "location": "Campus Center",
+      "hours": "Monday-Friday 6:00am-10:00pm",
+      "mapLocation": {
+        "lat": 21.298568001420396,
+        "lng": -157.81897209991342,
+        "address": "2600 Campus Rd, Honolulu, HI 96822"
       },
       "owner": "will@foo.com"
     }
