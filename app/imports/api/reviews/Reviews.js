@@ -2,49 +2,50 @@ import { Mongo } from 'meteor/mongo';
 import SimpleSchema from 'simpl-schema';
 
 /**
- * The ProfilesCollection. It encapsulates state and variable values for Vendor.
+ * The Reviews collection. It encapsulates state for reviews.
  */
-class UserProfilesCollection {
+class ReviewsCollection {
   constructor() {
     // The name of this collection.
-    this.name = 'UserProfilesCollection';
+    this.name = 'ReviewsCollection';
     // Define the Mongo collection.
     this.collection = new Mongo.Collection(this.name);
     // Define the structure of each document in the collection.
     this.schema = new SimpleSchema({
-      firstName: String,
-      lastName: {
+      reviewerName: {
         type: String,
-        optional: true,
+        required: true,
       },
-      title: {
+      vendorName: {
         type: String,
-        optional: true,
+        required: true,
       },
-      image: {
+      reviewText: {
         type: String,
-        optional: true,
+        required: true,
       },
-      instagram: {
+      stars: {
+        type: Number,
+        required: true,
+        min: 1,
+        max: 5,
+      },
+      owner: {
         type: String,
-        optional: true,
+        required: true,
       },
-      bio: {
-        type: String,
-        optional: true,
-      },
-      owner: String,
     });
     // Attach the schema to the collection, so all attempts to insert a document are checked against schema.
     this.collection.attachSchema(this.schema);
     // Define names for publications and subscriptions
     this.userPublicationName = `${this.name}.publication.user`;
     this.adminPublicationName = `${this.name}.publication.admin`;
+    this.vendorPublicationName = `${this.name}.publication.vendor`;
   }
 }
 
 /**
- * The singleton instance of the StuffsCollection.
- * @type {UserProfilesCollection}
+ * The singleton instance of the ReviewsCollection.
+ * @type {ReviewsCollection}
  */
-export const UserProfiles = new UserProfilesCollection();
+export const Reviews = new ReviewsCollection();

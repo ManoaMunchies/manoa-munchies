@@ -2,32 +2,41 @@
   "defaultAccounts": [
     { "email": "admin@foo.com", "password": "changeme", "role": "admin" },
     { "email": "john@foo.com", "password": "changeme", "role": "user" },
-    { "email": "will@foo.com", "password": "changeme", "role": "vendor" }
+    { "email": "will@foo.com", "password": "changeme", "role": "vendor" },
+    { "email": "dunkin@foo.com", "password": "changeme", "role": "vendor" },
+    { "email": "holohologrill@foo.com", "password": "changeme", "role": "vendor" },
+    { "email": "llbarbecue@foo.com", "password": "changeme", "role": "vendor" }
   ],
   "defaultDataVendors": [
-    { "name": "Dunkin Donuts", "location": "Paradise Palms Café", "hours": "Monday-Friday 7:00am-4:30pm",
-      "mapLocation": {
+    { "name": "Dunkin Donuts", "image": "https://photos.prnewswire.com/prnfull/20110224/NY53806LOGO", "location": "Paradise Palms Café", "hours": "Monday-Friday 7:00am-4:30pm", "mapLocation": {
       "lat": 21.301001034228594,
       "lng": -157.8154106672249,
       "address": "2600 Campus Rd, Honolulu, HI 96822"
-      },
-      "owner": "will@foo.com"
-    },
-    {
-      "name": "Starbucks",
-      "location": "Campus Center",
-      "hours": "Monday-Friday 6:00am-10:00pm",
-      "mapLocation": {
-        "lat": 21.298568001420396,
-        "lng": -157.81897209991342,
-        "address": "2600 Campus Rd, Honolulu, HI 96822"
-      },
-      "owner": "will@foo.com"
-    }
+    }, "owner": "dunkin@foo.com" },
+    { "name": "Holoholo Grill", "image": "https://holohologrill.com/wp-content/uploads/2017/03/hg_logo_01_000000_818x276_optimized.png", "location": "Paradise Palms Café", "hours": "Monday-Friday 12:00pm - 6:00pm", "mapLocation": {
+      "lat": 21.301001034228594,
+      "lng": -157.8154106672249,
+      "address": "2600 Campus Rd, Honolulu, HI 96822"
+    }, "owner": "holohologrill@foo.com" },
+    { "name": "L&L Hawaiian Barbecue", "image": "https://www.hawaiianbarbecue.com/static/30acfbd8ccfb6528c91b7f8e5e79a8bb/930e7/location-illustration-red.webp", "location": "Paradise Palms Café", "hours": "Monday-Friday 12:00pm - 6:00pm", "mapLocation": {
+      "lat": 21.301001034228594,
+      "lng": -157.8154106672249,
+      "address": "2600 Campus Rd, Honolulu, HI 96822"
+    }, "owner": "llbarbecue@foo.com" }
   ],
   "defaultDataFoodItems": [
-    { "name": "Hot Coffee", "quantity": 3, "owner": "john@foo.com", "cuisineType": "breakfast", "vendor": "Dunkin Donuts","availability": "available", "isTopPick": "false" },
-    { "name": "Cold Coffee", "quantity": 3, "owner": "john@foo.com", "cuisineType": "breakfast", "vendor": "Dunkin Donuts","availability": "available", "isTopPick": "false" },
-    { "name": "Donut", "quantity": 3, "owner": "john@foo.com", "cuisineType": "breakfast", "vendor": "Dunkin Donuts", "availability": "available", "isTopPick": "false" }
+    { "name": "Hot Coffee", "quantity": 3, "image": "https://s.yimg.com/ny/api/res/1.2/S6WtiTTnyPGvdeEXu7TB5g--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTQ3OQ--/https://media.zenfs.com/en/the_independent_635/e06dafce015e7dccb0663e3033b9c95b", "description": "Hot coffee", "owner": "dunkin@foo.com", "cuisineType": "breakfast", "vendor": "Dunkin Donuts","availability": "available", "isTopPick": "false" },
+    { "name": "Cold Coffee", "quantity": 3, "owner": "dunkin@foo.com", "image": "https://www.dunkindonuts.com/content/dam/dd/img/menu-redesign-v2/570x570/iced-coffee.png" ,"description": "Cold coffee", "cuisineType": "breakfast", "vendor": "Dunkin Donuts","availability": "available", "isTopPick": "false" },
+    { "name": "Donut", "quantity": 3, "owner": "dunkin@foo.com", "image": "https://ucarecdn.com/a67b8763-227d-47a4-ae3c-7afd9f10e211/", "description": "Donut","cuisineType": "breakfast", "vendor": "Dunkin Donuts", "availability": "available", "isTopPick": "false" },
+    { "name": "House Made Granola ", "quantity": 3, "owner": "holohologrill@foo.com","image": "https://cdn.loveandlemons.com/wp-content/uploads/2020/01/granola.jpg", "description": "House Made Granola", "cuisineType": "american", "vendor": "Holoholo Grill","availability": "available", "isTopPick": "true" },
+    { "name": "Barbecue Chicken", "quantity": 3, "owner": "llbarbecue@foo.com", "image": "https://images.prismic.io/hawaiianbarbecue/82d3adfc-7637-4775-95d2-7987179d73f1_BBQ_Chicken-optimized.png", "description": "Barbecue Chicken", "cuisineType": "hawaiian", "vendor": "L&L Hawaiian Barbecue","availability": "unavailable", "isTopPick": "false" },
+    { "name": "Chicken Katsu", "quantity": 3, "owner": "llbarbecue@foo.com", "image": "https://images.prismic.io/hawaiianbarbecue/91ce129b-21cc-4c8f-b015-2f2eac96e875_Chicken_Katsu-optimized.png" ,"description": "Chicken Katsu", "cuisineType": "hawaiian", "vendor": "L&L Hawaiian Barbecue","availability": "available", "isTopPick": "false" },
+    { "name": "Kalua Pork", "quantity": 3, "owner": "llbarbecue@foo.com", "image": "https://images.prismic.io/hawaiianbarbecue/02c2abca-f9d9-4b2c-8c3d-e3bd14271b28_Kalua_Pork_and_Cabbage-optimized.png", "description": "Kalua Pork","cuisineType": "hawaiian", "vendor": "L&L Hawaiian Barbecue", "availability": "available", "isTopPick": "true" }
+  ],
+  "defaultReviews": [
+    { "reviewerName": "John", "vendorName": "Dunkin Donuts", "review": "Great coffee!", "rating": 5, "owner": "john@foo.com" }
+  ],
+  "defaultUserPreferences": [
+    { "owner": "john@foo.com" }
   ]
 }

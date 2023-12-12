@@ -1,14 +1,15 @@
 import React from 'react';
-import { Button, Col, Container, Row, Table } from 'react-bootstrap';
-import '../../../client/style.css';
+import { Button, Col, Container, Image, Row, Table } from 'react-bootstrap';
+import '../../../../../../client/style.css';
 import PropTypes from 'prop-types';
 import { withTracker, useTracker } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
-import { Foods } from '../../api/fooditems/Foods';
-import { Vendors } from '../../api/vendors/Vendors';
-import LoadingSpinner from '../components/LoadingSpinner';
-import FoodItemsAdmin from '../components/FoodItemsAdmin';
-import VendorItemVendor from '../components/VendorItemVendor';
+import { Foods } from '../../../../../api/fooditems/Foods';
+import { Vendors } from '../../../../../api/vendors/Vendors';
+import LoadingSpinner from '../../../../components/LoadingSpinner';
+import VendorItemVendor from '../../../../components/VendorItemVendor';
+import FoodItemsVendor from '../../../../components/Vendors/FoodItemsVendor';
+// import MarkFoodReady from './MarkFoodReady';
 
 const VendorHome = ({ currentUser }) => {
   // Destructure the username from currentUser
@@ -34,9 +35,9 @@ const VendorHome = ({ currentUser }) => {
           </p>
         </Col>
       </Row>
-      <Col className="background-row d-flex flex-column align-items-center justify-content-center text-center">
-        <h2 className="h1-landing">Your Vendor Information</h2>
-      </Col>
+      <Row xs={6} md={6} lg={6} className="justify-content-center">
+        <Image className="mb-3" src={vendorData.map((vendor) => vendor.image)} />
+      </Row>
       <Table striped bordered hover>
         <thead>
           <tr>
@@ -53,23 +54,7 @@ const VendorHome = ({ currentUser }) => {
       <Col className="background-row d-flex flex-column align-items-center justify-content-center text-center">
         <h2 className="h1-landing">Your Menu</h2>
       </Col>
-      <Table striped bordered hover>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Quantity</th>
-            <th>Cuisine Type</th>
-            <th>Vendor</th>
-            <th>Availability</th>
-            <th>Owner</th>
-            <th>Edit</th>
-            <th>Delete</th>
-          </tr>
-        </thead>
-        <tbody>
-          {foodItems.map((fooditem) => <FoodItemsAdmin key={fooditem._id} fooditems={fooditem} />)}
-        </tbody>
-      </Table>
+      {foodItems.map((fooditem) => <FoodItemsVendor key={fooditem._id} fooditems={fooditem} />)}
       <Row className="justify-content-center mt-3">
         <Col md="auto">
           <Button as="a" href="/add-food-items" className="vendor-btn-edit">Add Menu Item</Button>

@@ -10,6 +10,9 @@ const VendorItem = ({ vendors }) => (
     <td>
       <Link to={`/menu?vendor=${encodeURIComponent(vendors.name)}`}>See Menu</Link>
     </td>
+    <td>
+      <Link to={`/reviews?vendor=${encodeURIComponent(vendors.name)}`}>See Reviews</Link>
+    </td>
   </tr>
 );
 

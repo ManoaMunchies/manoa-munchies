@@ -4,7 +4,7 @@ import { useTracker } from 'meteor/react-meteor-data';
 import { Table, Container, Row, Col } from 'react-bootstrap';
 import { Vendors } from '../../api/vendors/Vendors';
 import LoadingSpinner from '../components/LoadingSpinner';
-import VendorItem from '../components/VendorItem';
+import VendorItem from '../components/Vendors/VendorItem';
 
 const ListVendors = () => {
   const { ready, vendorData } = useTracker(() => {

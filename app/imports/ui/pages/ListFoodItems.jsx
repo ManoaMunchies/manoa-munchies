@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
-import { Col, Container, Row, Table } from 'react-bootstrap';
+import { Col, Container, Row } from 'react-bootstrap';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { Foods } from '../../api/fooditems/Foods';
 import FoodItems from '../components/FoodItems';
@@ -34,23 +34,12 @@ const ListFoodItems = () => {
               {/* Add more options as needed */}
             </select>
           </Col>
-          <Table striped bordered hover>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Quantity</th>
-                <th>Cuisine Type</th>
-                <th>Vendor</th>
-                <th>Availability</th>
-              </tr>
-            </thead>
-            <tbody>
-              {fooditems
-                .filter(fooditem => filter === '' || fooditem.cuisineType === filter)
-                .map(fooditem => <FoodItems key={fooditem._id} fooditems={fooditem} />)}
-            </tbody>
-          </Table>
         </Col>
+        <Row xs={1} md={2} lg={3} className="g-4">
+          {fooditems
+            .filter(fooditem => filter === '' || fooditem.cuisineType === filter)
+            .map(fooditem => <FoodItems key={fooditem._id} fooditems={fooditem} />)}
+        </Row>
       </Row>
     </Container>
   ) : <LoadingSpinner />);

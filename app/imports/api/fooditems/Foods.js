@@ -14,6 +14,14 @@ class FoodsCollection {
     this.schema = new SimpleSchema({
       name: String,
       quantity: Number,
+      image: {
+        type: String,
+        optional: true,
+      },
+      description: {
+        type: String,
+        optional: true,
+      },
       cuisineType: {
         type: String,
         allowedValues: ['breakfast', 'american', 'hawaiian', 'chinese', 'japanese', 'korean', 'thai', 'indian', 'mexican'],
@@ -26,6 +34,30 @@ class FoodsCollection {
         defaultValue: 'available',
       },
       isTopPick: {
+        type: Boolean,
+        defaultValue: false,
+      },
+      dietOptions: {
+        type: Object,
+        optional: true,
+      },
+      'dietOptions.isVegan': {
+        type: Boolean,
+        defaultValue: false,
+      },
+      'dietOptions.isVegetarian': {
+        type: Boolean,
+        defaultValue: false,
+      },
+      'dietOptions.isGlutenFree': {
+        type: Boolean,
+        defaultValue: false,
+      },
+      'dietOptions.isDairyFree': {
+        type: Boolean,
+        defaultValue: false,
+      },
+      'dietOptions.isNutFree': {
         type: Boolean,
         defaultValue: false,
       },

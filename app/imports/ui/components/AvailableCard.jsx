@@ -9,6 +9,7 @@ const AvailableCard = ({ vendors, availableFood }) => (
       <Card.Title>{vendors.name}</Card.Title>
       <Card.Subtitle>{vendors.location}</Card.Subtitle>
       <Card.Text>{vendors.hours}</Card.Text>
+      <Link to={`/map/${encodeURIComponent(vendors.name)}`}>See Location on Map</Link> {/* Use Link */}
     </Card.Header>
     <Card.Body>
       <Card.Text className="fw-bold">Available Food</Card.Text>
@@ -20,9 +21,8 @@ const AvailableCard = ({ vendors, availableFood }) => (
           return <ListGroup.Item key={food._id}>{food.name}</ListGroup.Item>;
         })}
       </ListGroup>
-      <Link to={`/menu?vendor=${encodeURIComponent(vendors.name)}`}>See Full Menu</Link> {/* Use Link */}
-      <br />
-      <Link to={`/map/${encodeURIComponent(vendors.name)}`}>See Location on Map</Link> {/* Use Link */}
+      <Link to={`/menu?vendor=${encodeURIComponent(vendors.name)}`}>See Full Menu</Link>
+      <Link className="ps-4" to={`/reviews?vendor=${encodeURIComponent(vendors.name)}`}>See Reviews</Link>
     </Card.Body>
   </Card>
 );

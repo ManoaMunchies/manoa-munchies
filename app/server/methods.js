@@ -2,9 +2,14 @@
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 import { Roles } from 'meteor/alanning:roles';
-import { Foods } from '/imports/api/fooditems/Foods';
+import { Email } from 'meteor/email';
+import { Foods } from '../imports/api/fooditems/Foods';
+import { FoodSubscriptions } from '../imports/api/fooditems/FoodSubscriptions';
 import { Vendors } from '../imports/api/vendors/Vendors';
+import { UserPreferences } from '../imports/api/userpreferences/UserPreferences';
+import { UserProfiles } from '../imports/api/userpreferences/UserProfiles';
 
+process.env.MAIL_URL = 'smtp://postmaster@sandboxa115aa72fdea492d9d9939ded535bf51.mailgun.org:3c4968e12b65e4c1860b7f38c150d6cf-07f37fca-389ebd8d@smtp.mailgun.org:587';
 // delete menu item
 Meteor.methods({
   'fooditems.remove'(foodItemId) {
@@ -91,6 +96,126 @@ Meteor.methods({
 
     Foods.collection.update(foodItemId, {
       $set: { isTopPick },
+    });
+  },
+});
+
+Meteor.methods({
+  'fooditems.updateDietary'(foodItemId, dietary) {
+    check(foodItemId, String);
+    check(dietary, { dietOptions: Object });
+
+    // Additional security checks if necessary
+
+    Foods.collection.upsert(foodItemId, {
+      $set: { dietary },
+    });
+  },
+});
+
+Meteor.methods({
+  'userPreferences.get'(userId) {
+    check(userId, String);
+    // Authorization checks here
+    return UserPreferences.collection.findOne({ owner: userId });
+  },
+
+  'userPreferences.update'(userId, preferences) {
+    check(userId, String);
+    check(preferences, { cuisinePreferences: Array, dietRestrictions: Array });
+    // Ensure preferences.cuisinePreferences is an array
+    if (!Array.isArray(preferences.cuisinePreferences)) {
+      throw new Meteor.Error('invalid-data', 'Cuisine Preferences must be an array.');
+    }
+    // Ensure preferences.dietRestrictions is an array
+    if (!Array.isArray(preferences.dietRestrictions)) {
+      throw new Meteor.Error('invalid-data', 'Diet Restrictions must be an array.');
+    }
+    UserPreferences.collection.upsert({ owner: userId }, { $set: preferences });
+  },
+});
+
+// Methods for update users profiles
+Meteor.methods({
+  // eslint-disable-next-line meteor/audit-argument-checks
+  'userProfiles.update'(formData) {
+    if (!this.userId) {
+      throw new Meteor.Error('not-authorized', 'You are not authorized to perform this action.');
+    }
+
+    const { _id, ...updatedData } = formData;
+    // Add the { multi: false } option to update a single document
+    const result = UserProfiles.collection.update({ _id: formData._id }, { $set: updatedData }, { multi: false });
+    if (result === 0) {
+      throw new Meteor.Error('update-failed', 'Failed to update the user profile.');
+    }
+  },
+});
+
+// Notification subscribe food for user
+Meteor.methods({
+  // eslint-disable-next-line meteor/audit-argument-checks
+  subscribeToFood(foodName) {
+    if (!this.userId) {
+      throw new Meteor.Error('not-authorized', 'User must be logged in to subscribe to food.');
+    }
+    console.log(this.userId);
+    if (typeof foodName !== 'string') {
+      throw new Meteor.Error('invalid-argument', 'Invalid food name.');
+    }
+
+    const existingSubscription = Foods.collection.findOne({ userId: this.userId, foodName });
+    if (existingSubscription) {
+      throw new Meteor.Error('already-subscribed', 'You are already subscribed to this food.');
+    }
+    FoodSubscriptions.collection.insert({
+      userId: this.userId,
+      foodName: foodName,
+      createdAt: new Date(),
+    });
+  },
+});
+
+Meteor.methods({
+  // eslint-disable-next-line meteor/audit-argument-checks
+  markFoodAsReady(foodId) {
+    if (!this.userId) {
+      throw new Meteor.Error('not-authorized', 'User must be logged in to mark food as ready.');
+    }
+
+    if (typeof foodId !== 'string') {
+      throw new Meteor.Error('invalid-argument', 'Invalid food ID.');
+    }
+
+    const food = Foods.collection.findOne(foodId);
+    if (!food) {
+      throw new Meteor.Error('food-not-found', 'Food item not found.');
+    }
+
+    Foods.collection.update(foodId, {
+      $set: {
+        availability: 'available',
+      },
+    });
+
+    const subscribedUsers = FoodSubscriptions.collection.find({ foodName: foodId }).fetch();
+    subscribedUsers.forEach((subscription) => {
+      const user = Meteor.users.findOne(subscription.userId);
+      const userEmail = user.emails[0].address;
+      console.log(`Sending email to user: ${userEmail}`);
+      const subject = 'Food Ready Notification';
+      const text = `Your subscribed food "${food.name}" is now ready. Enjoy your meal!`;
+      try {
+        Email.send({
+          to: userEmail,
+          from: 'AlohaEats <manoamunchies3@gmail.com>',
+          subject,
+          text,
+        });
+        console.log('Email sent successfully!');
+      } catch (error) {
+        console.error('An error occurred while sending the email:', error);
+      }
     });
   },
 });
