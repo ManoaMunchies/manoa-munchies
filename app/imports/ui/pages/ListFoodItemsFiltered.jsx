@@ -1,7 +1,7 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
-import { Col, Container, Row, Table } from 'react-bootstrap';
+import { Col, Container, Row } from 'react-bootstrap';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { Foods } from '../../api/fooditems/Foods';
 import FoodItems from '../components/FoodItems';
@@ -56,25 +56,14 @@ const ListFoodItemsFiltered = () => {
     <Container className="py-3">
       <Row className="justify-content-center">
         <Col md={7}>
-          <h1 className="text-center">Food Items by Your Preferences</h1>
-          <Table striped bordered hover>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Quantity</th>
-                <th>Cuisine Type</th>
-                <th>Vendor</th>
-                <th>Diet</th>
-                <th>Availability</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filterFoodItems(fooditems, userprefs).map(fooditem => (
-                <FoodItems key={fooditem._id} fooditems={fooditem} />
-              ))}
-            </tbody>
-          </Table>
+          <Col className="text-center"><h1 className="h1-food-card">Food Items by Your Preferences</h1>
+          </Col>
         </Col>
+        <Row xs={1} md={2} lg={3} className="g-4">
+          {filterFoodItems(fooditems, userprefs).map(fooditem => (
+            <FoodItems key={fooditem._id} fooditems={fooditem} />
+          ))}
+        </Row>
       </Row>
     </Container>
   ) : <LoadingSpinner />;
