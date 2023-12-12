@@ -13,25 +13,31 @@ import NavBar from '../components/NavBar';
 import SignIn from '../pages/SignIn';
 import NotAuthorized from '../pages/NotAuthorized';
 import LoadingSpinner from '../components/LoadingSpinner';
-import ListFoodItemsAdmin from '../pages/ListFoodItemsAdmin';
-import AddVendors from '../pages/AddVendors';
-import ListVendors from '../pages/ListVendors';
-import ListVendorsAdmin from '../pages/ListVendorsAdmin';
-import ListVendorsVendor from '../pages/ListVendorsVendor';
-import EditVendorItemAdmin from '../pages/EditVendorItemAdmin';
-import Menu from '../pages/Menu';
-import AdminPanel from '../pages/AdminPanel';
-import MenuAdmin from '../pages/MenuAdmin';
-import EditFoodItemAdmin from '../pages/EditFoodItemAdmin';
-import AvailableNow from '../pages/AvailableNow';
-import TopPicks from '../pages/TopPicks';
-import UserPreferencesPage from '../pages/UserPreferencesPage';
-import ListFoodItemsFiltered from '../pages/ListFoodItemsFiltered';
 import AddFoodItems from '../pages/Vendors/FoodItems/Function/AddFoodItems';
+import ListFoodItemsFiltered from '../pages/ListFoodItemsFiltered';
+import Menu from '../pages/Menu';
+import AvailableNow from '../pages/AvailableNow';
+import AddReview from '../pages/AddReview';
+import Reviews from '../pages/Reviews';
+import VendorMenu from '../pages/Vendors/FoodItems/Listing/VendorMenu';
 import VendorHome from '../pages/Vendors/FoodItems/Listing/VendorHome';
 import UserMyProfile from '../pages/Users/UserProfile/UserMyProfile';
+import FoodList from '../pages/FoodSubscribe/FoodList';
+import SubscribeFood from '../pages/Users/UserFoodSubscribe/SubscribeFood';
+import { UserPreferences } from '../../api/userpreferences/UserPreferences';
+import UserPreferencesPage from '../pages/UserPreferencesPage';
 import EditFoodItem from '../pages/Vendors/FoodItems/Function/EditFoodItem';
+import EditFoodItemAdmin from '../pages/EditFoodItemAdmin';
 import EditVendorItem from '../pages/Vendors/EditVendorItem';
+import ListFoodItemsAdmin from '../pages/ListFoodItemsAdmin';
+import AdminPanel from '../pages/AdminPanel';
+import ListVendors from '../pages/ListVendors';
+import ListVendorsVendor from '../pages/ListVendorsVendor';
+import ListVendorsAdmin from '../pages/ListVendorsAdmin';
+import EditVendorItemAdmin from '../pages/EditVendorItemAdmin';
+import MenuAdmin from '../pages/MenuAdmin';
+import AddVendors from '../pages/AddVendors';
+import TopPicks from '../pages/TopPicks';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
@@ -55,8 +61,14 @@ const App = () => {
           <Route path="/signout" element={<SignOut />} />
           <Route path="/home" element={<ProtectedRoute><Landing /></ProtectedRoute>} />
           <Route path="/available-now" element={<ProtectedRoute><AvailableNow /></ProtectedRoute>} />
+          <Route path="/add-review" element={<ProtectedRoute><AddReview /></ProtectedRoute>} />
+          <Route path="/reviews/" element={<ProtectedRoute><Reviews /></ProtectedRoute>} />
+          <Route path="/vendormenu" element={<ProtectedRoute><VendorMenu /></ProtectedRoute>} />
           <Route path="/vendorhome" element={<ProtectedRoute><VendorHome /></ProtectedRoute>} />
           <Route path="/profile" element={<ProtectedRoute><UserMyProfile /></ProtectedRoute>} />
+          <Route path="/foodlist" element={<ProtectedRoute><FoodList /></ProtectedRoute>} />
+          <Route path="/subscribe" element={<ProtectedRoute><SubscribeFood /></ProtectedRoute>} />
+          <Route path="/user-preferences" element={<ProtectedRoute><UserPreferences /></ProtectedRoute>} />
           <Route path="/user-preferences/" element={<ProtectedRoute><UserPreferencesPage /></ProtectedRoute>} />
           <Route path="/edit-food-item/:_id" element={<ProtectedRoute><EditFoodItem /></ProtectedRoute>} />
           <Route path="/edit-food-item-admin/:_id" element={<AdminProtectedRoute ready={ready}><EditFoodItemAdmin /></AdminProtectedRoute>} />
@@ -71,6 +83,8 @@ const App = () => {
           <Route path="/add-vendors" element={<ProtectedRoute ready={ready}><AddVendors /></ProtectedRoute>} />
           <Route path="/notauthorized" element={<NotAuthorized />} />
           <Route path="/top-picks" element={<ProtectedRoute ready={ready}><TopPicks /></ProtectedRoute>} />
+          <Route path="/add-review" element={<ProtectedRoute><AddReview /></ProtectedRoute>} />
+          <Route path="/reviews/" element={<ProtectedRoute><Reviews /></ProtectedRoute>} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />
