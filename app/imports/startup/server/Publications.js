@@ -4,6 +4,7 @@ import { check } from 'meteor/check';
 import { Foods } from '../../api/fooditems/Foods';
 import { Vendors } from '../../api/vendors/Vendors';
 import { UserProfiles } from '../../api/userpreferences/UserProfiles';
+import { Reviews } from '../../api/reviews/Reviews';
 import { UserPreferences } from '../../api/userpreferences/UserPreferences';
 // User-level publication.
 // If logged in, then publish documents owned by this user. Otherwise, publish nothing.
@@ -11,9 +12,8 @@ import { UserPreferences } from '../../api/userpreferences/UserPreferences';
 // if logged in with user role, then publish user preferences for that user
 Meteor.publish(UserPreferences.userPublicationName, function () {
   // publish only the user preferences for the logged in user
-  if (this.userId && Roles.userIsInRole(this.userId, 'user')) {
-    // return UserPreferences.collection.find({ owner: this.userId });
-    return UserPreferences.collection.find();
+  if (this.userId) {
+    return UserPreferences.collection.find({ owner: this.userId });
   }
   return this.ready();
 });
@@ -95,17 +95,6 @@ Meteor.publish('myFoodData', function () {
   return Foods.collection.find({ owner: user.username });
 });
 
-Meteor.publish('myUserPreferences', function () {
-  if (!this.userId) {
-    return this.ready();
-  }
-  const user = Meteor.users.findOne(this.userId);
-  if (!user) {
-    return this.ready(); // Handle the case where the user is not found
-  }
-  return UserPreferences.collection.find({ owner: user.username });
-});
-
 Meteor.publish('foodItemsByVendor', function (vendorName) {
   // Add necessary checks for vendorId validity and user permissions
   check(vendorName, String);
@@ -149,6 +138,27 @@ Meteor.publish(UserProfiles.userPublicationName, function () {
   if (this.userId) {
     const username = Meteor.users.findOne(this.userId).username;
     return UserProfiles.collection.find({ owner: username });
+  }
+  return this.ready();
+});
+
+Meteor.publish('userProfiles', function () {
+  if (!this.userId) {
+    return this.ready();
+  }
+
+  return UserProfiles.collection.find({ userId: this.userId });
+});
+
+Meteor.publish('reviewsByVendor', function (vendorName) {
+  // Add necessary checks for vendorId validity and user permissions
+  check(vendorName, String);
+  return Reviews.collection.find({ vendorName: vendorName });
+});
+
+Meteor.publish(Reviews.userPublicationName, function () {
+  if (this.userId) {
+    return Reviews.collection.find();
   }
   return this.ready();
 });

@@ -1,13 +1,16 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { Button } from 'react-bootstrap';
+import { Badge, Button, Card, Image } from 'react-bootstrap';
 import { Meteor } from 'meteor/meteor';
 
 /** Renders a single row in the FoodItems (Admin) table. See pages/ListStuffAdmin.jsx. */
 const FoodItemsVendor = ({ fooditems }) => {
   const [showConfirm, setShowConfirm] = useState(false);
   const [itemToDelete, setItemToDelete] = useState(null);
+  const [showDiet, setShowDiet] = useState(null);
+  const [available, setAvailable] = useState(null);
+  const [showReadyButton, setShowReadyButton] = useState(null);
 
   const handleDelete = (foodItemId) => {
     setItemToDelete(foodItemId);
@@ -31,6 +34,29 @@ const FoodItemsVendor = ({ fooditems }) => {
     setItemToDelete(null);
     setShowConfirm(false);
   };
+
+  const handleMarkReadyClick = () => {
+    Meteor.call('markFoodAsReady', fooditems._id, (error) => {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log('Food marked as ready!');
+      }
+    });
+  };
+
+  /*
+ const handleMarkUnReadyClick = () => {
+   Meteor.call('markFoodAsReady', fooditems._id, (error) => {
+     if (error) {
+       console.log(error);
+     } else {
+       console.log('Food marked as ready!');
+       setIsReady(false);
+     }
+   });
+ }; */
+
   const getDietaryOptions = () => {
     const options = [];
     if (fooditems.dietOptions?.isVegan) options.push('Vegan');
@@ -40,21 +66,53 @@ const FoodItemsVendor = ({ fooditems }) => {
     if (fooditems.dietOptions?.isNutFree) options.push('Nut-Free');
     return options.join(', ');
   };
+
+  useEffect(() => {
+    if (fooditems.dietOptions != null) {
+      setShowDiet(true);
+    }
+
+    if (fooditems.availability === 'available') {
+      setAvailable(true);
+      setShowReadyButton(false);
+    } else {
+      setAvailable(false);
+      setShowReadyButton(true);
+    }
+  }, [fooditems]);
+
   return (
     <>
-      <tr>
-        <td>{fooditems.name}</td>
-        <td>{fooditems.quantity}</td>
-        <td>{fooditems.cuisineType}</td>
-        <td>{fooditems.vendor}</td>
-        <td>{fooditems.availability}</td>
-        <td>{getDietaryOptions()}</td>
-        <td>{fooditems.owner}</td>
-        <td>
+      <Card className="h-80">
+        <Card.Header>
+          <Image src={fooditems.image} width={250} height={200} />
+          {showDiet && (
+            <Badge pill bg="info">
+              Diets: {getDietaryOptions()}
+            </Badge>
+          )}
+          {available && (
+            <Badge pill bg="success">
+              Availability: {fooditems.availability}
+            </Badge>
+          )}
+          {!available && (
+            <Badge pill bg="danger">
+              Availability: {fooditems.availability}
+            </Badge>
+          )}
+          <Card.Title>{fooditems.name}</Card.Title>
+          <Card.Subtitle>Cuisine Type: {fooditems.cuisineType}</Card.Subtitle>
+        </Card.Header>
+        <Card.Body>
+          <Card.Text>{fooditems.description}</Card.Text>
           <Link to={`/edit-food-item/${fooditems._id}`} className="btn btn-primary">Edit</Link>
-        </td>
-        <td><Button variant="danger" onClick={() => handleDelete(fooditems._id)}>Delete</Button></td>
-      </tr>
+          <Button className="mx-2" variant="danger" onClick={() => handleDelete(fooditems._id)}>Delete</Button>
+          {showReadyButton && (
+            <Button className="mx-1" variant="success" onClick={() => handleMarkReadyClick()}>Ready</Button>
+          )}
+        </Card.Body>
+      </Card>
       {showConfirm && (
         <div className="confirm-dialog">
           <p>Are you sure you want to delete this item?</p>
@@ -65,12 +123,13 @@ const FoodItemsVendor = ({ fooditems }) => {
     </>
   );
 };
-
 // Require a document to be passed to this component.
 FoodItemsVendor.propTypes = {
   fooditems: PropTypes.shape({
     name: PropTypes.string,
     quantity: PropTypes.number,
+    image: PropTypes.string,
+    description: PropTypes.string,
     cuisineType: PropTypes.string,
     vendor: PropTypes.string,
     availability: PropTypes.string,
