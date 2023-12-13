@@ -18,6 +18,11 @@ VendorItemVendor.propTypes = {
     _id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     location: PropTypes.string.isRequired,
+    mapLocation: PropTypes.shape({
+      lat: PropTypes.number,
+      lng: PropTypes.number,
+      address: PropTypes.string,
+    }),
     hours: PropTypes.string.isRequired,
     owner: PropTypes.string.isRequired,
   }).isRequired,

@@ -5,7 +5,7 @@ import { AutoForm, ErrorsField, HiddenField, NumField, SelectField, BoolField, S
 import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
-import { useParams } from 'react-router';
+import { useParams } from 'react-router-dom';
 import LoadingSpinner from '../../../../components/LoadingSpinner';
 import { Foods } from '../../../../../api/fooditems/Foods';
 
@@ -31,8 +31,8 @@ const EditFoodItem = () => {
   }, [_id]);
   // On successful submit, insert the data.
   const submit = (data) => {
-    const { name, quantity, cuisineType, vendor, availability, dietOptions } = data;
-    Foods.collection.update(_id, { $set: { name, quantity, cuisineType, vendor, availability, dietOptions } }, (error) => (error ?
+    const { name, quantity, cuisineType, availability, dietOptions } = data;
+    Foods.collection.update(_id, { $set: { name, quantity, cuisineType, availability, dietOptions } }, (error) => (error ?
       swal('Error', error.message, 'error') :
       swal('Success', 'Item updated successfully', 'success')));
   };
@@ -48,7 +48,6 @@ const EditFoodItem = () => {
                 <TextField name="name" />
                 <NumField name="quantity" decimal={null} />
                 <SelectField name="cuisineType" />
-                <TextField name="vendor" />
                 <SelectField name="availability" />
                 <BoolField name="dietOptions.isVegan" label="Vegan" />
                 <BoolField name="dietOptions.isVegetarian" label="Vegetarian" />
@@ -65,7 +64,7 @@ const EditFoodItem = () => {
       </Row>
       <Row className="justify-content-center mt-3">
         <Col md="auto">
-          <Button as="a" href="/vendorhome" className="vendor-btn-edit">Back</Button>
+          <Button as="a" href="/vendormenu" className="vendor-btn-edit">Back</Button>
         </Col>
       </Row>
     </Container>

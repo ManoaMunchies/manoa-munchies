@@ -2,7 +2,7 @@ import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
 import { Button, Col, Container, Row, Table } from 'react-bootstrap';
-import { useLocation } from 'react-router';
+import { useLocation } from 'react-router-dom';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { Foods } from '../../api/fooditems/Foods';
 import FoodItemsAdmin from '../components/FoodItemsAdmin';
@@ -28,7 +28,7 @@ const MenuAdmin = () => {
   return (ready ? (
     <Container className="py-3">
       <Row className="justify-content-center">
-        <Col md={7}>
+        <Col md={12}>
           <Col className="text-center"><h2>{ vendorName } Menu (Admin)</h2></Col>
           <Table striped bordered hover>
             <thead>

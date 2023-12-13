@@ -36,6 +36,26 @@ const SignUp = ({ location }) => {
         setError(err.reason);
       } else {
         UserProfiles.collection.insert({ firstName: Meteor.user().username, image: '/images/defaultImage.png', owner: Meteor.user().username });
+        UserPreferences.collection.insert({
+          cuisinePreferences: {
+            isBreakfast: true,
+            isAmerican: true,
+            isHawaiian: true,
+            isChinese: true,
+            isJapanese: true,
+            isKorean: true,
+            isThai: true,
+            isIndian: true,
+            isMexican: true,
+          },
+          dietRestrictions: {
+            isVegan: false,
+            isVegetarian: false,
+            isGlutenFree: false,
+            isDairyFree: false,
+            isNutFree: false,
+          },
+          owner: Meteor.user().username });
         Meteor.call('assignUserRole', Meteor.userId(), role, (errr) => {
           // Handle role assignment response
           if (errr) {
@@ -44,26 +64,6 @@ const SignUp = ({ location }) => {
         });
         setRedirectToRef(true);
       }
-      UserPreferences.collection.insert({
-        owner: email,
-        cuisinePreferences: {
-          isAmerican: true,
-          isHawaiian: true,
-          isChinese: true,
-          isJapanese: true,
-          isKorean: true,
-          isThai: true,
-          isIndian: true,
-          isMexican: true,
-        },
-        dietRestrictions: {
-          isVegan: false,
-          isVegetarian: false,
-          isGlutenFree: false,
-          isDairyFree: false,
-          isNutFree: false,
-        },
-      });
     });
   };
 

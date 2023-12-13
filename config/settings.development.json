@@ -41,8 +41,5 @@
   ],
   "defaultReviews": [
     { "reviewerName": "John", "vendorName": "Dunkin Donuts", "review": "Great coffee!", "rating": 5, "owner": "john@foo.com" }
-  ],
-  "defaultUserPreferences": [
-    { "owner": "john@foo.com" }
   ]
 }

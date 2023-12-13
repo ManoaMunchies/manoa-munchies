@@ -16,6 +16,10 @@ class UserPreferencesCollection {
         type: Object,
         optional: true,
       },
+      'cuisinePreferences.isBreakfast': {
+        type: Boolean,
+        defaultValue: true,
+      },
       'cuisinePreferences.isAmerican': {
         type: Boolean,
         defaultValue: true,
