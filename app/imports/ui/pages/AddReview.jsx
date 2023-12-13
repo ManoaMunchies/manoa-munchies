@@ -5,7 +5,7 @@ import swal from 'sweetalert';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
 import { Meteor } from 'meteor/meteor';
-import { useLocation } from 'react-router';
+import { useLocation } from 'react-router-dom';
 import { Reviews } from '../../api/reviews/Reviews';
 
 // Create a schema to specify the structure of the data to appear in the form.
@@ -68,7 +68,7 @@ const AddReview = () => {
           <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => submit(data, fRef)}>
             <Card>
               <Card.Body>
-                <TextField name="reviewerName" />
+                <TextField name="reviewerName" placeholder={Meteor.user().username} />
                 <TextField name="reviewText" />
                 <NumField name="stars" />
                 <SubmitField value="Submit" />

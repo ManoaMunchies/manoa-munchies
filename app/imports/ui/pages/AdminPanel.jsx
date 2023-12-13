@@ -4,7 +4,7 @@ import '../../../client/style.css';
 import PropTypes from 'prop-types';
 import { withTracker, useTracker } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
-import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 import { Vendors } from '../../api/vendors/Vendors';
 import LoadingSpinner from '../components/LoadingSpinner';
 import VendorItemAdmin from '../components/VendorItemAdmin';

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Col, Container, Row } from 'react-bootstrap';
+import { Card, Col, Container, Row, Button } from 'react-bootstrap';
 import { AutoForm, ErrorsField, NumField, SelectField, SubmitField, TextField } from 'uniforms-bootstrap5';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
@@ -17,6 +17,10 @@ const formSchema = new SimpleSchema({
     type: String,
     allowedValues: ['breakfast', 'american', 'hawaiian', 'chinese', 'japanese', 'korean', 'thai', 'indian', 'mexican'],
   },
+  vendor: {
+    type: String,
+    required: true,
+  },
   availability: {
     type: String,
     allowedValues: ['available', 'unavailable'],
@@ -31,9 +35,8 @@ const AddFoodItems = () => {
 
   // On submit, insert the data.
   const submit = (data, formRef) => {
-    const { name, quantity, image, description, cuisineType, availability } = data;
+    const { name, quantity, image, description, cuisineType, vendor, availability } = data;
     const owner = Meteor.user().username;
-    const vendor = Meteor.user().username;
     Foods.collection.insert(
       { name, quantity, image, description, cuisineType, vendor, availability, owner },
       (error) => {
@@ -61,6 +64,7 @@ const AddFoodItems = () => {
                 <NumField name="quantity" decimal={null} />
                 <TextField name="image" />
                 <SelectField name="cuisineType" />
+                <TextField name="vendor" />
                 <TextField name="description" />
                 <SelectField name="availability" />
                 <SubmitField value="Submit" />
@@ -68,6 +72,11 @@ const AddFoodItems = () => {
               </Card.Body>
             </Card>
           </AutoForm>
+        </Col>
+      </Row>
+      <Row className="justify-content-center mt-3">
+        <Col md="auto">
+          <Button as="a" href="/vendormenu" className="vendor-btn-edit">Back</Button>
         </Col>
       </Row>
     </Container>

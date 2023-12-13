@@ -12,7 +12,7 @@ const bridge = new SimpleSchema2Bridge(UserPreferences.schema);
 // const navigate = useNavigate();
 /* Renders the EditStuff page for editing a single document. */
 const UserPreferencesPage = () => {
-  console.log(Meteor.user());
+  // console.log(Meteor.user());
   const { doc, ready } = useTracker(() => {
     const subscription = Meteor.subscribe('myUserPreferences');
     const rdy = subscription.ready();
@@ -24,6 +24,7 @@ const UserPreferencesPage = () => {
   }, []);
 
   const submit = (data) => {
+    console.log(Meteor.userId());
     // No need to set 'owner' manually as it's included in 'data' from the form
     UserPreferences.collection.update(doc._id, { $set: data }, (error) => {
       if (error) {
@@ -43,6 +44,7 @@ const UserPreferencesPage = () => {
             <Card className="food-card">
               <Card.Body>
                 <Col><h5>Cuisine Preferences</h5>
+                  <BoolField name="cuisinePreferences.isBreakfast" label="Breakfast" />
                   <BoolField name="cuisinePreferences.isAmerican" label="American" />
                   <BoolField name="cuisinePreferences.isHawaiian" label="Hawaiian" />
                   <BoolField name="cuisinePreferences.isChinese" label="Chinese" />

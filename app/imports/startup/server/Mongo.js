@@ -43,10 +43,27 @@ if (UserProfiles.collection.find().count() === 0 && Meteor.users.find().count() 
   if (Meteor.isServer) {
     console.log('Creating default user data.');
     Meteor.users.find().forEach(function (user) { addUserData({ firstName: user.username, image: '/images/defaultImage.png', owner: user.username }); });
-  }
-
-  if (Meteor.settings.defaultDataUserPreferences) {
-    console.log('Creating default user preferences data.');
-    Meteor.settings.defaultDataUserPreferences.forEach(userPreferencesData => addUserPreferencesData(userPreferencesData));
+    console.log('Creating preferences user data.');
+    Meteor.users.find().forEach(function (user) {
+      addUserPreferencesData({ cuisinePreferences: {
+        isBreakfast: true,
+        isAmerican: true,
+        isHawaiian: true,
+        isChinese: true,
+        isJapanese: true,
+        isKorean: true,
+        isThai: true,
+        isIndian: true,
+        isMexican: true,
+      },
+      dietRestrictions: {
+        isVegan: false,
+        isVegetarian: false,
+        isGlutenFree: false,
+        isDairyFree: false,
+        isNutFree: false,
+      },
+      owner: user.username });
+    });
   }
 }
